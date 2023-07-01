@@ -32,6 +32,7 @@ app.UseStaticFiles(new StaticFileOptions
     FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.ContentRootPath, "wwwroot")),
     RequestPath = ""
 });
+
 app.UseRouting();
 
 app.UseEndpoints(endpoints =>
