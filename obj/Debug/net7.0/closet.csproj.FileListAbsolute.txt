@@ -74,3 +74,6 @@
 /Users/kristo/closet/obj/Debug/net7.0/closet.pdb
 /Users/kristo/closet/obj/Debug/net7.0/closet.genruntimeconfig.cache
 /Users/kristo/closet/obj/Debug/net7.0/ref/closet.dll
+/Users/kristo/closet/bin/Debug/net7.0/jsconfig.json
+/Users/kristo/closet/bin/Debug/net7.0/package-lock.json
+/Users/kristo/closet/bin/Debug/net7.0/package.json
