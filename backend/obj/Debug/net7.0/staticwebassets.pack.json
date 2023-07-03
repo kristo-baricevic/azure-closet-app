@@ -1,43 +1,43 @@
 {
   "Files": [
     {
-      "Id": "/Users/kristo/closet/wwwroot/css/app.2cf79ad6.css",
+      "Id": "/Users/kristo/closet/backend/wwwroot/css/app.2cf79ad6.css",
       "PackagePath": "staticwebassets/css/app.2cf79ad6.css"
     },
     {
-      "Id": "/Users/kristo/closet/wwwroot/favicon.ico",
+      "Id": "/Users/kristo/closet/backend/wwwroot/favicon.ico",
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
-      "Id": "/Users/kristo/closet/wwwroot/index.html",
+      "Id": "/Users/kristo/closet/backend/wwwroot/index.html",
       "PackagePath": "staticwebassets/index.html"
     },
     {
-      "Id": "/Users/kristo/closet/wwwroot/js/app.477bccb4.js",
+      "Id": "/Users/kristo/closet/backend/wwwroot/js/app.477bccb4.js",
       "PackagePath": "staticwebassets/js/app.477bccb4.js"
     },
     {
-      "Id": "/Users/kristo/closet/wwwroot/js/app.477bccb4.js.map",
+      "Id": "/Users/kristo/closet/backend/wwwroot/js/app.477bccb4.js.map",
       "PackagePath": "staticwebassets/js/app.477bccb4.js.map"
     },
     {
-      "Id": "/Users/kristo/closet/wwwroot/js/chunk-vendors.46f742d7.js",
+      "Id": "/Users/kristo/closet/backend/wwwroot/js/chunk-vendors.46f742d7.js",
       "PackagePath": "staticwebassets/js/chunk-vendors.46f742d7.js"
     },
     {
-      "Id": "/Users/kristo/closet/wwwroot/js/chunk-vendors.46f742d7.js.map",
+      "Id": "/Users/kristo/closet/backend/wwwroot/js/chunk-vendors.46f742d7.js.map",
       "PackagePath": "staticwebassets/js/chunk-vendors.46f742d7.js.map"
     },
     {
-      "Id": "/Users/kristo/closet/wwwroot/main.js",
+      "Id": "/Users/kristo/closet/backend/wwwroot/main.js",
       "PackagePath": "staticwebassets/main.js"
     },
     {
-      "Id": "/Users/kristo/closet/wwwroot/main.py",
+      "Id": "/Users/kristo/closet/backend/wwwroot/main.py",
       "PackagePath": "staticwebassets/main.py"
     },
     {
-      "Id": "/Users/kristo/closet/wwwroot/styles.css",
+      "Id": "/Users/kristo/closet/backend/wwwroot/styles.css",
       "PackagePath": "staticwebassets/styles.css"
     },
     {

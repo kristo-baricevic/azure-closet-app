@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "C9U5m4zEImwmL3LEuKyP2hbiNhCHqcJDE53TFwUQC7g=",
+  "Hash": "gjYEWIR1ej41IIy4FtWrRdJvcDB+OVL0wS/ZmWk9DDY=",
   "Source": "closet",
   "BasePath": "_content/closet",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "closet/wwwroot",
       "Source": "closet",
-      "ContentRoot": "/Users/kristo/closet/wwwroot/",
+      "ContentRoot": "/Users/kristo/closet/backend/wwwroot/",
       "BasePath": "_content/closet",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "/Users/kristo/closet/wwwroot/css/app.2cf79ad6.css",
+      "Identity": "/Users/kristo/closet/backend/wwwroot/css/app.2cf79ad6.css",
       "SourceId": "closet",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/kristo/closet/wwwroot/",
+      "ContentRoot": "/Users/kristo/closet/backend/wwwroot/",
       "BasePath": "_content/closet",
       "RelativePath": "css/app.2cf79ad6.css",
       "AssetKind": "All",
@@ -34,10 +34,10 @@
       "OriginalItemSpec": "wwwroot/css/app.2cf79ad6.css"
     },
     {
-      "Identity": "/Users/kristo/closet/wwwroot/favicon.ico",
+      "Identity": "/Users/kristo/closet/backend/wwwroot/favicon.ico",
       "SourceId": "closet",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/kristo/closet/wwwroot/",
+      "ContentRoot": "/Users/kristo/closet/backend/wwwroot/",
       "BasePath": "_content/closet",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",
@@ -51,10 +51,10 @@
       "OriginalItemSpec": "wwwroot/favicon.ico"
     },
     {
-      "Identity": "/Users/kristo/closet/wwwroot/index.html",
+      "Identity": "/Users/kristo/closet/backend/wwwroot/index.html",
       "SourceId": "closet",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/kristo/closet/wwwroot/",
+      "ContentRoot": "/Users/kristo/closet/backend/wwwroot/",
       "BasePath": "_content/closet",
       "RelativePath": "index.html",
       "AssetKind": "All",
@@ -68,10 +68,10 @@
       "OriginalItemSpec": "wwwroot/index.html"
     },
     {
-      "Identity": "/Users/kristo/closet/wwwroot/js/app.477bccb4.js",
+      "Identity": "/Users/kristo/closet/backend/wwwroot/js/app.477bccb4.js",
       "SourceId": "closet",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/kristo/closet/wwwroot/",
+      "ContentRoot": "/Users/kristo/closet/backend/wwwroot/",
       "BasePath": "_content/closet",
       "RelativePath": "js/app.477bccb4.js",
       "AssetKind": "All",
@@ -85,10 +85,10 @@
       "OriginalItemSpec": "wwwroot/js/app.477bccb4.js"
     },
     {
-      "Identity": "/Users/kristo/closet/wwwroot/js/app.477bccb4.js.map",
+      "Identity": "/Users/kristo/closet/backend/wwwroot/js/app.477bccb4.js.map",
       "SourceId": "closet",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/kristo/closet/wwwroot/",
+      "ContentRoot": "/Users/kristo/closet/backend/wwwroot/",
       "BasePath": "_content/closet",
       "RelativePath": "js/app.477bccb4.js.map",
       "AssetKind": "All",
@@ -102,10 +102,10 @@
       "OriginalItemSpec": "wwwroot/js/app.477bccb4.js.map"
     },
     {
-      "Identity": "/Users/kristo/closet/wwwroot/js/chunk-vendors.46f742d7.js",
+      "Identity": "/Users/kristo/closet/backend/wwwroot/js/chunk-vendors.46f742d7.js",
       "SourceId": "closet",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/kristo/closet/wwwroot/",
+      "ContentRoot": "/Users/kristo/closet/backend/wwwroot/",
       "BasePath": "_content/closet",
       "RelativePath": "js/chunk-vendors.46f742d7.js",
       "AssetKind": "All",
@@ -119,10 +119,10 @@
       "OriginalItemSpec": "wwwroot/js/chunk-vendors.46f742d7.js"
     },
     {
-      "Identity": "/Users/kristo/closet/wwwroot/js/chunk-vendors.46f742d7.js.map",
+      "Identity": "/Users/kristo/closet/backend/wwwroot/js/chunk-vendors.46f742d7.js.map",
       "SourceId": "closet",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/kristo/closet/wwwroot/",
+      "ContentRoot": "/Users/kristo/closet/backend/wwwroot/",
       "BasePath": "_content/closet",
       "RelativePath": "js/chunk-vendors.46f742d7.js.map",
       "AssetKind": "All",
@@ -136,10 +136,10 @@
       "OriginalItemSpec": "wwwroot/js/chunk-vendors.46f742d7.js.map"
     },
     {
-      "Identity": "/Users/kristo/closet/wwwroot/main.js",
+      "Identity": "/Users/kristo/closet/backend/wwwroot/main.js",
       "SourceId": "closet",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/kristo/closet/wwwroot/",
+      "ContentRoot": "/Users/kristo/closet/backend/wwwroot/",
       "BasePath": "_content/closet",
       "RelativePath": "main.js",
       "AssetKind": "All",
@@ -153,10 +153,10 @@
       "OriginalItemSpec": "wwwroot/main.js"
     },
     {
-      "Identity": "/Users/kristo/closet/wwwroot/main.py",
+      "Identity": "/Users/kristo/closet/backend/wwwroot/main.py",
       "SourceId": "closet",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/kristo/closet/wwwroot/",
+      "ContentRoot": "/Users/kristo/closet/backend/wwwroot/",
       "BasePath": "_content/closet",
       "RelativePath": "main.py",
       "AssetKind": "All",
@@ -170,10 +170,10 @@
       "OriginalItemSpec": "wwwroot/main.py"
     },
     {
-      "Identity": "/Users/kristo/closet/wwwroot/styles.css",
+      "Identity": "/Users/kristo/closet/backend/wwwroot/styles.css",
       "SourceId": "closet",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/kristo/closet/wwwroot/",
+      "ContentRoot": "/Users/kristo/closet/backend/wwwroot/",
       "BasePath": "_content/closet",
       "RelativePath": "styles.css",
       "AssetKind": "All",

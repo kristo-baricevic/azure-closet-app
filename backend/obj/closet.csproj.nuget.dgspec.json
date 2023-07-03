@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/kristo/closet/closet.csproj": {}
+    "/Users/kristo/closet/backend/closet.csproj": {}
   },
   "projects": {
-    "/Users/kristo/closet/closet.csproj": {
+    "/Users/kristo/closet/backend/closet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/kristo/closet/closet.csproj",
+        "projectUniqueName": "/Users/kristo/closet/backend/closet.csproj",
         "projectName": "closet",
-        "projectPath": "/Users/kristo/closet/closet.csproj",
+        "projectPath": "/Users/kristo/closet/backend/closet.csproj",
         "packagesPath": "/Users/kristo/.nuget/packages/",
-        "outputPath": "/Users/kristo/closet/obj/",
+        "outputPath": "/Users/kristo/closet/backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/kristo/.nuget/NuGet/NuGet.Config"
