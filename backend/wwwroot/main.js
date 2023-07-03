@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (response.ok) {
                     resultLabel.textContent = 'Image uploaded successfully';
 
-                    // Update the image source
+                    // Update the image source // 
                     uploadedImage.src = URL.createObjectURL(imageFile);
                     uploadedImage.style.display = 'block'; 
                 } else {
