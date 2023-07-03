@@ -34,9 +34,10 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ZEALOUS_DUNE_08C39950F }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
-          app_location: "./frontend/dist" # Adjust if your build output location is different
+          app_location: "./frontend" # Adjust if your build output location is different
           api_location: "./backend" # Adjust if your API location is different
-
+          output_location: "dist"
+          
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
