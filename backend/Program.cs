@@ -7,6 +7,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using ClothingInventory.Models;
+using System.IO;
 
 
 var builder = WebApplication.CreateBuilder(args);
