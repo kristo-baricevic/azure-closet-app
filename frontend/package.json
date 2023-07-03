@@ -543,7 +543,9 @@
     "yargs": "^16.2.0",
     "yargs-parser": "^20.2.9"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@vue/cli-service": "^4.5.13"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "vue-cli-service build",
