@@ -28,7 +28,6 @@
         <img id="uploadedImage" alt="Uploaded Image">
     </div>
     
-    <script src="main.js"></script>
 </body>
 </html>
 

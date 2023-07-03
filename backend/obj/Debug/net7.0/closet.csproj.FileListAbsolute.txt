@@ -153,3 +153,5 @@
 /Users/kristo/closet/backend/obj/Debug/net7.0/closet.pdb
 /Users/kristo/closet/backend/obj/Debug/net7.0/closet.genruntimeconfig.cache
 /Users/kristo/closet/backend/obj/Debug/net7.0/ref/closet.dll
+/Users/kristo/closet/backend/bin/Debug/net7.0/package-lock.json
+/Users/kristo/closet/backend/bin/Debug/net7.0/package.json
