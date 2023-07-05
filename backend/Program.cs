@@ -12,6 +12,9 @@ using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add configuration
+builder.Configuration.AddJsonFile("appsettings.json");
+
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
 builder.Services.AddControllers();
@@ -35,6 +38,11 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 app.UseRouting();
+
+app.UseCors(builder => builder
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
 
 app.UseEndpoints(endpoints =>
 {

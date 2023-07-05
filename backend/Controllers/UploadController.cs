@@ -8,7 +8,13 @@ using ClothingInventory.Models;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Formats.Jpeg;
-
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.StaticFiles;
+using Newtonsoft.Json.Serialization;
 
 
 namespace ClothingInventory.Controllers
@@ -28,7 +34,7 @@ namespace ClothingInventory.Controllers
         public ActionResult Upload([FromForm] string category, [FromForm] IFormFile imageFile)
         {
             Console.WriteLine("Upload endpoint called.");
-            
+
             if (imageFile != null && imageFile.Length > 0)
             {
                 try
@@ -65,22 +71,20 @@ namespace ClothingInventory.Controllers
             }
         }
 
-
-private byte[] PreprocessImage(IFormFile imageFile)
-{
-    using (var image = Image.Load(imageFile.OpenReadStream()))
-    {
-        // Perform image processing logic here using the `image` object
-        // You can use methods like Resize, Crop, Rotate, etc. from the `ImageSharp` library
-
-        using (var processedImage = new MemoryStream())
+        private byte[] PreprocessImage(IFormFile imageFile)
         {
-            image.Save(processedImage, new JpegEncoder()); // Save the processed image to the stream
-            return processedImage.ToArray(); // Convert the processed image to a byte array
-        }
-    }
-}
+            using (var image = Image.Load(imageFile.OpenReadStream()))
+            {
+                // Perform image processing logic here using the `image` object
+                // You can use methods like Resize, Crop, Rotate, etc. from the `ImageSharp` library
 
+                using (var processedImage = new MemoryStream())
+                {
+                    image.Save(processedImage, new JpegEncoder()); // Save the processed image to the stream
+                    return processedImage.ToArray(); // Convert the processed image to a byte array
+                }
+            }
+        }
 
         private string ClassifyCategory(string category)
         {
