@@ -1,19 +1,18 @@
 <template>
   <div>
-    <nav>
-      <ul>
-        <li><router-link to="/">Home</router-link></li>
-        <li><router-link to="/about">About</router-link></li>
-        <li><router-link to="/contact">Contact</router-link></li>
+    <nav class="navbar">
+      <ul class="navbar-menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
       </ul>
     </nav>
-    
-    <router-view></router-view>
+
   </div>
+  <body>
+  <HelloWorld msg="Welcome to The Image Uploader!"/>
 
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-
-
+  </body>
 </template>
 
 <script>
@@ -34,27 +33,35 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 10px;
 }
 
-nav {
-  background-color: #f8f8f8;
+body { 
+  background-color: #e9ff96;
 }
 
-ul {
+.navbar {
+  background-color: #a4e333;
+  height: 80px; /* Adjust the height value as needed */
+}
+
+.navbar-menu {
   list-style-type: none;
   padding: 0;
+  height: 100%; /* Adjust the height value as needed */
+  display: flex;
+  align-items: center;
 }
 
-li {
+.navbar-menu li {
   display: inline-block;
   margin: 0 10px;
 }
 
-router-link {
+.navbar-menu a {
   text-decoration: none;
   color: #333;
   font-weight: bold;
+  line-height: 80px; /* Ensures the text is vertically centered */
 }
-
 </style>
