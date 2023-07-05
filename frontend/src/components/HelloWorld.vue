@@ -1,45 +1,45 @@
 <template>
-  <!DOCTYPE html>
-<html>
-<head>
-    <title>Image Classification</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-<body>
+  <div>
     <h1>Image Classification</h1>
-    
+
     <form id="imageForm">
-        <label for="category">Category:</label>
-        <select id="category" required>
-            <option value="Top">Top</option>
-            <option value="Bottom">Bottom</option>
-            <option value="Shoes">Shoes</option>
-            <option value="Hat">Hat</option>
-            <option value="Accessory">Accessory</option>
-        </select>
-        
-        <input type="file" id="imageFile" accept=".jpg,.jpeg,.png,.gif" required>
-        <button id="classifyButton">Classify Image</button>
+      <label for="category">Category:</label>
+      <select id="category" required>
+        <option value="Top">Top</option>
+        <option value="Bottom">Bottom</option>
+        <option value="Shoes">Shoes</option>
+        <option value="Hat">Hat</option>
+        <option value="Accessory">Accessory</option>
+      </select>
+
+      <input type="file" id="imageFile" accept=".jpg,.jpeg,.png,.gif" required @change="handleFileUpload">
+      <button id="classifyButton">Classify Image</button>
     </form>
-    
+
     <p id="resultLabel"></p>
 
     <div id="imageContainer">
-        <img id="uploadedImage" alt="Uploaded Image">
+      <img id="uploadedImage" alt="Uploaded Image" v-if="imageUrl" :src="imageUrl">
     </div>
-    
-</body>
-</html>
 
+  </div>
 </template>
 
 <script>
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
+  data() {
+    return {
+      imageUrl: null
+    };
+  },
+  methods: {
+    handleFileUpload(event) {
+      const file = event.target.files[0];
+      this.imageUrl = URL.createObjectURL(file);
+    }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
