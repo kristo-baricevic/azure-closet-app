@@ -41,37 +41,36 @@ export default {
     },
     
     classifyImage() {
-  const file = document.getElementById('imageFile').files[0];
-  const formData = new FormData();
-  formData.append('imageFile', file);
-  formData.append('category', this.selectedCategory);
+      const file = document.getElementById('imageFile').files[0];
+      const formData = new FormData();
+      formData.append('imageFile', file);
+      formData.append('category', this.selectedCategory);
 
-  let apiUrl;
-  if (process.env.NODE_ENV === 'production') {
-    apiUrl = 'https://zealous-dune-08c39950f.3.azurestaticapps.net/backend/Upload';  // Replace <production-base-url> with the base URL for the production environment
-  } else {
-    apiUrl = 'http://localhost:5000/backend/Upload';  // Use the appropriate URL for local development
-  }
+      let apiUrl;
+      if (process.env.NODE_ENV === 'production') {
+        apiUrl = 'https://zealous-dune-08c39950f.3.azurestaticapps.net/backend/Upload';  // Replace <production-base-url> with the base URL for the production environment
+      } else {
+        apiUrl = 'http://localhost:5000/backend/Upload';  // Use the appropriate URL for local development
+      }
 
-  fetch(apiUrl, {
-    method: 'POST',
-    body: formData
-  })
-    .then(response => response.json())
-    .then(data => {
-      // Handle the response from the backend
-      console.log(data);
-    })
-    .catch(error => {
-      // Handle the error
-      console.error(error);
-    });
-}
-
+      fetch(apiUrl, {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          // Handle the response from the backend
+          console.log(data);
+        })
+        .catch(error => {
+          // Handle the error
+          console.error(error);
+        });
     }
   }
 };
 </script>
+
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
