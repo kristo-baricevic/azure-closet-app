@@ -8,7 +8,7 @@ namespace ClothingInventory.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public byte[] Image { get; set; }
-        public string Category { get; set; }
+        public required byte[] Image { get; set; }
+        public required string Category { get; set; }
     }
 }
