@@ -153,3 +153,7 @@
 /Users/kristo/closet/backend/obj/Debug/net7.0/closet.pdb
 /Users/kristo/closet/backend/obj/Debug/net7.0/closet.genruntimeconfig.cache
 /Users/kristo/closet/backend/obj/Debug/net7.0/ref/closet.dll
+/Users/kristo/closet/backend/bin/Debug/net7.0/Microsoft.AspNetCore.JsonPatch.dll
+/Users/kristo/closet/backend/bin/Debug/net7.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/Users/kristo/closet/backend/bin/Debug/net7.0/Newtonsoft.Json.dll
+/Users/kristo/closet/backend/bin/Debug/net7.0/Newtonsoft.Json.Bson.dll

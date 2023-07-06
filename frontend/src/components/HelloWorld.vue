@@ -37,7 +37,7 @@ export default {
     handleFileUpload(event) {
       const file = event.target.files[0];
       this.imageUrl = URL.createObjectURL(file);
-    }
+    },
     classifyImage() {
       const file = document.getElementById('imageFile').files[0];
       const formData = new FormData();

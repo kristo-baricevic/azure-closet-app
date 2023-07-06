@@ -29,8 +29,6 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
-app.UseDefaultFiles(); // Serve the default index.html file
-
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.ContentRootPath, "wwwroot")),
@@ -46,11 +44,8 @@ app.UseCors(builder => builder
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllers(); // Map the attribute routed controllers
-    endpoints.MapGet("/", async (context) =>
-    {
-        await context.Response.SendFileAsync("wwwroot/index.html");
-    });
+    endpoints.MapControllers();
+    endpoints.MapFallbackToFile("/index.html"); // Serve index.html for all non-API routes
 });
 
 app.Run();
