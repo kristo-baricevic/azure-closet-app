@@ -78,8 +78,6 @@ namespace ClothingInventory.Controllers
         {
             using (var image = Image.Load(imageFile.OpenReadStream()))
             {
-                // Perform image processing logic here using the `image` object
-                // You can use methods like Resize, Crop, Rotate, etc. from the `ImageSharp` library
 
                 using (var processedImage = new MemoryStream())
                 {
@@ -92,7 +90,6 @@ namespace ClothingInventory.Controllers
         private string ClassifyCategory(string category)
         {
             // Implement the classification logic based on the user's input category
-            // Here's an example rule-based approach
             if (category.ToLower() == "top")
                 return "Top";
             else if (category.ToLower() == "bottom")
