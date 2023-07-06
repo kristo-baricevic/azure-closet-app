@@ -2,9 +2,9 @@
   <div>
     <h1>Image Classification</h1>
 
-    <form id="imageForm">
+    <form id="imageForm" @submit.prevent="classifyImage">
       <label for="category">Category:</label>
-      <select id="category" required>
+      <select id="category" v-model="selectedCategory" required>
         <option value="Top">Top</option>
         <option value="Bottom">Bottom</option>
         <option value="Shoes">Shoes</option>
@@ -13,7 +13,7 @@
       </select>
 
       <input type="file" id="imageFile" accept=".jpg,.jpeg,.png,.gif" required @change="handleFileUpload">
-      <button id="classifyButton">Classify Image</button>
+      <button id="classifyButton" type="submit">Classify Image</button>
     </form>
 
     <p id="resultLabel"></p>
@@ -30,7 +30,8 @@ export default {
   name: 'HelloWorld',
   data() {
     return {
-      imageUrl: null
+      imageUrl: null,
+      selectedCategory: ''
     };
   },
   methods: {
@@ -42,7 +43,7 @@ export default {
     classifyImage() {
       const file = document.getElementById('imageFile').files[0];
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append('imageFile', file);
       formData.append('category', this.selectedCategory);
 
       fetch('/backend/Upload', {
