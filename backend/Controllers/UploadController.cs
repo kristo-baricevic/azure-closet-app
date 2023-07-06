@@ -22,7 +22,7 @@ using Microsoft.AspNetCore.Cors;
 namespace ClothingInventory.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("backend/[controller]")]
     public class UploadController : ControllerBase
     {
         private readonly ClothingInventoryContext _dbContext;
