@@ -38,13 +38,14 @@ export default {
       const file = event.target.files[0];
       this.imageUrl = URL.createObjectURL(file);
     },
+    
     classifyImage() {
       const file = document.getElementById('imageFile').files[0];
       const formData = new FormData();
       formData.append('file', file);
       formData.append('category', this.selectedCategory);
 
-      fetch('/api/upload', {
+      fetch('/backend/Upload', {
         method: 'POST',
         body: formData
       })
