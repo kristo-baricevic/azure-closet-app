@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.StaticFiles;
 using Newtonsoft.Json.Serialization;
+using Microsoft.AspNetCore.Cors;
 
 
 
@@ -32,6 +33,7 @@ namespace ClothingInventory.Controllers
         }
 
         [HttpPost]
+        [EnableCors]
         public ActionResult Upload([FromForm] string category, [FromForm] IFormFile imageFile)
         {
             Console.WriteLine("Upload endpoint called.");
