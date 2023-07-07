@@ -19,12 +19,22 @@ builder.Configuration.AddJsonFile("appsettings.json");
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
 builder.Services.AddControllers();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowMyOrigin",
+        builder => builder
+        .WithOrigins("https://closet-webapp.azurewebsites.net")
+        .AllowAnyMethod()
+        .AllowAnyHeader());
+});
 builder.Services.AddDbContext<ClothingInventoryContext>(options => 
     options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseCors("AllowMyOrigin");
+
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -37,11 +47,6 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 app.UseRouting();
-
-app.UseCors(builder => builder
-    .AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader());
 
 app.UseEndpoints(endpoints =>
 {
