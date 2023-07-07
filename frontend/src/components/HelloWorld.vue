@@ -48,9 +48,9 @@ export default {
 
       let apiUrl;
       if (process.env.NODE_ENV === 'production') {
-        apiUrl = 'https://zealous-dune-08c39950f.3.azurestaticapps.net/backend/Upload';  // Replace <production-base-url> with the base URL for the production environment
+        apiUrl = 'https://zealous-dune-08c39950f.3.azurestaticapps.net/backend/Upload';
       } else {
-        apiUrl = 'http://localhost:5000/backend/Upload';  // Use the appropriate URL for local development
+        apiUrl = 'http://localhost:5000/backend/Upload'; 
       }
 
       fetch(apiUrl, {
