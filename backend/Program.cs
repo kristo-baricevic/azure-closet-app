@@ -9,6 +9,22 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.Configuration;
 using ClothingInventory.Models;
 using System.IO;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.StaticFiles;
+using Newtonsoft.Json.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +47,9 @@ builder.Services.AddDbContext<ClothingInventoryContext>(options =>
     options.UseSqlServer(connectionString));
 
 var app = builder.Build();
+
+// Enable TLS 1.2
+System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
 
 // Configure the HTTP request pipeline.
 app.UseCors("AllowMyOrigin");
