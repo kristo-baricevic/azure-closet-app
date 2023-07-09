@@ -47,18 +47,26 @@ namespace ClothingInventory.Controllers
                     {
                         imageFile.CopyTo(memoryStream);
                         var imageBytes = memoryStream.ToArray();
+                        Console.WriteLine("image coverted to imageBytes.");
 
                         // Preprocess the image
                         var processedImage = PreprocessImage(imageFile);
+                        Console.WriteLine("image processed");
+
 
                         // Classify the category
                         var predictedCategory = ClassifyCategory(category);
+                        Console.WriteLine("image classified");
+
 
                         // Save the image and category to the database
                         SaveImageAndCategory(processedImage, predictedCategory);
+                        Console.WriteLine("Upload endpoint called.");
+
 
                         // Return the predicted category as JSON
                         return Ok(new { category = predictedCategory });
+
                     }
                 }
                 catch (Exception ex)
