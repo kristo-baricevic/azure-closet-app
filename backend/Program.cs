@@ -26,46 +26,37 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.StaticFiles;
 using Newtonsoft.Json.Serialization;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add configuration
 builder.Configuration.AddJsonFile("appsettings.json");
 
-// Add services to the container.
+// Add services to the container
 var connectionString = builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowMyOrigin",
+    options.AddPolicy("AllowMyOrigins",
         builder => builder
-        .WithOrigins("https://closet-webapp.azurewebsites.net")
-        .AllowAnyMethod()
-        .AllowAnyHeader());
+            .WithOrigins("http://localhost:5062", "https://closet-webapp.azurewebsites.net")
+            .AllowAnyMethod()
+            .AllowAnyHeader());
 });
-builder.Services.AddDbContext<ClothingInventoryContext>(options => 
+builder.Services.AddDbContext<ClothingInventoryContext>(options =>
     options.UseSqlServer(connectionString));
 
 var app = builder.Build();
-
-// Enable TLS 1.2
-System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
-
-// Configure the HTTP request pipeline.
-app.UseCors("AllowMyOrigin");
 
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
 
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.ContentRootPath, "wwwroot")),
-    RequestPath = ""
-});
+app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseCors("AllowMyOrigins");
 
 app.UseEndpoints(endpoints =>
 {
@@ -74,3 +65,4 @@ app.UseEndpoints(endpoints =>
 });
 
 app.Run();
+

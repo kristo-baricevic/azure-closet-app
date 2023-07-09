@@ -1,32 +1,32 @@
 {
   "Files": [
     {
-      "Id": "/Users/kristo/closet/backend/wwwroot/dist/css/app.264fd909.css",
-      "PackagePath": "staticwebassets/dist/css/app.264fd909.css"
+      "Id": "/Users/kristo/closet/backend/wwwroot/css/app.fd1b7e35.css",
+      "PackagePath": "staticwebassets/css/app.fd1b7e35.css"
     },
     {
-      "Id": "/Users/kristo/closet/backend/wwwroot/dist/favicon.ico",
-      "PackagePath": "staticwebassets/dist/favicon.ico"
+      "Id": "/Users/kristo/closet/backend/wwwroot/favicon.ico",
+      "PackagePath": "staticwebassets/favicon.ico"
     },
     {
-      "Id": "/Users/kristo/closet/backend/wwwroot/dist/index.html",
-      "PackagePath": "staticwebassets/dist/index.html"
+      "Id": "/Users/kristo/closet/backend/wwwroot/index.html",
+      "PackagePath": "staticwebassets/index.html"
     },
     {
-      "Id": "/Users/kristo/closet/backend/wwwroot/dist/js/app.551601ac.js",
-      "PackagePath": "staticwebassets/dist/js/app.551601ac.js"
+      "Id": "/Users/kristo/closet/backend/wwwroot/js/app.a4049eea.js",
+      "PackagePath": "staticwebassets/js/app.a4049eea.js"
     },
     {
-      "Id": "/Users/kristo/closet/backend/wwwroot/dist/js/app.551601ac.js.map",
-      "PackagePath": "staticwebassets/dist/js/app.551601ac.js.map"
+      "Id": "/Users/kristo/closet/backend/wwwroot/js/app.a4049eea.js.map",
+      "PackagePath": "staticwebassets/js/app.a4049eea.js.map"
     },
     {
-      "Id": "/Users/kristo/closet/backend/wwwroot/dist/js/chunk-vendors.34c3ebc0.js",
-      "PackagePath": "staticwebassets/dist/js/chunk-vendors.34c3ebc0.js"
+      "Id": "/Users/kristo/closet/backend/wwwroot/js/chunk-vendors.34c3ebc0.js",
+      "PackagePath": "staticwebassets/js/chunk-vendors.34c3ebc0.js"
     },
     {
-      "Id": "/Users/kristo/closet/backend/wwwroot/dist/js/chunk-vendors.34c3ebc0.js.map",
-      "PackagePath": "staticwebassets/dist/js/chunk-vendors.34c3ebc0.js.map"
+      "Id": "/Users/kristo/closet/backend/wwwroot/js/chunk-vendors.34c3ebc0.js.map",
+      "PackagePath": "staticwebassets/js/chunk-vendors.34c3ebc0.js.map"
     },
     {
       "Id": "obj/Debug/net7.0/staticwebassets/msbuild.build.closet.props",
