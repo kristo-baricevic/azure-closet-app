@@ -36,7 +36,7 @@ var connectionString = builder.Configuration.GetConnectionString("AZURE_SQL_CONN
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowMyOrigins",
+    options.AddDefaultPolicy(
         builder => builder
             .WithOrigins("http://localhost:5062", "https://closet-webapp.azurewebsites.net")
             .AllowAnyMethod()
@@ -56,7 +56,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseCors("AllowMyOrigins");
+app.UseCors();
 
 app.UseEndpoints(endpoints =>
 {
