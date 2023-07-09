@@ -57,15 +57,21 @@ export default {
         method: 'POST',
         body: formData
       })
-        .then(response => response.json())
+        .then(response => {
+          if (response.ok) {
+            return response.json(); // Parse the response body as JSON
+          } else {
+            throw new Error('Error: ' + response.status); // Throw an error if the response is not successful
+          }
+        })
         .then(data => {
           // Handle the response from the backend
           console.log(data);
         })
-        .catch(error => {
-          // Handle the error
-          console.log(error);
-        });
+      .catch(error => {
+        // Handle the error
+        console.log(error);
+      });
     }
   }
 };
