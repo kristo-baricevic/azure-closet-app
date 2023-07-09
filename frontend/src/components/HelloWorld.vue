@@ -50,7 +50,7 @@ export default {
       if (process.env.NODE_ENV === 'production') {
         apiUrl = 'https://closet-webapp.azurewebsites.net/backend/Upload';
       } else {
-        apiUrl = 'http://localhost:5000/backend/Upload'; 
+        apiUrl = 'http://localhost:5062/backend/Upload'; 
       }
 
       fetch(apiUrl, {
