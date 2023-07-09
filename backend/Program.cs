@@ -45,6 +45,13 @@ builder.Services.AddCors(options =>
 builder.Services.AddDbContext<ClothingInventoryContext>(options =>
     options.UseSqlServer(connectionString));
 
+// Create and migrate the database
+using (var scope = builder.Services.BuildServiceProvider().CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<ClothingInventoryContext>();
+    dbContext.Database.Migrate();
+}
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

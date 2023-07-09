@@ -46,32 +46,19 @@ export default {
       formData.append('imageFile', file);
       formData.append('category', this.selectedCategory);
 
-      let apiUrl;
-      if (process.env.NODE_ENV === 'production') {
-        apiUrl = 'https://closet-webapp.azurewebsites.net/backend/Upload';
-      } else {
-        apiUrl = 'http://localhost:5062/backend/Upload'; 
-      }
-
-      fetch(apiUrl, {
+      fetch('/backend/Upload', {
         method: 'POST',
         body: formData
       })
-        .then(response => {
-          if (response.ok) {
-            return response.json(); // Parse the response body as JSON
-          } else {
-            throw new Error('Error: ' + response.status); // Throw an error if the response is not successful
-          }
-        })
+        .then(response => response.json())
         .then(data => {
           // Handle the response from the backend
           console.log(data);
         })
-      .catch(error => {
-        // Handle the error
-        console.log(error);
-      });
+        .catch(error => {
+          // Handle the error
+          console.log(error);
+        });
     }
   }
 };
