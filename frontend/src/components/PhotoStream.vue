@@ -3,56 +3,60 @@
     <h1>Photo Stream</h1>
     <div class="photo-stream">
       <div v-for="image in images" :key="image.id" @click="openImage(image)">
-        <img :src="image.url" alt="Photo" />
+        <img :src="getImageUrl(image.data)" alt="Photo" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   data() {
     return {
       images: [],
     };
   },
-  mounted() {
-    this.fetchImages();
-  },
   methods: {
-    fetchImages() {
-      // Fetch the image data
-      axios.get('/backend/Images')
-        .then(response => {
-          console.log(response);
-          // Process the byte arrays and create image URLs
-          response.data.forEach(byteArray => {
-            var blob = new Blob([byteArray], { type: 'image/jpeg' });
-            var imgUrl = URL.createObjectURL(blob);
-            this.images.push({ url: imgUrl });
-          });
-          console.log(this.images);
-        })
-        .catch(error => {
-          console.error('Error fetching images:', error);
-        });
+    openImage() {
+      // Implement the logic to open the image when clicked
     },
+    getImageUrl(imageData) {
+  try {
+    if (!imageData) {
+      console.error('Invalid image data:', imageData);
+      return null;
+    }
+  
+    const base64String = atob(imageData);
+    const bytes = new Uint8Array(base64String.length);
+  
+    for (let i = 0; i < base64String.length; i++) {
+      bytes[i] = base64String.charCodeAt(i);
+    }
+  
+    const blob = new Blob([bytes.buffer], { type: 'image/jpeg' });
+    return URL.createObjectURL(blob);
+  } catch (error) {
+    console.error('Error converting image data:', error);
+    return null;
+  }
+},
+
+
+    async fetchImages() {
+  try {
+    const response = await fetch('/backend/Images');
+    const data = await response.json();
+    console.log('Retrieved images:', data); // Debug: Log the retrieved image data
+    this.images = data.map((imageBytes, index) => ({ id: index, data: imageBytes }));
+  } catch (error) {
+    console.error('Failed to fetch images:', error);
+  }
+},
+  },
+  mounted() {
+    console.log('Component mounted');
+    this.fetchImages();
   },
 };
 </script>
-
-
-<style scoped>
-.photo-stream {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 10px;
-}
-
-.photo-stream img {
-  width: 100%;
-  height: auto;
-}
-</style>
