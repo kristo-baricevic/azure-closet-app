@@ -23,11 +23,16 @@ export default {
   },
   methods: {
     fetchImages() {
-      // fetch the image data
+      // Fetch the image data
       axios.get('/backend/Images')
         .then(response => {
           console.log(response);
-          this.images = response.data;
+          // Process the byte arrays and create image URLs
+          response.data.forEach(byteArray => {
+            var blob = new Blob([byteArray], { type: 'image/jpeg' });
+            var imgUrl = URL.createObjectURL(blob);
+            this.images.push({ url: imgUrl });
+          });
           console.log(this.images);
         })
         .catch(error => {
@@ -36,8 +41,8 @@ export default {
     },
   },
 };
-
 </script>
+
 
 <style scoped>
 .photo-stream {

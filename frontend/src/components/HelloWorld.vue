@@ -43,8 +43,8 @@ export default {
     classifyImage() {
       const file = document.getElementById('imageFile').files[0];
       const formData = new FormData();
-      formData.append('imageFile', file);
-      formData.append('category', this.selectedCategory);
+      formData.append('Category', this.selectedCategory);
+      formData.append('Image', file);
 
       fetch('/backend/Upload', {
         method: 'POST',
