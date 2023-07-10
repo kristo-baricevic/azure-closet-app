@@ -10,18 +10,21 @@
 
   </div>
   <body>
-  <HelloWorld msg="Welcome to The Image Uploader!"/>
-
+    <HelloWorld msg="Welcome to The Image Uploader!"/>
+    <PhotoStream />
   </body>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from './components/HelloWorld.vue';
+import PhotoStream from './components/PhotoStream.vue';
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    PhotoStream
   }
 }
 </script>
