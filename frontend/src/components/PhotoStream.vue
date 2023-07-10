@@ -26,19 +26,17 @@ export default {
       // fetch the image data
       axios.get('/backend/Images')
         .then(response => {
+          console.log(response);
           this.images = response.data;
+          console.log(this.images);
         })
         .catch(error => {
           console.error('Error fetching images:', error);
         });
     },
-    openImage(image) {
-      // Implement the logic to open the clicked image
-      // e.g., display it in a modal or navigate to a detail page
-      console.log('Clicked image:', image);
-    },
   },
 };
+
 </script>
 
 <style scoped>

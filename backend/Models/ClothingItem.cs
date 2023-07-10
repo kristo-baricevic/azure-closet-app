@@ -10,5 +10,6 @@ namespace ClothingInventory.Models
         public int Id { get; set; }
         public required byte[] Image { get; set; }
         public required string Category { get; set; }
+
     }
 }
