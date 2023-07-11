@@ -3,15 +3,13 @@
     <nav class="navbar">
       <ul class="navbar-menu">
         <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/contact">Contact</a></li>
       </ul>
     </nav>
 
   </div>
   <body>
-    <HelloWorld msg="Welcome to The Image Uploader!"/>
-    <PhotoStream />
+    <HelloWorld msg="Welcome to The Image Uploader!" @imageUploaded="refreshPhotostream" />
+    <PhotoStream :images="images" ref="photostream" />
   </body>
 </template>
 
@@ -25,6 +23,15 @@ export default {
   components: {
     HelloWorld,
     PhotoStream
+  },
+  data() {
+    return {
+    };
+  },
+    methods: {
+      refreshPhotostream() {
+      this.$refs.photostream.fetchImages();
+    }
   }
 }
 </script>

@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     openImage() {
-      // Implement the logic to open the image when clicked
+      // open the image when clicked
     },
     getImageUrl(imageData) {
   try {
@@ -47,7 +47,7 @@ export default {
   try {
     const response = await fetch('/backend/Images');
     const data = await response.json();
-    console.log('Retrieved images:', data); // Debug: Log the retrieved image data
+    console.log('Retrieved images:', data);
     this.images = data.map((imageBytes, index) => ({ id: index, data: imageBytes }));
   } catch (error) {
     console.error('Failed to fetch images:', error);

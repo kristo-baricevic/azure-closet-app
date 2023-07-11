@@ -53,6 +53,8 @@ export default {
         .then(response => response.json())
         .then(data => {
           // Handle the response from the backend
+          this.imageUrl = null; 
+          this.$emit('imageUploaded'); 
           console.log(data);
         })
         .catch(error => {
