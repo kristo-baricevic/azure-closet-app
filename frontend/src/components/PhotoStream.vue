@@ -4,6 +4,7 @@
     <div class="photo-stream">
       <div class="card" v-for="image in images" :key="image.id" @click="openImage(image)">
         <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
+        <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
       </div>
     </div>
   </div>
@@ -21,45 +22,63 @@ export default {
       // open the image when clicked
     },
     getImageUrl(imageData) {
-  try {
-    if (!imageData) {
-      console.error('Invalid image data:', imageData);
-      return null;
-    }
-  
-    const base64String = atob(imageData);
-    const bytes = new Uint8Array(base64String.length);
-  
-    for (let i = 0; i < base64String.length; i++) {
-      bytes[i] = base64String.charCodeAt(i);
-    }
-  
-    const blob = new Blob([bytes.buffer], { type: 'image/jpeg' });
-    return URL.createObjectURL(blob);
-  } catch (error) {
-    console.error('Error converting image data:', error);
-    return null;
-  }
-},
+      try {
+        if (!imageData) {
+          console.error('Invalid image data:', imageData);
+          return null;
+        }
 
+        const base64String = atob(imageData);
+        const bytes = new Uint8Array(base64String.length);
+
+        for (let i = 0; i < base64String.length; i++) {
+          bytes[i] = base64String.charCodeAt(i);
+        }
+
+        const blob = new Blob([bytes.buffer], { type: 'image/jpeg' });
+        return URL.createObjectURL(blob);
+      } catch (error) {
+        console.error('Error converting image data:', error);
+        return null;
+      }
+    },
 
     async fetchImages() {
-  try {
-    const response = await fetch('/backend/Images');
-    const data = await response.json();
-    console.log('Retrieved images:', data);
-    this.images = data.map((imageBytes, index) => ({ id: index, data: imageBytes }));
-  } catch (error) {
-    console.error('Failed to fetch images:', error);
-  }
-},
+      try {
+        const response = await fetch('/backend/Images');
+        const data = await response.json();
+        console.log('Retrieved images:', data);
+        this.images = data;
+      } catch (error) {
+        console.error('Failed to fetch images:', error);
+      }
+    },
+
+    async deleteImage(imageId) {
+      try {
+        const response = await fetch(`/backend/Images/${imageId}`, {
+          method: 'DELETE',
+        });
+
+        if (response.ok) {
+          console.log('Image deleted:', imageId);
+          this.$emit('imageDeleted');
+        } else {
+          console.error('Failed to delete image:', imageId);
+        }
+      } catch (error) {
+        console.error('Error deleting image:', error);
+      }
+    },
   },
+
   mounted() {
     console.log('Component mounted');
     this.fetchImages();
   },
 };
 </script>
+
 
 <style>
 .photo-stream {
@@ -86,4 +105,22 @@ export default {
   width: 100%;
   height: auto;
 }
+
+.delete-button {
+  display: block;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #50C878; 
+  color: black;
+  border: 1px solid black;  
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+}
+
+.delete-button:hover {
+  background-color: #228B22; 
+  color: black;
+}
+
 </style>
