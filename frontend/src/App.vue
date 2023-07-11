@@ -9,7 +9,7 @@
   </div>
   <body>
     <HelloWorld msg="Welcome to The Image Uploader!" @imageUploaded="refreshPhotostream" />
-    <PhotoStream :images="images" ref="photostream" />
+    <PhotoStream :images="images" ref="photostream" @imageDeleted="refreshPhotostream" />
   </body>
 </template>
 

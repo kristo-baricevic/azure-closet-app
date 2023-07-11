@@ -18,17 +18,38 @@ namespace ClothingInventory.Controllers
             _dbContext = dbContext;
         }
 
-[HttpGet]
-public IActionResult GetImages()
-{
-    var clothingItems = _dbContext.ClothingItems.ToList();
-    var imageBytes = new List<byte[]>();
+        [HttpGet]
+        public IActionResult GetImages()
+        {
+            var clothingItems = _dbContext.ClothingItems.ToList();
+            var images = new List<object>();
 
-    foreach (var clothingItem in clothingItems)
-    {
-        imageBytes.Add(clothingItem.Image);
+            foreach (var clothingItem in clothingItems)
+            {
+                images.Add(new
+                {
+                    id = clothingItem.Id,
+                    data = clothingItem.Image
+                });
+            }
+
+        return Ok(images);
     }
 
-    return Ok(imageBytes);
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteImage(int id)
+        {
+            var clothingItem = _dbContext.ClothingItems.FirstOrDefault(c => c.Id == id);
+            if (clothingItem == null)
+            {
+                return NotFound();
+            }
+
+            _dbContext.ClothingItems.Remove(clothingItem);
+            _dbContext.SaveChanges();
+
+            return NoContent();
+        }
     }
-}}
+}

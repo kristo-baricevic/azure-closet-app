@@ -1,8 +1,8 @@
 {
   "Files": [
     {
-      "Id": "/Users/kristo/closet/backend/wwwroot/css/app.f264b35c.css",
-      "PackagePath": "staticwebassets/css/app.f264b35c.css"
+      "Id": "/Users/kristo/closet/backend/wwwroot/css/app.3aaa1cf5.css",
+      "PackagePath": "staticwebassets/css/app.3aaa1cf5.css"
     },
     {
       "Id": "/Users/kristo/closet/backend/wwwroot/favicon.ico",
@@ -13,12 +13,12 @@
       "PackagePath": "staticwebassets/index.html"
     },
     {
-      "Id": "/Users/kristo/closet/backend/wwwroot/js/app.5b41cf8c.js",
-      "PackagePath": "staticwebassets/js/app.5b41cf8c.js"
+      "Id": "/Users/kristo/closet/backend/wwwroot/js/app.89e8caac.js",
+      "PackagePath": "staticwebassets/js/app.89e8caac.js"
     },
     {
-      "Id": "/Users/kristo/closet/backend/wwwroot/js/app.5b41cf8c.js.map",
-      "PackagePath": "staticwebassets/js/app.5b41cf8c.js.map"
+      "Id": "/Users/kristo/closet/backend/wwwroot/js/app.89e8caac.js.map",
+      "PackagePath": "staticwebassets/js/app.89e8caac.js.map"
     },
     {
       "Id": "/Users/kristo/closet/backend/wwwroot/js/chunk-vendors.7695441a.js",
