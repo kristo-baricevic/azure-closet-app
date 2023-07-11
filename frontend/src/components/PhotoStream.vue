@@ -2,8 +2,8 @@
   <div>
     <h1>Photo Stream</h1>
     <div class="photo-stream">
-      <div v-for="image in images" :key="image.id" @click="openImage(image)">
-        <img :src="getImageUrl(image.data)" alt="Photo" />
+      <div class="card" v-for="image in images" :key="image.id" @click="openImage(image)">
+        <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
       </div>
     </div>
   </div>
@@ -60,3 +60,30 @@ export default {
   },
 };
 </script>
+
+<style>
+.photo-stream {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  width: 250px;
+  margin: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+}
+</style>
