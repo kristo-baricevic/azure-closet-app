@@ -29,7 +29,8 @@ namespace ClothingInventory.Controllers
                 images.Add(new
                 {
                     id = clothingItem.Id,
-                    data = clothingItem.Image
+                    data = clothingItem.Image,
+                    category = clothingItem.Category
                 });
             }
 

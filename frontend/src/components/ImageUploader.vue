@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'ImageUploader',
   data() {
     return {
       imageUrl: null,

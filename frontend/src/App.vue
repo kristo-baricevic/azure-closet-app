@@ -8,20 +8,20 @@
 
   </div>
   <body>
-    <HelloWorld msg="Welcome to The Image Uploader!" @imageUploaded="refreshPhotostream" />
+    <ImageUploader msg="Welcome to The Image Uploader!" @imageUploaded="refreshPhotostream" />
     <PhotoStream :images="images" ref="photostream" @imageDeleted="refreshPhotostream" />
   </body>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import ImageUploader from './components/ImageUploader.vue';
 import PhotoStream from './components/PhotoStream.vue';
 
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    ImageUploader,
     PhotoStream
   },
   data() {

@@ -4,7 +4,10 @@
     <div class="photo-stream">
       <div class="card" v-for="image in images" :key="image.id" @click="openImage(image)">
         <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
-        <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
+        <div class="card-info">
+          <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
+          <div class="image-category">{{ image.category }}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -106,6 +109,12 @@ export default {
   height: auto;
 }
 
+.card-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .delete-button {
   display: block;
   margin-top: 10px;
@@ -121,6 +130,13 @@ export default {
 .delete-button:hover {
   background-color: #228B22; 
   color: black;
+}
+
+.image-category {
+  margin-top: 5px;
+  font-size: 14px;
+  color: black;
+  padding: 5px;
 }
 
 </style>
