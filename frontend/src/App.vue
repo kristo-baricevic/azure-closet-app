@@ -1,42 +1,75 @@
 <template>
+
+  <body>
+    <div>
+      <ImageUploader msg="Welcome to The Image Uploader!" @imageUploaded="refreshPhotostream" />
+    </div>
+    <div>
+      <PhotoStream :images="images" ref="photostream" @imageDeleted="refreshPhotostream" />
+    </div>
+
   <div>
     <nav class="navbar">
       <ul class="navbar-menu">
-        <li><a href="/">Home</a></li>
+        <li><a href="/">Kristo's Closet</a></li>
       </ul>
     </nav>
 
+     <!-- Render the outfit view component based on the screen size and layout -->
+    <div v-if="isDesktop">
+      <div>
+        <OutfitView class="outfit-view-desktop" />
+      </div>
+    <div v-else>
+      <div class="mobile-layout">
+      <!-- Render the outfit view component in the desired position for mobile layout -->
+          <div>
+            <OutfitView class="outfit-view-mobile" />
+          </div>
+      </div>
+    </div>
+
   </div>
-  <body>
-    <ImageUploader msg="Welcome to The Image Uploader!" @imageUploaded="refreshPhotostream" />
-    <PhotoStream :images="images" ref="photostream" @imageDeleted="refreshPhotostream" />
-  </body>
 </template>
 
 <script>
 import ImageUploader from './components/ImageUploader.vue';
 import PhotoStream from './components/PhotoStream.vue';
+import OutfitView from './components/OutfitView.vue';
 
 
 export default {
   name: 'App',
   components: {
     ImageUploader,
-    PhotoStream
+    PhotoStream,
+    OutfitView
   },
   data() {
     return {
+      isDesktop: false,
     };
   },
+    mounted() {
+      this.checkScreenSize();
+      window.addEventListener('resize', this.checkScreenSize);
+    },
+    beforeUnmounted() {
+      window.removeEventListener('resize', this.checkScreenSize);
+    },
     methods: {
+      checkScreenSize() {
+        this.isDesktop = window.innerWidth >= 768;
+      },
       refreshPhotostream() {
       this.$refs.photostream.fetchImages();
-    }
-  }
-}
+      },
+    },
+  };
 </script>
 
 <style>
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -48,6 +81,18 @@ export default {
 
 body { 
   background-color: #e9ff96;
+}
+
+.desktop-layout {
+}
+
+.mobile-layout {
+}
+
+.outfit-view-desktop {
+}
+
+.outfit-view-mobile {
 }
 
 .navbar {
