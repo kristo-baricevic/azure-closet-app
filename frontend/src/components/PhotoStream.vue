@@ -1,14 +1,45 @@
 <template>
   <div>
-    <h1>Photo Stream</h1>
-    <div class="photo-stream">
-      <div class="card" v-for="image in images" :key="image.id" @click="openImage(image)">
-        <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
-        <div class="card-info">
-          <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
-          <div class="image-category">{{ image.category }}</div>
+    <!-- Desktop layout -->
+    <div v-if="isDesktop">
+      <h1>Photo Stream</h1>
+        <div class="photo-stream">
+          <div class="card" v-for="image in images" :key="image.id" @click="openImage(image)">
+            <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
+          <div class="card-info">
+            <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
+            <div class="image-category">{{ image.category }}</div>
+          </div>
         </div>
       </div>
+    </div>
+
+    <!-- Mobile layout -->
+    <div v-else>
+      <!-- Render mobile-specific components or layout here -->
+    </div>
+  </div>
+</template>
+
+<template>
+  <div>
+    <!-- Desktop layout -->
+    <div v-if="isDesktop">
+      <h1>Photo Stream</h1>
+      <div class="photo-stream">
+        <div class="card" v-for="image in images" :key="image.id" @click="openImage(image)">
+          <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
+          <div class="card-info">
+            <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
+            <div class="image-category">{{ image.category }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile layout -->
+    <div v-else>
+      <!-- Render mobile-specific components or layout here -->
     </div>
   </div>
 </template>
@@ -17,13 +48,30 @@
 export default {
   data() {
     return {
+      isDesktop: false,
       images: [],
     };
   },
+
+  mounted() {
+    this.fetchImages();
+    this.checkScreenSize();
+    window.addEventListener('resize', this.checkScreenSize);
+  },
+
+  beforeUnmount() {
+    window.removeEventListener('resize', this.checkScreenSize);
+  },
+
   methods: {
-    openImage() {
-      // open the image when clicked
+    checkScreenSize() {
+      this.isDesktop = window.innerWidth >= 768; // Breakpoint
     },
+
+    openImage() {
+      // Open the image when clicked
+    },
+
     getImageUrl(imageData) {
       try {
         if (!imageData) {
@@ -74,16 +122,11 @@ export default {
       }
     },
   },
-
-  mounted() {
-    console.log('Component mounted');
-    this.fetchImages();
-  },
 };
 </script>
 
-
 <style>
+
 .photo-stream {
   display: flex;
   flex-wrap: wrap;

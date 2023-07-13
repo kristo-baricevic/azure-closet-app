@@ -52,13 +52,13 @@ body {
 
 .navbar {
   background-color: #a4e333;
-  height: 80px; /* Adjust the height value as needed */
+  height: 80px; 
 }
 
 .navbar-menu {
   list-style-type: none;
   padding: 0;
-  height: 100%; /* Adjust the height value as needed */
+  height: 100%; 
   display: flex;
   align-items: center;
 }
@@ -72,6 +72,6 @@ body {
   text-decoration: none;
   color: #333;
   font-weight: bold;
-  line-height: 80px; /* Ensures the text is vertically centered */
+  line-height: 80px; 
 }
 </style>
