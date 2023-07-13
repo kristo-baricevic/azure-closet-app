@@ -1,17 +1,15 @@
 <template>
   <div class="body-container">
-    <div>
-      <ImageUploader msg="Welcome to The Image Uploader!" @imageUploaded="refreshPhotostream" />
-    </div>
-    <div>
-      <PhotoStream :images="images" ref="photostream" @imageDeleted="refreshPhotostream" />
-    </div>
 
     <nav class="navbar">
       <ul class="navbar-menu">
         <li><a href="/">Kristo's Closet</a></li>
       </ul>
     </nav>
+
+    <div>
+      <ImageUploader msg="Welcome to The Image Uploader!" @imageUploaded="refreshPhotostream" />
+    </div>
 
     <!-- Render the outfit view component based on the screen size and layout -->
     <div v-if="isDesktop" class="desktop-layout">

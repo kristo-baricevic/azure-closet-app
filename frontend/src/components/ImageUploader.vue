@@ -7,6 +7,7 @@
       <select id="category" v-model="selectedCategory" required>
         <option value="Top">Top</option>
         <option value="Bottom">Bottom</option>
+        <option value="Top">One-piece</option>
         <option value="Shoes">Shoes</option>
         <option value="Hat">Hat</option>
         <option value="Accessory">Accessory</option>

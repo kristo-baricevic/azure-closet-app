@@ -102,6 +102,8 @@ namespace ClothingInventory.Controllers
                 return "Top";
             else if (category.ToLower() == "bottom")
                 return "Bottom";
+            else if (category.ToLower() == "one-piece")
+                return "One-piece";
             else if (category.ToLower() == "shoes")
                 return "Shoes";
             else if (category.ToLower() == "hat")

@@ -1,5 +1,5 @@
 <template>
-    <div>
+  <div>
     <!-- Desktop layout -->
     <div v-if="isDesktop">
       <h1>Photo Stream</h1>
@@ -9,6 +9,7 @@
           <div class="card-info">
             <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
             <div class="image-category">{{ image.category }}</div>
+            <button class="select-button" @click="selectImage(image)">Select</button>
           </div>
         </div>
       </div>
@@ -24,6 +25,7 @@
           <div class="card-info">
             <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
             <div class="image-category">{{ image.category }}</div>
+            <button class="select-button" @click="selectImage(image)">Select</button>
           </div>
         </div>
       </div>
@@ -37,6 +39,14 @@ export default {
     return {
       isDesktop: false,
       images: [],
+      selectedItems: {
+        shoes: null,
+        bottom: null,
+        top: null,
+        onePiece: null,
+        hat: null,
+        accessories: [],
+      }
     };
   },
 
@@ -108,12 +118,43 @@ export default {
         console.error('Error deleting image:', error);
       }
     },
+
+    selectImage(image) {
+      const { category } = image;
+
+      // Check the category of the selected image and update the selectedItems accordingly
+      if (category === 'shoes') {
+        this.selectedItems.shoes = image;
+        this.selectedItems.onePiece = null;
+        this.selectedItems.top = null;
+        this.selectedItems.bottom = null;
+      } else if (category === 'bottom') {
+        this.selectedItems.bottom = image;
+        this.selectedItems.onePiece = null;
+        this.selectedItems.top = null;
+      } else if (category === 'top') {
+        this.selectedItems.top = image;
+        this.selectedItems.onePiece = null;
+        this.selectedItems.bottom = null;
+      } else if (category === 'hat') {
+        this.selectedItems.hat = image;
+      } else if (category === 'accessories') {
+        if (this.selectedItems.accessories.length >= 3) {
+          return; // Reached maximum number of accessories
+        }
+        this.selectedItems.accessories.push(image);
+      } else if (category === 'onePiece') {
+        this.selectedItems.onePiece = image;
+        this.selectedItems.shoes = null;
+        this.selectedItems.bottom = null;
+        this.selectedItems.top = null;
+      }
+    },
   },
 };
 </script>
 
 <style>
-
 .photo-stream {
   display: flex;
   flex-wrap: wrap;
@@ -149,16 +190,16 @@ export default {
   display: block;
   margin-top: 10px;
   padding: 5px 10px;
-  background-color: #50C878; 
+  background-color: #50C878;
   color: black;
-  border: 1px solid black;  
+  border: 1px solid black;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease;
 }
 
 .delete-button:hover {
-  background-color: #228B22; 
+  background-color: #228B22;
   color: black;
 }
 
@@ -169,4 +210,20 @@ export default {
   padding: 5px;
 }
 
+.select-button {
+  display: block;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #4287f5;
+  color: white;
+  border: 1px solid #4287f5;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.select-button:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
 </style>
