@@ -36,30 +36,49 @@
 export default {
   data() {
     return {
-      selectedItems: [], // Array to store the selected clothing items
+      selectedItems: {
+        shoes: null, // Selected shoe item
+        bottom: null, // Selected bottom item
+        top: null, // Selected top item
+        hat: null, // Selected hat item
+        accessories: [], // Array to store the selected accessories
+        onePiece: null, // Selected one-piece item
+      },
       isDesktop: false, // Flag to determine view mode
     };
   },
-  mounted() {
-    this.checkScreenSize();
-    window.addEventListener('resize', this.checkScreenSize);
-  },
-  beforeUnmount() {
-    window.removeEventListener('resize', this.checkScreenSize);
-  },
   methods: {
-    checkScreenSize() {
-      this.isDesktop = window.innerWidth >= 768; // Example breakpoint: 768px
-    },
     // Add a clothing item to the outfit view
-    addItem(item) {
-      this.selectedItems.push(item);
+    addItem(item, category) {
+      if (category === 'accessories') {
+        if (this.selectedItems.accessories.length >= 3) {
+          return; // Reached maximum number of accessories
+        }
+        this.selectedItems.accessories.push(item);
+      } else if (category === 'onePiece') {
+        // Reset top and bottom selections when a one-piece is selected
+        this.selectedItems.top = null;
+        this.selectedItems.bottom = null;
+        this.selectedItems.onePiece = item;
+      } else {
+        // Check if a one-piece item is already selected, if so, prevent selecting top and bottom
+        if (this.selectedItems.onePiece) {
+          return;
+        }
+        this.selectedItems[category] = item;
+      }
     },
     // Remove a clothing item from the outfit view
-    removeItem(item) {
-      const index = this.selectedItems.indexOf(item);
-      if (index !== -1) {
-        this.selectedItems.splice(index, 1);
+    removeItem(item, category) {
+      if (category === 'accessories') {
+        const index = this.selectedItems.accessories.indexOf(item);
+        if (index !== -1) {
+          this.selectedItems.accessories.splice(index, 1);
+        }
+      } else if (category === 'onePiece') {
+        this.selectedItems.onePiece = null;
+      } else {
+        this.selectedItems[category] = null;
       }
     },
   },
