@@ -1,28 +1,5 @@
 <template>
-  <div>
-    <!-- Desktop layout -->
-    <div v-if="isDesktop">
-      <h1>Photo Stream</h1>
-        <div class="photo-stream">
-          <div class="card" v-for="image in images" :key="image.id" @click="openImage(image)">
-            <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
-          <div class="card-info">
-            <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
-            <div class="image-category">{{ image.category }}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile layout -->
-    <div v-else>
-      <!-- Render mobile-specific components or layout here -->
-    </div>
-  </div>
-</template>
-
-<template>
-  <div>
+    <div>
     <!-- Desktop layout -->
     <div v-if="isDesktop">
       <h1>Photo Stream</h1>
