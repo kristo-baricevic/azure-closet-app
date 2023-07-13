@@ -22,10 +22,10 @@
       </div>
     <div v-else>
       <div class="mobile-layout">
-      <!-- Render the outfit view component in the desired position for mobile layout -->
-          <div>
-            <OutfitView class="outfit-view-mobile" />
-          </div>
+    <!-- Render the outfit view component in the desired position for mobile layout -->
+        <div>
+          <OutfitView class="outfit-view-mobile" />
+        </div>
       </div>
     </div>
 
