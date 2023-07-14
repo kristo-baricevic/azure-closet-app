@@ -4,12 +4,12 @@
     <div v-if="isDesktop">
       <h1>Photo Stream</h1>
       <div class="photo-stream">
-        <div class="card" v-for="image in images" :key="image.id" @click="selectImage(image)">
+        <div class="card" v-for="image in images" :key="image.id" @click="openImage(image)">
           <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
           <div class="card-info">
             <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
             <div class="image-category">{{ image.category }}</div>
-            <button class="select-button">Select</button>
+            <button class="select-button" @click="handleSelectImage(image)">Select</button>
           </div>
         </div>
       </div>
@@ -17,14 +17,15 @@
 
     <!-- Mobile layout -->
     <div v-else>
+      <!-- Render mobile-specific components or layout here -->
       <h1>Photo Stream</h1>
       <div class="photo-stream">
-        <div class="card" v-for="image in images" :key="image.id" @click="selectImage(image)">
+        <div class="card" v-for="image in images" :key="image.id" @click="openImage(image)">
           <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
           <div class="card-info">
             <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
             <div class="image-category">{{ image.category }}</div>
-            <button class="select-button">Select</button>
+            <button class="select-button" @click="$emit('selectedItemsUpdated', selectedItems)">Select</button>
           </div>
         </div>
       </div>
@@ -40,6 +41,13 @@ export default {
       images: [],
     };
   },
+
+  props: {
+    selectedItems: {
+      type: Object,
+    }
+  },
+  
 
   mounted() {
     this.fetchImages();
@@ -110,9 +118,43 @@ export default {
       }
     },
 
-    selectImage(image) {
-      this.$emit('imageSelected', image);
-    },
+  selectImage(image) {
+    const { category } = image;
+    console.log('Selected Image:', image.data);
+    console.log('Selected Category:', category);
+
+  // Check the category of the selected image and update the selectedItems accordingly
+  if (category === 'shoes') {
+    this.selectedItems.shoes = image;
+    this.selectedItems.onePiece = null;
+    this.selectedItems.top = null;
+    this.selectedItems.bottom = null;
+  } else if (category === 'bottom') {
+    this.selectedItems.bottom = image;
+    this.selectedItems.onePiece = null;
+    this.selectedItems.top = null;
+  } else if (category === 'top') {
+    this.selectedItems.top = image;
+    this.selectedItems.onePiece = null;
+    this.selectedItems.bottom = null;
+  } else if (category === 'hat') {
+    this.selectedItems.hat = image;
+  } else if (category === 'accessories') {
+    if (this.selectedItems.accessories.length >= 3) {
+      return; // Reached maximum number of accessories
+    }
+    this.selectedItems.accessories.push(image);
+  } else if (category === 'onePiece') {
+    this.selectedItems.onePiece = image;
+    this.selectedItems.shoes = null;
+    this.selectedItems.bottom = null;
+    this.selectedItems.top = null;
+  }
+
+  // Emit an event with the updated selectedItems object
+  this.$emit('selectedItemsUpdated', this.selectedItems);
+},
+
   },
 };
 </script>
