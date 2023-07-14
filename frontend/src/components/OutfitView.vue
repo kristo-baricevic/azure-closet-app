@@ -1,32 +1,28 @@
 <template>
   <div>
     <!-- Desktop view -->
-    <div v-if="isDesktop">
-      <div class="outfit-view-desktop">
-        <div class="outfit-view">
-          <!-- Display the selected clothing items here -->
-          <div v-for="(item, category) in selectedItems" :key="category" class="item">
-            <!-- Render the item in the desired format -->
-            {{ item }}
-            <button @click="removeItem(item, category)">Remove</button>
-          </div>
-          <div v-if="Object.keys(selectedItems).length === 0" class="empty-message">No items selected</div>
+    <div v-if="isDesktop" class="outfit-view-desktop">
+      <div class="outfit-view">
+        <!-- Display the selected clothing items here -->
+        <div v-for="(item, category) in selectedItems" :key="category" class="item">
+          <!-- Render the item in the desired format -->
+          <img :src="getImageUrl(item.image)" alt="Selected Item" v-if="item" />
+          <button @click="removeItem(item, category)">Remove</button>
         </div>
+        <div v-if="Object.keys(selectedItems).length === 0" class="empty-message">No items selected</div>
       </div>
     </div>
 
     <!-- Mobile view -->
-    <div v-else>
-      <div class="outfit-view-mobile">
-        <div class="outfit-view">
-          <!-- Display the selected clothing items here -->
-          <div v-for="(item, category) in selectedItems" :key="category" class="item">
-            <!-- Render the item in the desired format -->
-            {{ item }}
-            <button @click="removeItem(item, category)">Remove</button>
-          </div>
-          <div v-if="Object.keys(selectedItems).length === 0" class="empty-message">No items selected</div>
+    <div v-else class="outfit-view-mobile">
+      <div class="outfit-view">
+        <!-- Display the selected clothing items here -->
+        <div v-for="(item, category) in selectedItems" :key="category" class="item">
+          <!-- Render the item in the desired format -->
+          <img :src="getImageUrl(item.image)" alt="Selected Item" v-if="item" />
+          <button @click="removeItem(item, category)">Remove</button>
         </div>
+        <div v-if="Object.keys(selectedItems).length === 0" class="empty-message">No items selected</div>
       </div>
     </div>
   </div>
@@ -34,51 +30,54 @@
 
 <script>
 export default {
+  props: {
+    selectedItems: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
   data() {
     return {
-      selectedItems: {
-        shoes: null, // Selected shoe item
-        bottom: null, // Selected bottom item
-        top: null, // Selected top item
-        onePiece: null, // Selected one-piece item
-        hat: null, // Selected hat item
-        accessories: [], // Array to store the selected accessories
-      },
-      isDesktop: false, // Flag to determine view mode,
+      isDesktop: false,
     };
   },
+  
   methods: {
-    // Add a clothing item to the outfit view
-    addItem(item, category) {
-      if (category === 'accessories') {
-        if (this.selectedItems.accessories.length >= 3) {
-          return; // Reached maximum number of accessories
-        }
-        this.selectedItems.accessories.push(item);
-      } else if (category === 'onePiece') {
-        // Reset top and bottom selections when a one-piece is selected
-        this.selectedItems.top = null;
-        this.selectedItems.bottom = null;
-        this.selectedItems.onePiece = item;
-      } else {
-        // Check if a one-piece item is already selected, if so, prevent selecting top and bottom
-        if (this.selectedItems.onePiece) {
-          return;
-        }
-        this.selectedItems[category] = item;
-      }
-    },
-    // Remove a clothing item from the outfit view
     removeItem(item, category) {
       if (category === 'accessories') {
         const index = this.selectedItems.accessories.indexOf(item);
         if (index !== -1) {
-          this.selectedItems.accessories.splice(index, 1);
+          // Emit an event to remove the item from the parent component
+          this.$emit('remove-item', item, category);
         }
       } else if (category === 'onePiece') {
-        this.selectedItems.onePiece = null;
+        // Emit an event to remove the item from the parent component
+        this.$emit('remove-item', item, category);
       } else {
-        this.selectedItems[category] = null;
+        // Emit an event to remove the item from the parent component
+        this.$emit('remove-item', item, category);
+      }
+    },
+
+    getImageUrl(imageData) {
+      try {
+        if (!imageData) {
+          console.error('Invalid image data:', imageData);
+          return null;
+        }
+
+        const base64String = atob(imageData);
+        const bytes = new Uint8Array(base64String.length);
+
+        for (let i = 0; i < base64String.length; i++) {
+          bytes[i] = base64String.charCodeAt(i);
+        }
+
+        const blob = new Blob([bytes.buffer], { type: 'image/jpeg' });
+        return URL.createObjectURL(blob);
+      } catch (error) {
+        console.error('Error converting image data:', error);
+        return null;
       }
     },
   },

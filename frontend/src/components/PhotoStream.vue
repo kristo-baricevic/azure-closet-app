@@ -4,12 +4,12 @@
     <div v-if="isDesktop">
       <h1>Photo Stream</h1>
       <div class="photo-stream">
-        <div class="card" v-for="image in images" :key="image.id" @click="openImage(image)">
+        <div class="card" v-for="image in images" :key="image.id" @click="selectImage(image)">
           <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
           <div class="card-info">
             <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
             <div class="image-category">{{ image.category }}</div>
-            <button class="select-button" @click="selectImage(image)">Select</button>
+            <button class="select-button">Select</button>
           </div>
         </div>
       </div>
@@ -17,15 +17,14 @@
 
     <!-- Mobile layout -->
     <div v-else>
-      <!-- Render mobile-specific components or layout here -->
       <h1>Photo Stream</h1>
       <div class="photo-stream">
-        <div class="card" v-for="image in images" :key="image.id" @click="openImage(image)">
+        <div class="card" v-for="image in images" :key="image.id" @click="selectImage(image)">
           <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
           <div class="card-info">
             <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
             <div class="image-category">{{ image.category }}</div>
-            <button class="select-button" @click="selectImage(image)">Select</button>
+            <button class="select-button">Select</button>
           </div>
         </div>
       </div>
@@ -39,14 +38,6 @@ export default {
     return {
       isDesktop: false,
       images: [],
-      selectedItems: {
-        shoes: null,
-        bottom: null,
-        top: null,
-        onePiece: null,
-        hat: null,
-        accessories: [],
-      }
     };
   },
 
@@ -120,41 +111,13 @@ export default {
     },
 
     selectImage(image) {
-      const { category } = image;
-
-      // Check the category of the selected image and update the selectedItems accordingly
-      if (category === 'shoes') {
-        this.selectedItems.shoes = image;
-        this.selectedItems.onePiece = null;
-        this.selectedItems.top = null;
-        this.selectedItems.bottom = null;
-      } else if (category === 'bottom') {
-        this.selectedItems.bottom = image;
-        this.selectedItems.onePiece = null;
-        this.selectedItems.top = null;
-      } else if (category === 'top') {
-        this.selectedItems.top = image;
-        this.selectedItems.onePiece = null;
-        this.selectedItems.bottom = null;
-      } else if (category === 'hat') {
-        this.selectedItems.hat = image;
-      } else if (category === 'accessories') {
-        if (this.selectedItems.accessories.length >= 3) {
-          return; // Reached maximum number of accessories
-        }
-        this.selectedItems.accessories.push(image);
-      } else if (category === 'onePiece') {
-        this.selectedItems.onePiece = image;
-        this.selectedItems.shoes = null;
-        this.selectedItems.bottom = null;
-        this.selectedItems.top = null;
-      }
+      this.$emit('imageSelected', image);
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
 .photo-stream {
   display: flex;
   flex-wrap: wrap;

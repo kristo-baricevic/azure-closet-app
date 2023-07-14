@@ -11,21 +11,23 @@
       <ImageUploader msg="Welcome to The Image Uploader!" @imageUploaded="refreshPhotostream" />
     </div>
 
-    <!-- Render the outfit view component based on the screen size and layout -->
+    <!-- Render the outfit for Desktop -->
     <div v-if="isDesktop" class="desktop-layout">
       <div class="photostream-container resizable">
-        <PhotoStream :images="images" ref="photostream" @imageDeleted="refreshPhotostream" />
+        <PhotoStream :images="images" ref="photostream" @imageDeleted="refreshPhotostream" @selectImage="selectImage" />
       </div>
       <div class="outfit-view-container resizable">
-        <OutfitView class="outfit-view-desktop" />
+        <OutfitView :selectedItems="selectedItems" @remove-Item="removeItem" class="outfit-view-desktop" />
       </div>
     </div>
+
+    <!-- Render the outfit for Mobile -->
     <div v-else class="mobile-layout">
       <div class="photostream-container resizable">
-        <PhotoStream :images="images" ref="photostream" @imageDeleted="refreshPhotostream" />
+        <PhotoStream :images="images" ref="photostream" @imageDeleted="refreshPhotostream" @selectImage="selectImage" />
       </div>
       <div class="outfit-view-container resizable">
-        <OutfitView class="outfit-view-mobile" />
+        <OutfitView :selectedItems="selectedItems" @remove-Item="removeItem" class="outfit-view-mobile" />
       </div>
     </div>
   </div>
@@ -46,6 +48,14 @@ export default {
   data() {
     return {
       isDesktop: false,
+      selectedItems: {
+        shoes: null,
+        bottom: null,
+        top: null,
+        onePiece: null,
+        hat: null,
+        accessories: [],
+      },
     };
   },
   mounted() {
@@ -61,6 +71,45 @@ export default {
     },
     refreshPhotostream() {
       this.$refs.photostream.fetchImages();
+    },
+    selectImage(image) {
+      const { category } = image;
+      console.log('Selected image:', image);
+
+      // Check the category of the selected image and update the selectedItems accordingly
+      if (category === 'shoes') {
+        this.selectedItems.shoes = image;
+        this.selectedItems.onePiece = null;
+        this.selectedItems.top = null;
+        this.selectedItems.bottom = null;
+      } else if (category === 'bottom') {
+        this.selectedItems.bottom = image;
+        this.selectedItems.onePiece = null;
+        this.selectedItems.top = null;
+      } else if (category === 'top') {
+        this.selectedItems.top = image;
+        this.selectedItems.onePiece = null;
+        this.selectedItems.bottom = null;
+      } else if (category === 'hat') {
+        this.selectedItems.hat = image;
+      } else if (category === 'accessories') {
+        if (this.selectedItems.accessories.length >= 3) {
+          return; // Reached maximum number of accessories
+        }
+        this.selectedItems.accessories.push(image);
+      } else if (category === 'onePiece') {
+        this.selectedItems.onePiece = image;
+        this.selectedItems.shoes = null;
+        this.selectedItems.bottom = null;
+        this.selectedItems.top = null;
+      }
+    },
+    removeItem(category) {
+      if (category === 'accessories') {
+        this.selectedItems.accessories = [];
+      } else {
+        this.selectedItems[category] = null;
+      }
     },
   },
 };
