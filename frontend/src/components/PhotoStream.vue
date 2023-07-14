@@ -25,7 +25,7 @@
           <div class="card-info">
             <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
             <div class="image-category">{{ image.category }}</div>
-            <button class="select-button" @click="$emit('selectedItemsUpdated', selectedItems)">Select</button>
+            <button class="select-button" @click="handleSelectImage(image)">Select</button>
           </div>
         </div>
       </div>
@@ -118,42 +118,40 @@ export default {
       }
     },
 
-  selectImage(image) {
-    const { category } = image;
-    console.log('Selected Image:', image.data);
-    console.log('Selected Category:', category);
+    handleSelectImage(image) {
+      // Code to handle image selection and update localSelectedItems
+      const { category } = image;
+      if (category === 'shoes') {
+        this.localSelectedItems.shoes = image;
+        this.localSelectedItems.onePiece = null;
+        this.localSelectedItems.top = null;
+        this.localSelectedItems.bottom = null;
+      } else if (category === 'bottom') {
+        this.localSelectedItems.bottom = image;
+        this.localSelectedItems.onePiece = null;
+        this.localSelectedItems.top = null;
+      } else if (category === 'top') {
+        this.localSelectedItems.top = image;
+        this.localSelectedItems.onePiece = null;
+        this.localSelectedItems.bottom = null;
+      } else if (category === 'hat') {
+        this.localSelectedItems.hat = image;
+      } else if (category === 'accessories') {
+        if (this.localSelectedItems.accessories.length >= 3) {
+          return; // Reached maximum number of accessories
+        }
+        this.localSelectedItems.accessories.push(image);
+      } else if (category === 'onePiece') {
+        this.localSelectedItems.onePiece = image;
+        this.localSelectedItems.shoes = null;
+        this.localSelectedItems.bottom = null;
+        this.localSelectedItems.top = null;
+      }
+    },
 
-  // Check the category of the selected image and update the selectedItems accordingly
-  if (category === 'shoes') {
-    this.selectedItems.shoes = image;
-    this.selectedItems.onePiece = null;
-    this.selectedItems.top = null;
-    this.selectedItems.bottom = null;
-  } else if (category === 'bottom') {
-    this.selectedItems.bottom = image;
-    this.selectedItems.onePiece = null;
-    this.selectedItems.top = null;
-  } else if (category === 'top') {
-    this.selectedItems.top = image;
-    this.selectedItems.onePiece = null;
-    this.selectedItems.bottom = null;
-  } else if (category === 'hat') {
-    this.selectedItems.hat = image;
-  } else if (category === 'accessories') {
-    if (this.selectedItems.accessories.length >= 3) {
-      return; // Reached maximum number of accessories
-    }
-    this.selectedItems.accessories.push(image);
-  } else if (category === 'onePiece') {
-    this.selectedItems.onePiece = image;
-    this.selectedItems.shoes = null;
-    this.selectedItems.bottom = null;
-    this.selectedItems.top = null;
-  }
-
-  // Emit an event with the updated selectedItems object
-  this.$emit('selectedItemsUpdated', this.selectedItems);
-},
+    emitSelectedItemsUpdated() {
+      this.$emit('selectedItemsUpdated', { ...this.localSelectedItems });
+    },
 
   },
 };

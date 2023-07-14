@@ -19,7 +19,7 @@
         :images="images" 
         ref="photostream" 
         @imageDeleted="refreshPhotostream" 
-        @selectedItemsUpdated="selectedItemsUpdated" 
+        @selectedItemsUpdated="updateSelectedItems" 
         />
       </div>
       <div class="outfit-view-container resizable">
@@ -38,7 +38,7 @@
         :images="images" 
         ref="photostream" 
         @imageDeleted="refreshPhotostream" 
-        @selectedItemsUpdated="selectedItemsUpdated" 
+        @selectedItemsUpdated="updateSelectedItems"        
         />
       </div>
       <div class="outfit-view-container resizable">
@@ -101,13 +101,8 @@ export default {
       this.$refs.photostream.fetchImages();
     },
 
-    handleSelectImage(image) {
-      this.selectImage(image);
-      this.$emit('selectedItemsUpdated', this.selectedItems);
-    },
-
-    updateSelectedItems(selectedItems) {
-      this.selectedItems = selectedItems;
+    updateSelectedItems(updatedItems) {
+      this.selectedItems = updatedItems;
     },
 
     removeItem(category) {

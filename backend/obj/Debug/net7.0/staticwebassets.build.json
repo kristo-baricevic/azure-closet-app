@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9MTxNS1I5I1GkZYRkADOenu8uwD6ihbKQuHNCI/rcRY=",
+  "Hash": "flzu7uTjcTMBhISrs8a4IPwwI+Tnv2LHSz5ixAH9nUU=",
   "Source": "closet",
   "BasePath": "_content/closet",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "/Users/kristo/closet/backend/wwwroot/css/app.db909a59.css",
+      "Identity": "/Users/kristo/closet/backend/wwwroot/css/app.83251952.css",
       "SourceId": "closet",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/kristo/closet/backend/wwwroot/",
       "BasePath": "_content/closet",
-      "RelativePath": "css/app.db909a59.css",
+      "RelativePath": "css/app.83251952.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -31,7 +31,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/css/app.db909a59.css"
+      "OriginalItemSpec": "wwwroot/css/app.83251952.css"
     },
     {
       "Identity": "/Users/kristo/closet/backend/wwwroot/favicon.ico",
@@ -68,12 +68,12 @@
       "OriginalItemSpec": "wwwroot/index.html"
     },
     {
-      "Identity": "/Users/kristo/closet/backend/wwwroot/js/app.a55b1385.js",
+      "Identity": "/Users/kristo/closet/backend/wwwroot/js/app.73c8bf47.js",
       "SourceId": "closet",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/kristo/closet/backend/wwwroot/",
       "BasePath": "_content/closet",
-      "RelativePath": "js/app.a55b1385.js",
+      "RelativePath": "js/app.73c8bf47.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -82,15 +82,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/js/app.a55b1385.js"
+      "OriginalItemSpec": "wwwroot/js/app.73c8bf47.js"
     },
     {
-      "Identity": "/Users/kristo/closet/backend/wwwroot/js/app.a55b1385.js.map",
+      "Identity": "/Users/kristo/closet/backend/wwwroot/js/app.73c8bf47.js.map",
       "SourceId": "closet",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/kristo/closet/backend/wwwroot/",
       "BasePath": "_content/closet",
-      "RelativePath": "js/app.a55b1385.js.map",
+      "RelativePath": "js/app.73c8bf47.js.map",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -99,15 +99,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/js/app.a55b1385.js.map"
+      "OriginalItemSpec": "wwwroot/js/app.73c8bf47.js.map"
     },
     {
-      "Identity": "/Users/kristo/closet/backend/wwwroot/js/chunk-vendors.44549dc9.js",
+      "Identity": "/Users/kristo/closet/backend/wwwroot/js/chunk-vendors.3cd4f346.js",
       "SourceId": "closet",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/kristo/closet/backend/wwwroot/",
       "BasePath": "_content/closet",
-      "RelativePath": "js/chunk-vendors.44549dc9.js",
+      "RelativePath": "js/chunk-vendors.3cd4f346.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -116,15 +116,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/js/chunk-vendors.44549dc9.js"
+      "OriginalItemSpec": "wwwroot/js/chunk-vendors.3cd4f346.js"
     },
     {
-      "Identity": "/Users/kristo/closet/backend/wwwroot/js/chunk-vendors.44549dc9.js.map",
+      "Identity": "/Users/kristo/closet/backend/wwwroot/js/chunk-vendors.3cd4f346.js.map",
       "SourceId": "closet",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/kristo/closet/backend/wwwroot/",
       "BasePath": "_content/closet",
-      "RelativePath": "js/chunk-vendors.44549dc9.js.map",
+      "RelativePath": "js/chunk-vendors.3cd4f346.js.map",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -133,7 +133,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/js/chunk-vendors.44549dc9.js.map"
+      "OriginalItemSpec": "wwwroot/js/chunk-vendors.3cd4f346.js.map"
     }
   ]
 }
