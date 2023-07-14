@@ -7,7 +7,7 @@
           <!-- Display the selected clothing items here -->
           <div v-for="(item, category) in selectedItems" :key="category" class="item">
             <!-- Render the item in the desired format -->
-            {{ item.name }}
+            {{ item }}
             <button @click="removeItem(item, category)">Remove</button>
           </div>
           <div v-if="Object.keys(selectedItems).length === 0" class="empty-message">No items selected</div>
@@ -22,7 +22,7 @@
           <!-- Display the selected clothing items here -->
           <div v-for="(item, category) in selectedItems" :key="category" class="item">
             <!-- Render the item in the desired format -->
-            {{ item.name }}
+            {{ item }}
             <button @click="removeItem(item, category)">Remove</button>
           </div>
           <div v-if="Object.keys(selectedItems).length === 0" class="empty-message">No items selected</div>
@@ -44,8 +44,7 @@ export default {
         hat: null, // Selected hat item
         accessories: [], // Array to store the selected accessories
       },
-      isDesktop: false, // Flag to determine view mode
-      images: [],
+      isDesktop: false, // Flag to determine view mode,
     };
   },
   methods: {
