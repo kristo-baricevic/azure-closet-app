@@ -6,7 +6,8 @@
         <!-- Display the selected clothing items here -->
         <div v-for="(item, category) in selectedItems" :key="category" class="item">
           <!-- Render the item in the desired format -->
-          <img :src="getImageUrl(item.image)" alt="Selected Item" v-if="item" />
+          <img :src="getImageUrl(item.image)" alt="Selected Item" v-if="item && item.image" />
+        <div> {{ item.image.category }} </div>
           <button @click="removeItem(item, category)">Remove</button>
         </div>
         <div v-if="Object.keys(selectedItems).length === 0" class="empty-message">No items selected</div>
@@ -19,7 +20,8 @@
         <!-- Display the selected clothing items here -->
         <div v-for="(item, category) in selectedItems" :key="category" class="item">
           <!-- Render the item in the desired format -->
-          <img :src="getImageUrl(item.image)" alt="Selected Item" v-if="item" />
+          <img :src="getImageUrl(item.image)" alt="Selected Item" v-if="item && item.image" />
+            <div> {{ item.image.category }} </div>
           <button @click="removeItem(item, category)">Remove</button>
         </div>
         <div v-if="Object.keys(selectedItems).length === 0" class="empty-message">No items selected</div>
@@ -29,11 +31,12 @@
 </template>
 
 <script>
+
 export default {
+
   props: {
     selectedItems: {
       type: Object,
-      default: () => ({}),
     },
   },
   data() {
@@ -60,6 +63,8 @@ export default {
     },
 
     getImageUrl(imageData) {
+        console.log(imageData)
+
       try {
         if (!imageData) {
           console.error('Invalid image data:', imageData);
