@@ -104,36 +104,39 @@ export default {
     },
 
     handleSelectImage(image) {
-      const { category } = image;
-      console.log("handleSelectImage hit", image);
+  const { category } = image;
+  console.log("handleSelectImage hit", image);
 
-      if (category === 'shoes') {
-        this.selectedItems.shoes = image;
-        this.selectedItems.onePiece = null;
-        this.selectedItems.top = null;
-        this.selectedItems.bottom = null;
-      } else if (category === 'bottom') {
-        this.selectedItems.bottom = image;
-        this.selectedItems.onePiece = null;
-        this.selectedItems.top = null;
-      } else if (category === 'top') {
-        this.selectedItems.top = image;
-        this.selectedItems.onePiece = null;
-        this.selectedItems.bottom = null;
-      } else if (category === 'hat') {
-        this.selectedItems.hat = image;
-      } else if (category === 'accessories') {
-        if (this.selectedItems.accessories.length >= 3) {
-          return; // Reached maximum number of accessories
-        }
-        this.selectedItems.accessories.push(image);
-      } else if (category === 'onePiece') {
-        this.selectedItems.onePiece = image;
-        this.selectedItems.shoes = null;
-        this.selectedItems.bottom = null;
-        this.selectedItems.top = null;
-      }
-    },
+  if (category === 'shoes') {
+    this.selectedItems.shoes = image;
+    this.selectedItems.onePiece = null;
+    this.selectedItems.top = null;
+    this.selectedItems.bottom = null;
+  } else if (category === 'bottom') {
+    this.selectedItems.bottom = image;
+    this.selectedItems.onePiece = null;
+    this.selectedItems.top = null;
+  } else if (category === 'top') {
+    this.selectedItems.top = image;
+    this.selectedItems.onePiece = null;
+    this.selectedItems.bottom = null;
+  } else if (category === 'hat') {
+    this.selectedItems.hat = image;
+  } else if (category === 'accessories') {
+    if (this.selectedItems.accessories.length >= 3) {
+      return; // Reached maximum number of accessories
+    }
+    this.selectedItems.accessories.push(image);
+  } else if (category === 'onePiece') {
+    this.selectedItems.onePiece = image;
+    this.selectedItems.shoes = null;
+    this.selectedItems.bottom = null;
+    this.selectedItems.top = null;
+  }
+
+  console.log("Updated selectedItems:", this.selectedItems);
+},
+
 
     handleRemoveItem(category) {
       if (category === 'accessories') {

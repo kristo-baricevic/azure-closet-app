@@ -44,6 +44,9 @@ export default {
       isDesktop: false,
     };
   },
+  mounted() {
+    console.log('selectedItems prop:', this.selectedItems);
+  },
   
   methods: {
     removeItem(item, category) {
