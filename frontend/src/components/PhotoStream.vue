@@ -45,7 +45,7 @@ export default {
   props: {
     selectedItems: {
       type: Object,
-    }
+    },
   },
   
 
@@ -119,40 +119,10 @@ export default {
     },
 
     handleSelectImage(image) {
-      // Code to handle image selection and update localSelectedItems
-      const { category } = image;
-      if (category === 'shoes') {
-        this.localSelectedItems.shoes = image;
-        this.localSelectedItems.onePiece = null;
-        this.localSelectedItems.top = null;
-        this.localSelectedItems.bottom = null;
-      } else if (category === 'bottom') {
-        this.localSelectedItems.bottom = image;
-        this.localSelectedItems.onePiece = null;
-        this.localSelectedItems.top = null;
-      } else if (category === 'top') {
-        this.localSelectedItems.top = image;
-        this.localSelectedItems.onePiece = null;
-        this.localSelectedItems.bottom = null;
-      } else if (category === 'hat') {
-        this.localSelectedItems.hat = image;
-      } else if (category === 'accessories') {
-        if (this.localSelectedItems.accessories.length >= 3) {
-          return; // Reached maximum number of accessories
-        }
-        this.localSelectedItems.accessories.push(image);
-      } else if (category === 'onePiece') {
-        this.localSelectedItems.onePiece = image;
-        this.localSelectedItems.shoes = null;
-        this.localSelectedItems.bottom = null;
-        this.localSelectedItems.top = null;
-      }
+      // Emit the selected image to the parent component
+      this.$emit('selectImage', image);
     },
-
-    emitSelectedItemsUpdated() {
-      this.$emit('selectedItemsUpdated', { ...this.localSelectedItems });
-    },
-
+    
   },
 };
 </script>

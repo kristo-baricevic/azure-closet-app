@@ -19,13 +19,13 @@
         :images="images" 
         ref="photostream" 
         @imageDeleted="refreshPhotostream" 
-        @selectedItemsUpdated="updateSelectedItems" 
+        @selectedItemsUpdated="localSelectedItems" 
         />
       </div>
       <div class="outfit-view-container resizable">
         <OutfitView 
         :selectedItems="selectedItems" 
-        @remove-Item="removeItem" 
+        @remove-Item="handleRemoveItem" 
         class="outfit-view-desktop" />
       </div>
     </div>
@@ -34,17 +34,18 @@
     <div v-else class="mobile-layout">
       <div class="photostream-container resizable">
         <PhotoStream 
-        :selectedItems="selectedItems" 
+        :selectedItems="selectedItems"
+        :localSelectedItems="localSelectedItems" 
         :images="images" 
         ref="photostream" 
         @imageDeleted="refreshPhotostream" 
-        @selectedItemsUpdated="updateSelectedItems"        
+        @selectedItemsUpdated="localSelectedItems"        
         />
       </div>
       <div class="outfit-view-container resizable">
         <OutfitView 
         :selectedItems="selectedItems" 
-        @remove-Item="removeItem" 
+        @remove-Item="handleRemoveItem" 
         class="outfit-view-mobile" 
         />
       </div>
@@ -82,7 +83,7 @@ export default {
         onePiece: null,
         hat: null,
         accessories: [],
-      }
+      },
     };
   },
     
@@ -101,11 +102,38 @@ export default {
       this.$refs.photostream.fetchImages();
     },
 
-    updateSelectedItems(updatedItems) {
-      this.selectedItems = updatedItems;
+    handleSelectImage(image) {
+      const { category } = image;
+
+      if (category === 'shoes') {
+        this.selectedItems.shoes = image;
+        this.selectedItems.onePiece = null;
+        this.selectedItems.top = null;
+        this.selectedItems.bottom = null;
+      } else if (category === 'bottom') {
+        this.selectedItems.bottom = image;
+        this.selectedItems.onePiece = null;
+        this.selectedItems.top = null;
+      } else if (category === 'top') {
+        this.selectedItems.top = image;
+        this.selectedItems.onePiece = null;
+        this.selectedItems.bottom = null;
+      } else if (category === 'hat') {
+        this.selectedItems.hat = image;
+      } else if (category === 'accessories') {
+        if (this.selectedItems.accessories.length >= 3) {
+          return; // Reached maximum number of accessories
+        }
+        this.selectedItems.accessories.push(image);
+      } else if (category === 'onePiece') {
+        this.selectedItems.onePiece = image;
+        this.selectedItems.shoes = null;
+        this.selectedItems.bottom = null;
+        this.selectedItems.top = null;
+      }
     },
 
-    removeItem(category) {
+    handleRemoveItem(category) {
       if (category === 'accessories') {
         this.selectedItems.accessories = [];
       } else {
