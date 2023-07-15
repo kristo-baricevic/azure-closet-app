@@ -19,13 +19,13 @@
         :images="images" 
         ref="photostream" 
         @imageDeleted="refreshPhotostream" 
-        @selectedItemsUpdated="localSelectedItems" 
+        @selectImage="handleSelectImage"
         />
       </div>
       <div class="outfit-view-container resizable">
         <OutfitView 
         :selectedItems="selectedItems" 
-        @remove-Item="handleRemoveItem" 
+        @removeItem="handleRemoveItem" 
         class="outfit-view-desktop" />
       </div>
     </div>
@@ -39,9 +39,10 @@
         :images="images" 
         ref="photostream" 
         @imageDeleted="refreshPhotostream" 
-        @selectedItemsUpdated="localSelectedItems"        
+        @selectImage="handleSelectImage"
         />
       </div>
+
       <div class="outfit-view-container resizable">
         <OutfitView 
         :selectedItems="selectedItems" 
@@ -104,6 +105,7 @@ export default {
 
     handleSelectImage(image) {
       const { category } = image;
+      console.log("handleSelectImage hit", image);
 
       if (category === 'shoes') {
         this.selectedItems.shoes = image;

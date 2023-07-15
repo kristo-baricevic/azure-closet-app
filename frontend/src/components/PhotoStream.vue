@@ -42,13 +42,6 @@ export default {
     };
   },
 
-  props: {
-    selectedItems: {
-      type: Object,
-    },
-  },
-  
-
   mounted() {
     this.fetchImages();
     this.checkScreenSize();

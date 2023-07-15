@@ -6,8 +6,8 @@
         <!-- Display the selected clothing items here -->
         <div v-for="(item, category) in selectedItems" :key="category" class="item">
           <!-- Render the item in the desired format -->
-          <img :src="getImageUrl(item.image)" alt="Selected Item" v-if="item && item.image" />
-        <div> {{ item.image.category }} </div>
+          <img :src="getImageUrl(item.data)" alt="Selected Item" v-if="item" />
+        <div> {{ item.category }} </div>
           <button @click="removeItem(item, category)">Remove</button>
         </div>
         <div v-if="Object.keys(selectedItems).length === 0" class="empty-message">No items selected</div>
@@ -20,8 +20,8 @@
         <!-- Display the selected clothing items here -->
         <div v-for="(item, category) in selectedItems" :key="category" class="item">
           <!-- Render the item in the desired format -->
-          <img :src="getImageUrl(item.image)" alt="Selected Item" v-if="item && item.image" />
-            <div> {{ item.image.category }} </div>
+          <img :src="getImageUrl(item.data)" alt="Selected Item" v-if="item" />
+            <div> {{ item.category }} </div>
           <button @click="removeItem(item, category)">Remove</button>
         </div>
         <div v-if="Object.keys(selectedItems).length === 0" class="empty-message">No items selected</div>
@@ -52,14 +52,14 @@ export default {
         const index = this.selectedItems.accessories.indexOf(item);
         if (index !== -1) {
           // Emit an event to remove the item from the parent component
-          this.$emit('remove-item', item, category);
+          this.$emit('removeItem', item, category);
         }
       } else if (category === 'onePiece') {
         // Emit an event to remove the item from the parent component
-        this.$emit('remove-item', item, category);
+        this.$emit('removeItem', item, category);
       } else {
         // Emit an event to remove the item from the parent component
-        this.$emit('remove-item', item, category);
+        this.$emit('removeItem', item, category);
       }
     },
 
