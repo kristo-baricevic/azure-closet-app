@@ -47,6 +47,7 @@ export default {
   
   methods: {
     removeItem(item, category) {
+      console.log("remove items clicked", item);
       if (category === 'accessories') {
         const index = this.selectedItems.accessories.indexOf(item);
         if (index !== -1) {

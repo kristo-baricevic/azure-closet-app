@@ -121,6 +121,7 @@ export default {
     handleSelectImage(image) {
       // Emit the selected image to the parent component
       this.$emit('selectImage', image);
+      console.log('handleSelectImage connected:', image);
     },
     
   },
