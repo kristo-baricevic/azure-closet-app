@@ -6,8 +6,7 @@
         <!-- Display the selected clothing items here -->
         <div v-for="(item, category) in selectedItems" :key="category" class="item">
           <!-- Render the item in the desired format -->
-          <img :src="getImageUrl(item.data)" alt="Selected Item" v-if="item" />
-        <div> {{ item.category }} </div>
+          <img :src="getImageUrl(item)" alt="Selected Item" v-if="item" />
           <button @click="removeItem(item, category)">Remove</button>
         </div>
         <div v-if="Object.keys(selectedItems).length === 0" class="empty-message">No items selected</div>
@@ -20,8 +19,7 @@
         <!-- Display the selected clothing items here -->
         <div v-for="(item, category) in selectedItems" :key="category" class="item">
           <!-- Render the item in the desired format -->
-          <img :src="getImageUrl(item.data)" alt="Selected Item" v-if="item" />
-            <div> {{ item.category }} </div>
+          <img :src="getImageUrl(item)" alt="Selected Item" v-if="item" />
           <button @click="removeItem(item, category)">Remove</button>
         </div>
         <div v-if="Object.keys(selectedItems).length === 0" class="empty-message">No items selected</div>
@@ -67,7 +65,10 @@ export default {
     },
 
     getImageUrl(imageData) {
-        console.log(imageData)
+        console.log(imageData);
+        console.log(imageData.data);
+        const selectedImageData = imageData.data;
+        console.log(selectedImageData);
 
       try {
         if (!imageData) {
@@ -75,7 +76,7 @@ export default {
           return null;
         }
 
-        const base64String = atob(imageData);
+        const base64String = atob(selectedImageData);
         const bytes = new Uint8Array(base64String.length);
 
         for (let i = 0; i < base64String.length; i++) {
