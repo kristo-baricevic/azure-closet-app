@@ -134,11 +134,21 @@ export default {
   console.log("Updated selectedItems:", this.selectedItems);
 },
 
-    handleRemoveItem(category) {
-      if (category === 'accessories') {
-        this.selectedItems.accessories = [];
-      } else {
-        this.selectedItems[category] = null;
+  handleRemoveItem(item, category) {
+    console.log("handleRemoveItem ran:", category);
+
+    if (category === 'accessories') {
+    
+      const index = this.selectedItems.accessories.indexOf(item);
+
+      if (index !== -1) {
+        // Remove the item from the accessories array
+        this.selectedItems.accessories.splice(index, 1);
+      }
+    } else {
+      // Reset the category to null
+      console.log("else remove RAN:", this.selectedItems[category]);
+      this.selectedItems[category] = null;
       }
     },
   },

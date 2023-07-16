@@ -10,6 +10,7 @@
             <img :src="getImageUrl(item)" alt="Selected Item" v-if="item" />
           </div>
           <div class="item-info">
+            <div> {{ category }} </div>
             <button @click="removeItem(item, category)">Remove</button>
           </div>
         </div>
@@ -27,6 +28,7 @@
             <img :src="getImageUrl(item)" alt="Selected Item" v-if="item" />
           </div>
           <div class="item-info">
+            <div> {{ category }} </div>
             <button @click="removeItem(item, category)">Remove</button>
           </div>
         </div>
@@ -55,22 +57,26 @@ export default {
   },
   
   methods: {
+
     removeItem(item, category) {
-      console.log("remove items clicked", item);
-      if (category === 'accessories') {
-        const index = this.selectedItems.accessories.indexOf(item);
-        if (index !== -1) {
-          // Emit an event to remove the item from the parent component
-          this.$emit('removeItem', item, category);
-        }
-      } else if (category === 'onepiece') {
-        // Emit an event to remove the item from the parent component
-        this.$emit('removeItem', item, category);
-      } else {
-        // Emit an event to remove the item from the parent component
-        this.$emit('removeItem', item, category);
-      }
-    },
+  console.log("remove items clicked", item);
+  console.log("remove categories clicked", category);
+
+  if (category === 'accessories') {
+    const index = this.selectedItems.accessories.indexOf(item);
+
+    if (index !== -1) {
+      // Emit an event to remove the item from the parent component
+      this.$emit('removeItem', item, category);
+    }
+  } else {
+    // Emit an event to remove the item from the parent component
+    this.$emit('removeItem', this.selectedItems[category], category);
+  }
+
+  console.log("remove items has run", category);
+},
+
 
     getImageUrl(imageData) {
         console.log(imageData);
