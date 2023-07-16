@@ -63,7 +63,7 @@ export default {
           // Emit an event to remove the item from the parent component
           this.$emit('removeItem', item, category);
         }
-      } else if (category === 'onePiece') {
+      } else if (category === 'onepiece') {
         // Emit an event to remove the item from the parent component
         this.$emit('removeItem', item, category);
       } else {

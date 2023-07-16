@@ -81,7 +81,7 @@ export default {
         shoes: null,
         bottom: null,
         top: null,
-        onePiece: null,
+        onepiece: null,
         hat: null,
         accessories: [],
       },
@@ -111,31 +111,24 @@ export default {
   if (category.toLowerCase() === 'shoes') {
       console.log("handleSelectImage LOGIC hit:", category);
       this.selectedItems.shoes = image;
-        this.selectedItems.onePiece = null;
-        this.selectedItems.top = null;
-        this.selectedItems.bottom = null;
   } else if (category.toLowerCase() === 'bottom') {
       console.log("handleSelectImage LOGIC hit:", category);
-      this.selectedItems.shoes = null;
-        this.selectedItems.onePiece = null;
-        this.selectedItems.top = null;
-        this.selectedItems.bottom = image;
+      this.selectedItems.bottom = image;
+      this.selectedItems.onepiece = null;
   } else if (category.toLowerCase() === 'top') {
       console.log("handleSelectImage LOGIC hit:", category);
-      this.selectedItems.shoes = null;
-        this.selectedItems.onePiece = null;
-        this.selectedItems.top = image;
-        this.selectedItems.bottom = null;
+      this.selectedItems.top = image;
+      this.selectedItems.onepiece = null;
   } else if (category.toLowerCase() === 'hat') {
       console.log("handleSelectImage LOGIC hit:", category);
-      this.selectedItems.shoes = null;
-        this.selectedItems.onePiece = null;
-        this.selectedItems.top = null;
-        this.selectedItems.bottom = null;
+      this.selectedItems.hat = image;
   } else if (category.toLowerCase() === 'accessories') {
       console.log("handleSelectImage LOGIC hit:", category);
-  } else if (category.toLowerCase() === 'onePiece') {
+  } else if (category.toLowerCase() === 'onepiece') {
       console.log("handleSelectImage LOGIC hit:", category);
+      this.selectedItems.onepiece = image;
+      this.selectedItems.top = null;
+      this.selectedItems.bottom = null;
   }
 
   console.log("Updated selectedItems:", this.selectedItems);
