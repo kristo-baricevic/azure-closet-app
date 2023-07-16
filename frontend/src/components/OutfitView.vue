@@ -6,8 +6,12 @@
         <!-- Display the selected clothing items here -->
         <div v-for="(item, category) in selectedItems" :key="category" class="item">
           <!-- Render the item in the desired format -->
-          <img :src="getImageUrl(item)" alt="Selected Item" v-if="item" />
-          <button @click="removeItem(item, category)">Remove</button>
+          <div class="item-image-wrapper">
+            <img :src="getImageUrl(item)" alt="Selected Item" v-if="item" />
+          </div>
+          <div class="item-info">
+            <button @click="removeItem(item, category)">Remove</button>
+          </div>
         </div>
         <div v-if="Object.keys(selectedItems).length === 0" class="empty-message">No items selected</div>
       </div>
@@ -19,8 +23,12 @@
         <!-- Display the selected clothing items here -->
         <div v-for="(item, category) in selectedItems" :key="category" class="item">
           <!-- Render the item in the desired format -->
-          <img :src="getImageUrl(item)" alt="Selected Item" v-if="item" />
-          <button @click="removeItem(item, category)">Remove</button>
+          <div class="item-image-wrapper">
+            <img :src="getImageUrl(item)" alt="Selected Item" v-if="item" />
+          </div>
+          <div class="item-info">
+            <button @click="removeItem(item, category)">Remove</button>
+          </div>
         </div>
         <div v-if="Object.keys(selectedItems).length === 0" class="empty-message">No items selected</div>
       </div>
@@ -94,7 +102,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .outfit-view {
   display: flex;
   flex-wrap: wrap;
@@ -122,5 +130,33 @@ export default {
 
 .outfit-view-mobile {
   /* Styles specific to the mobile view */
+}
+
+.item-image-wrapper {
+  width: 100%;
+  height: 120px; /* Adjust the height as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.item-image-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.item-info {
+  margin-top: 10px;
+}
+
+.item-category {
+  font-size: 14px;
+  color: black;
+  padding: 5px;
+}
+
+button {
+  margin-top: 5px;
 }
 </style>
