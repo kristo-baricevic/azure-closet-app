@@ -123,12 +123,15 @@ export default {
       console.log("handleSelectImage LOGIC hit:", category);
       this.selectedItems.hat = image;
   } else if (category.toLowerCase() === 'accessory') {
-      console.log("handleSelectImage LOGIC hit:", category);
-      if (this.selectedItems.accessory.length === 2) {
+      console.log("handleSelectImage Accessory hit:", category);
+      if (this.selectedItems.accessory.length === 3) {
       console.log("too many accessories") 
       } else {
       this.selectedItems.accessory.push(image);
+      const firstAccessoryData = this.selectedItems.accessory[0].data;
+      console.log(firstAccessoryData);
       console.log("accessory added");
+      console.log("accessory list:", this.selectedItems.accessory[0].id);
       }
   } else if (category.toLowerCase() === 'onepiece') {
       console.log("handleSelectImage LOGIC hit:", category);

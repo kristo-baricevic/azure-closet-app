@@ -14,7 +14,24 @@
             <button @click="removeItem(item, category)">Remove</button>
           </div>
         </div>
-        <div v-if="Object.keys(selectedItems).length === 0" class="empty-message">No items selected</div>
+
+        <!-- Display the selected accessories here -->
+        <div v-if="selectedItems.accessory.length > 0" class="accessories">
+          <div v-for="accessory in selectedItems.accessory" :key="accessory.id" class="item">
+            <!-- Render the accessory in the desired format -->
+            <div class="item-image-wrapper">
+              <img :src="getImageUrl(accessory[0].data)" alt="Selected Accessory" />
+            </div>
+            <div class="item-info">
+              <div> Accessory </div>
+              <button @click="removeItem(accessory, 'accessory')">Remove</button>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="Object.keys(selectedItems).length === 0 && selectedItems.accessory.length === 0" class="empty-message">
+          No items selected
+        </div>
       </div>
     </div>
 
@@ -32,7 +49,24 @@
             <button @click="removeItem(item, category)">Remove</button>
           </div>
         </div>
-        <div v-if="Object.keys(selectedItems).length === 0" class="empty-message">No items selected</div>
+
+        <!-- Display the selected accessories here -->
+        <div v-if="selectedItems.accessory.length > 0" class="accessories">
+          <div v-for="accessory in selectedItems.accessory" :key="accessory.id" class="item">
+            <!-- Render the accessory in the desired format -->
+            <div class="item-image-wrapper">
+              <img :src="getImageUrl(accessory[0].data)" alt="Selected Accessory" />
+            </div>
+            <div class="item-info">
+              <div> Accessory </div>
+              <button @click="removeItem(accessory, 'accessory')">Remove</button>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="Object.keys(selectedItems).length === 0 && selectedItems.accessory.length === 0" class="empty-message">
+          No items selected
+        </div>
       </div>
     </div>
   </div>
