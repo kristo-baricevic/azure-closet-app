@@ -83,7 +83,7 @@ export default {
         top: null,
         onepiece: null,
         hat: null,
-        accessories: [],
+        accessory: [],
       },
     };
   },
@@ -122,8 +122,14 @@ export default {
   } else if (category.toLowerCase() === 'hat') {
       console.log("handleSelectImage LOGIC hit:", category);
       this.selectedItems.hat = image;
-  } else if (category.toLowerCase() === 'accessories') {
+  } else if (category.toLowerCase() === 'accessory') {
       console.log("handleSelectImage LOGIC hit:", category);
+      if (this.selectedItems.accessory.length === 2) {
+      console.log("too many accessories") 
+      } else {
+      this.selectedItems.accessory.push(image);
+      console.log("accessory added");
+      }
   } else if (category.toLowerCase() === 'onepiece') {
       console.log("handleSelectImage LOGIC hit:", category);
       this.selectedItems.onepiece = image;
@@ -137,13 +143,13 @@ export default {
   handleRemoveItem(item, category) {
     console.log("handleRemoveItem ran:", category);
 
-    if (category === 'accessories') {
+    if (category === 'accessory') {
     
-      const index = this.selectedItems.accessories.indexOf(item);
+      const index = this.selectedItems.accessory.indexOf(item);
 
       if (index !== -1) {
         // Remove the item from the accessories array
-        this.selectedItems.accessories.splice(index, 1);
+        this.selectedItems.accessory.splice(index, 1);
       }
     } else {
       // Reset the category to null
