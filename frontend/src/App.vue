@@ -13,7 +13,7 @@
 
     <!-- Render the outfit for Desktop -->
     <div v-if="isDesktop" class="desktop-layout">
-      <div class="photostream-container resizable-horizontal">
+      <div class="photostream-container">
         <PhotoStream 
         :selectedItems="selectedItems" 
         :images="images" 
@@ -22,7 +22,7 @@
         @selectImage="handleSelectImage"
         />
       </div>
-      <div class="outfit-view-container resizable-horizontal">
+      <div class="outfit-view-container">
         <OutfitView 
         :selectedItems="selectedItems" 
         @removeItem="handleRemoveItem" 
@@ -32,7 +32,7 @@
 
     <!-- Render the outfit for Mobile -->
     <div v-else class="mobile-layout">
-      <div class="photostream-container resizable-horizontal">
+      <div class="photostream-container">
         <PhotoStream 
         :selectedItems="selectedItems"
         :localSelectedItems="localSelectedItems" 
@@ -43,7 +43,7 @@
         />
       </div>
 
-      <div class="outfit-view-container resizable-horizontal">
+      <div class="outfit-view-container">
         <OutfitView 
         :selectedItems="selectedItems" 
         @removeItem="handleRemoveItem" 
@@ -169,14 +169,6 @@ export default {
   background-color: #e9ff96;
 }
 
-.resizable-horizontal {
-  resize: horizontal;
-  overflow-x: hidden;
-  overflow-y: auto;
-  min-width: 200px;
-  max-width: 500px;
-}
-
 .desktop-layout {
   display: flex;
   flex-direction: row;
@@ -193,8 +185,9 @@ export default {
 
 .photostream-container {
   flex-grow: 1;
+  resize: horizontal;
   height: calc(100vh - 80px);
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 .outfit-view-container {
