@@ -20,7 +20,7 @@
           <div v-for="accessory in selectedItems.accessory" :key="accessory.id" class="item">
             <!-- Render the accessory in the desired format -->
             <div class="item-image-wrapper">
-              <img :src="getImageUrl(accessory[0].data)" alt="Selected Accessory" />
+              <img :src="getImageUrl(accessory)" alt="Selected Accessory" />
             </div>
             <div class="item-info">
               <div> Accessory </div>
@@ -55,7 +55,7 @@
           <div v-for="accessory in selectedItems.accessory" :key="accessory.id" class="item">
             <!-- Render the accessory in the desired format -->
             <div class="item-image-wrapper">
-              <img :src="getImageUrl(accessory[0].data)" alt="Selected Accessory" />
+              <img :src="getImageUrl(accessory)" alt="Selected Accessory" />
             </div>
             <div class="item-info">
               <div> Accessory </div>
