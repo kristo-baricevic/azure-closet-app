@@ -181,16 +181,16 @@ export default {
   display: block;
   margin-top: 10px;
   padding: 5px 10px;
-  background-color: #4287f5;
-  color: white;
-  border: 1px solid #4287f5;
+  background-color: #50C878;
+  color: black;
+  border: 1px solid black;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .select-button:hover {
-  background-color: #0056b3;
+  background-color: #228B22;
   border-color: #0056b3;
 }
 </style>

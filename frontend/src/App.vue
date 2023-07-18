@@ -7,13 +7,13 @@
       </ul>
     </nav>
 
-    <div>
+    <div class="image-uploader-container">
       <ImageUploader msg="Welcome to The Image Uploader!" @imageUploaded="refreshPhotostream" />
     </div>
 
     <!-- Render the outfit for Desktop -->
     <div v-if="isDesktop" class="desktop-layout">
-      <div class="photostream-container resizable">
+      <div class="photostream-container resizable-horizontal">
         <PhotoStream 
         :selectedItems="selectedItems" 
         :images="images" 
@@ -22,7 +22,7 @@
         @selectImage="handleSelectImage"
         />
       </div>
-      <div class="outfit-view-container resizable">
+      <div class="outfit-view-container resizable-horizontal">
         <OutfitView 
         :selectedItems="selectedItems" 
         @removeItem="handleRemoveItem" 
@@ -32,7 +32,7 @@
 
     <!-- Render the outfit for Mobile -->
     <div v-else class="mobile-layout">
-      <div class="photostream-container resizable">
+      <div class="photostream-container resizable-horizontal">
         <PhotoStream 
         :selectedItems="selectedItems"
         :localSelectedItems="localSelectedItems" 
@@ -43,7 +43,7 @@
         />
       </div>
 
-      <div class="outfit-view-container resizable">
+      <div class="outfit-view-container resizable-horizontal">
         <OutfitView 
         :selectedItems="selectedItems" 
         @removeItem="handleRemoveItem" 
@@ -169,14 +169,12 @@ export default {
   background-color: #e9ff96;
 }
 
-/* Add CSS styles for resizable split screens */
-.resizable {
-  resize: both;
-  overflow: auto;
+.resizable-horizontal {
+  resize: horizontal;
+  overflow-x: hidden;
+  overflow-y: auto;
   min-width: 200px;
-  min-height: 200px;
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 500px;
 }
 
 .desktop-layout {
@@ -189,12 +187,20 @@ export default {
   flex-direction: column;
 }
 
+.image-uploader-container {
+  margin-left:20px;
+}
+
 .photostream-container {
   flex-grow: 1;
+  height: calc(100vh - 80px);
+  overflow-y: auto;
 }
 
 .outfit-view-container {
   flex-grow: 1;
+  height: calc(100vh - 80px);
+  overflow-y: auto;
 }
 
 .outfit-view-desktop {
