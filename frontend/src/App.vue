@@ -188,6 +188,7 @@ export default {
   resize: horizontal;
   height: calc(100vh - 80px);
   overflow-y: scroll;
+  max-width: 800px;
 }
 
 .outfit-view-container {
