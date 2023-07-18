@@ -78,11 +78,11 @@ export default {
     return {
       isDesktop: false,
       selectedItems: { 
-        shoes: null,
-        bottom: null,
-        top: null,
-        onepiece: null,
         hat: null,
+        top: null,
+        bottom: null,
+        onepiece: null,
+        shoes: null,
         accessory: [],
       },
     };

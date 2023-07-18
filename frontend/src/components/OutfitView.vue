@@ -4,7 +4,7 @@
     <div v-if="isDesktop" class="outfit-view-desktop">
       <div class="outfit-view">
         <!-- Display the selected clothing items here -->
-        <div v-for="(item, category) in selectedItems" :key="category" class="item">
+        <div v-for="(item, category) in filteredSelectedItems" :key="category" class="item">
           <!-- Render the item in the desired format -->
           <div class="item-image-wrapper">
             <img :src="getImageUrl(item)" alt="Selected Item" v-if="item" />
@@ -39,7 +39,7 @@
     <div v-else class="outfit-view-mobile">
       <div class="outfit-view">
         <!-- Display the selected clothing items here -->
-        <div v-for="(item, category) in selectedItems" :key="category" class="item">
+        <div v-for="(item, category) in filteredSelectedItems" :key="category" class="item">
           <!-- Render the item in the desired format -->
           <div class="item-image-wrapper">
             <img :src="getImageUrl(item)" alt="Selected Item" v-if="item" />
@@ -88,6 +88,16 @@ export default {
   },
   mounted() {
     console.log('selectedItems prop:', this.selectedItems);
+  },
+  computed: {
+    filteredSelectedItems() {
+      return Object.keys(this.selectedItems).reduce((acc, category) => {
+        if (category !== "accessory") {
+          acc[category] = this.selectedItems[category];
+        }
+        return acc;
+      }, {});
+    },
   },
   
   methods: {
