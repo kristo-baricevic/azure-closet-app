@@ -43,7 +43,7 @@
         <div class="card" v-for="image in images" :key="image.id" @click="openImage(image)">
           <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
           <div class="card-info">
-            <button class="delete-button" @click="deleteImage(image.id)">Delete</button>z
+            <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
             <div class="image-category">{{ image.category }}</div>
             <button class="select-button" @click="handleSelectImage(image)">Select</button>
           </div>

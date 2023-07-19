@@ -1,7 +1,11 @@
 <template>
   <div>
+
     <!-- Desktop view -->
     <div v-if="isDesktop" class="outfit-view-desktop">
+    
+    <div class="outfit-view-container-desktop">
+      
       <div class="outfit-view">
         <!-- Display the selected clothing items here -->
         <div v-for="(item, category) in filteredSelectedItems" :key="category" class="item">
@@ -14,7 +18,9 @@
             <button @click="removeItem(item, category)">Remove</button>
           </div>
         </div>
+      </div>
 
+      <div class="accessory-view">
         <!-- Display the selected accessories here -->
         <div v-if="selectedItems.accessory.length > 0" class="accessories">
           <div v-for="accessory in selectedItems.accessory" :key="accessory.id" class="item">
@@ -33,42 +39,49 @@
           No items selected
         </div>
       </div>
+    </div>
     </div>
 
     <!-- Mobile view -->
     <div v-else class="outfit-view-mobile">
-      <div class="outfit-view">
+
+      <div class="outfit-view-container-mobile">
         <!-- Display the selected clothing items here -->
-        <div v-for="(item, category) in filteredSelectedItems" :key="category" class="item">
-          <!-- Render the item in the desired format -->
-          <div class="item-image-wrapper">
-            <img :src="getImageUrl(item)" alt="Selected Item" v-if="item" />
-          </div>
-          <div class="item-info">
-            <div> {{ category }} </div>
-            <button @click="removeItem(item, category)">Remove</button>
+        <div class="outfit-view">
+          <div v-for="(item, category) in filteredSelectedItems" :key="category" class="item">
+            <!-- Render the item in the desired format -->
+            <div class="item-image-wrapper">
+              <img :src="getImageUrl(item)" alt="Selected Item" v-if="item" />
+            </div>
+            <div class="item-info">
+              <div> {{ category }} </div>
+              <button @click="removeItem(item, category)">Remove</button>
+            </div>
           </div>
         </div>
 
         <!-- Display the selected accessories here -->
-        <div v-if="selectedItems.accessory.length > 0" class="accessories">
-          <div v-for="accessory in selectedItems.accessory" :key="accessory.id" class="item">
-            <!-- Render the accessory in the desired format -->
-            <div class="item-image-wrapper">
-              <img :src="getImageUrl(accessory)" alt="Selected Accessory" />
-            </div>
-            <div class="item-info">
-              <div> Accessory </div>
-              <button @click="removeItem(accessory, 'accessory')">Remove</button>
+        <div class="accessory-view">
+          <div v-if="selectedItems.accessory.length > 0" class="accessories">
+            <div v-for="accessory in selectedItems.accessory" :key="accessory.id" class="item">
+              <!-- Render the accessory in the desired format -->
+              <div class="item-image-wrapper">
+                <img :src="getImageUrl(accessory)" alt="Selected Accessory" />
+              </div>
+              <div class="item-info">
+                <div> Accessory </div>
+                <button @click="removeItem(accessory, 'accessory')">Remove</button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div v-if="Object.keys(selectedItems).length === 0 && selectedItems.accessory.length === 0" class="empty-message">
-          No items selected
+          <div v-if="Object.keys(selectedItems).length === 0 && selectedItems.accessory.length === 0" class="empty-message">
+            No items selected
+          </div>
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -153,14 +166,31 @@ export default {
 </script>
 
 <style>
+
+.outfit-view-container-desktop {
+  display: flex;
+  flex-direction: column;
+}
+
+.outfit-view-container-mobile {
+  display: flex;
+  flex-direction: row;
+}
+
 .outfit-view {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
+.accessory-view {
+  display: flex;
+  flex-direction: row;
+}
+
 .item {
   width: 120px;
+  height: 180px;
   margin: 10px;
   padding: 10px;
   background-color: #f9f9f9;
@@ -175,16 +205,14 @@ export default {
 }
 
 .outfit-view-desktop {
-  /* Styles specific to the desktop view */
 }
 
 .outfit-view-mobile {
-  /* Styles specific to the mobile view */
 }
 
 .item-image-wrapper {
   width: 100%;
-  height: 120px; /* Adjust the height as needed */
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;

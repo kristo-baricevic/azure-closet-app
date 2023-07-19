@@ -195,6 +195,7 @@ export default {
   flex-grow: 1;
   height: calc(100vh - 80px);
   overflow-y: auto;
+  min-width: 25%;
 }
 
 .outfit-view-desktop {
