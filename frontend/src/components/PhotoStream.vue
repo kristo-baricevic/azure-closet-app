@@ -2,12 +2,15 @@
   <div>
     <!-- Desktop layout -->
     <div v-if="isDesktop">
-      <div class="category-buttons">
-        <button @click="filterByCategory(null)">All</button>
-        <button v-for="category in uniqueCategories" :key="category" @click="filterByCategory(category)">
+
+    <div class="sticky-container">
+      <div class="category-buttons-container">
+        <button class="category-button" @click="filterByCategory(null)">All</button>
+        <button class="category-button" v-for="category in uniqueCategories" :key="category" @click="filterByCategory(category)">
           {{ category }}
         </button>
       </div>
+    </div>
 
       <h1>Photo Stream</h1>
       <div class="photo-stream">
@@ -24,15 +27,18 @@
 
     <!-- Mobile layout -->
     <div v-else>
-      <div class="category-buttons">
-        <button @click="filterByCategory(null)">All</button>
-        <button v-for="category in uniqueCategories" :key="category" @click="filterByCategory(category)">
+
+    <div class="sticky-container">
+      <div class="category-buttons-container">
+        <button class="category-button" @click="filterByCategory(null)">All</button>
+        <button class="category-button" v-for="category in uniqueCategories" :key="category" @click="filterByCategory(category)">
           {{ category }}
         </button>
       </div>
+    </div>
 
-      <!-- Render mobile-specific components or layout here -->
-      <h1>Photo Stream</h1>
+    <!-- Render mobile-specific components or layout here -->
+    <h1>Photo Stream</h1>
       <div class="photo-stream">
         <div class="card" v-for="image in images" :key="image.id" @click="openImage(image)">
           <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
@@ -154,7 +160,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+
+.sticky-container {
+  position: sticky;
+  top: 0;
+  z-index: 1; 
+}
+
 .photo-stream {
   display: flex;
   flex-wrap: wrap;
@@ -184,6 +197,35 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.category-buttons-container {
+  display: flex;
+  flex: flex-wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  background-color: #a4e333;
+  position: sticky;
+  top: 0;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.category-button {
+  padding: 10px;
+  margin: 5px;
+  background-color: #50C878;
+  color: black;
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.category-button:hover {
+  background-color: #228B22;
+  border-color: #0056b3;
 }
 
 .delete-button {
