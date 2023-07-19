@@ -2,9 +2,16 @@
   <div>
     <!-- Desktop layout -->
     <div v-if="isDesktop">
+      <div class="category-buttons">
+        <button @click="filterByCategory(null)">All</button>
+        <button v-for="category in uniqueCategories" :key="category" @click="filterByCategory(category)">
+          {{ category }}
+        </button>
+      </div>
+
       <h1>Photo Stream</h1>
       <div class="photo-stream">
-        <div class="card" v-for="image in images" :key="image.id" @click="openImage(image)">
+        <div class="card" v-for="image in filteredImages" :key="image.id" @click="openImage(image)">
           <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
           <div class="card-info">
             <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
@@ -17,13 +24,20 @@
 
     <!-- Mobile layout -->
     <div v-else>
+      <div class="category-buttons">
+        <button @click="filterByCategory(null)">All</button>
+        <button v-for="category in uniqueCategories" :key="category" @click="filterByCategory(category)">
+          {{ category }}
+        </button>
+      </div>
+
       <!-- Render mobile-specific components or layout here -->
       <h1>Photo Stream</h1>
       <div class="photo-stream">
         <div class="card" v-for="image in images" :key="image.id" @click="openImage(image)">
           <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
           <div class="card-info">
-            <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
+            <button class="delete-button" @click="deleteImage(image.id)">Delete</button>z
             <div class="image-category">{{ image.category }}</div>
             <button class="select-button" @click="handleSelectImage(image)">Select</button>
           </div>
@@ -32,13 +46,13 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
   data() {
     return {
       isDesktop: false,
       images: [],
+      selectedCategory: null,
     };
   },
 
@@ -50,6 +64,21 @@ export default {
 
   beforeUnmount() {
     window.removeEventListener('resize', this.checkScreenSize);
+  },
+
+  computed: {
+    uniqueCategories() {
+      const categories = new Set();
+      this.images.forEach((image) => {
+        categories.add(image.category);
+      });
+      return Array.from(categories);
+    },
+
+    filteredImages() {
+      if (!this.selectedCategory) return this.images;
+      return this.images.filter((image) => image.category === this.selectedCategory);
+    },
   },
 
   methods: {
@@ -115,6 +144,10 @@ export default {
       // Emit the selected image to the parent component
       this.$emit('selectImage', image);
       console.log('handleSelectImage connected:', image);
+    },
+
+    filterByCategory(category) {
+      this.selectedCategory = category;
     },
     
   },
