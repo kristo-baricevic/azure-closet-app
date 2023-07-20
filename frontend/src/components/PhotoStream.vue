@@ -12,7 +12,6 @@
       </div>
     </div>
 
-      <h1>Photo Stream</h1>
       <div class="photo-stream">
         <div class="card" v-for="image in filteredImages" :key="image.id" @click="openImage(image)">
           <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
@@ -38,7 +37,6 @@
     </div>
 
     <!-- Render mobile-specific components or layout here -->
-    <h1>Photo Stream</h1>
       <div class="photo-stream">
         <div class="card" v-for="image in filteredImages" :key="image.id" @click="openImage(image)">
           <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
@@ -203,7 +201,7 @@ export default {
 
 .category-buttons-container {
   display: flex;
-  flex: flex-wrap;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   padding: 5px;
@@ -215,12 +213,12 @@ export default {
 }
 
 .category-button {
-  padding: 10px;
+  padding: 5 5px;
   margin: 5px;
   background-color: #50C878;
   color: black;
   border: 1px solid black;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }

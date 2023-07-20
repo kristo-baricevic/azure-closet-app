@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Image Classification</h1>
+    <h2>Upload Your Article of Clothing</h2>
 
     <form id="imageForm" @submit.prevent="classifyImage">
       <label for="category">Category:</label>

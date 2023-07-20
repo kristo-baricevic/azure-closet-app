@@ -188,14 +188,14 @@ export default {
   resize: horizontal;
   height: calc(100vh - 80px);
   overflow-y: scroll;
-  max-width: 800px;
+  max-width: 60%;
 }
 
 .outfit-view-container {
   flex-grow: 1;
   height: calc(100vh - 80px);
   overflow-y: auto;
-  min-width: 25%;
+  min-width: 40%;
 }
 
 .outfit-view-desktop {
