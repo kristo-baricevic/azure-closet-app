@@ -40,7 +40,7 @@
     <!-- Render mobile-specific components or layout here -->
     <h1>Photo Stream</h1>
       <div class="photo-stream">
-        <div class="card" v-for="image in images" :key="image.id" @click="openImage(image)">
+        <div class="card" v-for="image in filteredImages" :key="image.id" @click="openImage(image)">
           <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
           <div class="card-info">
             <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
@@ -153,7 +153,9 @@ export default {
     },
 
     filterByCategory(category) {
+      console.log(category);
       this.selectedCategory = category;
+      console.log(this.selectedCategory);
     },
     
   },
