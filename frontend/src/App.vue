@@ -187,7 +187,6 @@ export default {
 
 .photostream-container {
   flex-grow: 1;
-  resize: horizontal;
   height: calc(100vh - 80px);
   overflow-y: scroll;
   max-width: 60%;
