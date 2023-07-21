@@ -32,7 +32,7 @@
 
     <!-- Render the outfit for Mobile -->
     <div v-else class="mobile-layout">
-      <div class="photostream-container">
+      <div class="photostream-container-mobile">
         <PhotoStream 
         :selectedItems="selectedItems"
         :localSelectedItems="localSelectedItems" 
@@ -176,6 +176,8 @@ export default {
 
 .mobile-layout {
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
 }
 
@@ -191,11 +193,27 @@ export default {
   max-width: 60%;
 }
 
+.photostream-container-mobile {
+  flex-grow: 1;
+  resize: vertical;
+  height: calc(100vh - 80px);
+  overflow-y: scroll;
+  max-width: 90%;
+}
+
+
 .outfit-view-container {
   flex-grow: 1;
   height: calc(100vh - 80px);
   overflow-y: auto;
   min-width: 40%;
+}
+
+.outfit-view-container-mobile {
+  flex-grow: 1;
+  height: calc(100vh - 80px);
+  overflow-y: auto;
+  min-width: 90%;
 }
 
 .outfit-view-desktop {
