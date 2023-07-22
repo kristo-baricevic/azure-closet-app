@@ -4,6 +4,7 @@ using System.Linq;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Formats.Jpeg;
+using static ClothingInventory.Models.ClothingItem;
 
 namespace ClothingInventory.Controllers
 {
@@ -37,6 +38,26 @@ namespace ClothingInventory.Controllers
         return Ok(images);
     }
 
+        [HttpPut("{id}")]
+        public IActionResult UpdateImage(int id,[FromBody] EditClothingItemModel editModel)    
+        {
+            var clothingItem = _dbContext.ClothingItems.FirstOrDefault(c => c.Id == id);
+            if (clothingItem == null)
+            {
+                return NotFound();
+            }
+
+            clothingItem.Category = editModel.Category;
+            _dbContext.SaveChanges();
+
+            return Ok(new
+            {
+            id = clothingItem.Id,
+            data = clothingItem.Image,
+            category = clothingItem.Category
+            }); 
+
+        }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteImage(int id)

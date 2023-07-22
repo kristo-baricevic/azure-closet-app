@@ -3,45 +3,55 @@
     <!-- Desktop layout -->
     <div v-if="isDesktop">
 
-    <div class="sticky-container">
-      <div class="category-buttons-container">
-        <button class="category-button" @click="filterByCategory(null)">All</button>
-        <button class="category-button" v-for="category in uniqueCategories" :key="category" @click="filterByCategory(category)">
-          {{ category }}
-        </button>
+      <div class="sticky-container">
+        <div class="category-buttons-container">
+          <button class="category-button" @click="filterByCategory(null)">All</button>
+          <button class="category-button" v-for="category in uniqueCategories" :key="category" @click="filterByCategory(category)">
+            {{ category }}
+          </button>
+        </div>
       </div>
-    </div>
 
       <div class="photo-stream">
         <div class="card" v-for="image in filteredImages" :key="image.id" @click="openImage(image)">
           <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
           <div class="card-info">
             <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
-            <div class="image-category">{{ image.category }}</div>
             <button class="select-button" @click="handleSelectImage(image)">Select</button>
+            <button class="edit-button" @click="handleEditImage(image)">Edit</button>
+            <div class="image-category">{{ image.category }}</div>
+            <div v-if="isEditing(image)">
+              <select v-model="editedCategory" @keyup.enter="saveImageEdit(image)" >
+                <option v-for="category in uniqueCategories" :key="category" :value="category">{{ category }}</option>
+              </select>
+              <button @click="saveImageEdit(image)" >Save</button>
+              <button @click="cancelImageEdit()" >Cancel</button>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
 
     <!-- Mobile layout -->
     <div v-else>
 
-    <div class="sticky-container">
-      <div class="category-buttons-container">
-        <button class="category-button" @click="filterByCategory(null)">All</button>
-        <button class="category-button" v-for="category in uniqueCategories" :key="category" @click="filterByCategory(category)">
-          {{ category }}
-        </button>
+      <div class="sticky-container">
+        <div class="category-buttons-container">
+          <button class="category-button" @click="filterByCategory(null)">All</button>
+          <button class="category-button" v-for="category in uniqueCategories" :key="category" @click="filterByCategory(category)">
+            {{ category }}
+          </button>
+        </div>
       </div>
-    </div>
 
-    <!-- Render mobile-specific components or layout here -->
+      <!-- Render mobile-specific components or layout here -->
       <div class="photo-stream">
         <div class="card" v-for="image in filteredImages" :key="image.id" @click="openImage(image)">
           <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
           <div class="card-info">
             <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
+            <button class="edit-button" @click="handleEditImage(image.id)">Edit</button>
             <div class="image-category">{{ image.category }}</div>
             <button class="select-button" @click="handleSelectImage(image)">Select</button>
           </div>
@@ -57,6 +67,8 @@ export default {
       isDesktop: false,
       images: [],
       selectedCategory: null,
+      editedCategory: null,
+      editingImageId: null,
     };
   },
 
@@ -144,6 +156,62 @@ export default {
       }
     },
 
+    handleEditImage(image) {
+      console.log("edit hit");
+      //Change to new category
+      this.editingImageId = image.id;
+      this.editedCategory = image.category;
+      console.log(this.editedCategory);
+    },
+
+    isEditing(image) {
+      return this.editingImageId === image.id;
+    },
+
+   async saveImageEdit(image) {
+    const updatedCategory = this.editedCategory.trim();
+    if (updatedCategory !== "") {
+    // update the category 
+    const foundImage = this.images.find((img) => img.id === image.id);
+    if (foundImage) {
+      foundImage.category = updatedCategory;
+    }
+
+    // Call the backend to update the category
+    try {
+      const response = await fetch(`/backend/Images/${image.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          category: updatedCategory,
+        }),
+      });
+
+      if (response.ok) {
+        const updatedImage = await response.json();
+        // Update the image category in the frontend
+        foundImage.category = updatedImage.category;
+      } else {
+        console.error('Failed to update image category:', response);
+      }
+    } catch (error) {
+      console.error('Error updating image category:', error);
+    }
+  }
+
+  // Reset editing state 
+  this.editingImageId = null;
+  this.editedCategory = "";
+},
+
+
+    cancelImageEdit() {
+      this.editingImageId = null;
+      this.editedCategory = "";
+    },
+
     handleSelectImage(image) {
       // Emit the selected image to the parent component
       this.$emit('selectImage', image);
@@ -155,7 +223,7 @@ export default {
       this.selectedCategory = category;
       console.log(this.selectedCategory);
     },
-    
+
   },
 };
 </script>
@@ -241,6 +309,23 @@ export default {
 }
 
 .delete-button:hover {
+  background-color: #228B22;
+  color: black;
+}
+
+.edit-button {
+  display: block;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #50C878;
+  color: black;
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
   background-color: #228B22;
   color: black;
 }

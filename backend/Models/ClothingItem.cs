@@ -11,5 +11,10 @@ namespace ClothingInventory.Models
         public required byte[] Image { get; set; }
         public required string Category { get; set; }
 
+        public class EditClothingItemModel
+        {
+            public string Category { get; set; }
+        }
+
     }
 }
