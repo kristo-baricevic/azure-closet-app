@@ -16,16 +16,20 @@
         <div class="card" v-for="image in filteredImages" :key="image.id" @click="openImage(image)">
           <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
           <div class="card-info">
-            <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
-            <button class="select-button" @click="handleSelectImage(image)">Select</button>
-            <button class="edit-button" @click="handleEditImage(image)">Edit</button>
-            <div class="image-category">{{ image.category }}</div>
-            <div v-if="isEditing(image)">
-              <select v-model="editedCategory" @keyup.enter="saveImageEdit(image)" >
-                <option v-for="category in uniqueCategories" :key="category" :value="category">{{ category }}</option>
-              </select>
-              <button @click="saveImageEdit(image)" >Save</button>
-              <button @click="cancelImageEdit()" >Cancel</button>
+            <div class="card-buttons-container">
+              <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
+              <button class="select-button" @click="handleSelectImage(image)">Select</button>
+              <button class="edit-button" @click="handleEditImage(image)">Edit</button>
+            </div>
+            <div class="category-container">
+              <div class="edit-category" v-if="isEditing(image)">
+                <select v-model="editedCategory" @keyup.enter="saveImageEdit(image)">
+                  <option v-for="category in uniqueCategories" :key="category" :value="category">{{ category }}</option>
+                </select>
+                <button @click="saveImageEdit(image)">Save</button>
+                <button @click="cancelImageEdit()">Cancel</button>
+              </div>
+              <div class="image-category">{{ image.category }}</div>
             </div>
           </div>
         </div>
@@ -36,6 +40,7 @@
     <!-- Mobile layout -->
     <div v-else>
 
+      <!-- Mobile layout code (same as desktop) -->
       <div class="sticky-container">
         <div class="category-buttons-container">
           <button class="category-button" @click="filterByCategory(null)">All</button>
@@ -45,18 +50,29 @@
         </div>
       </div>
 
-      <!-- Render mobile-specific components or layout here -->
       <div class="photo-stream">
         <div class="card" v-for="image in filteredImages" :key="image.id" @click="openImage(image)">
           <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
           <div class="card-info">
-            <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
-            <button class="edit-button" @click="handleEditImage(image.id)">Edit</button>
-            <div class="image-category">{{ image.category }}</div>
-            <button class="select-button" @click="handleSelectImage(image)">Select</button>
+            <div class="card-buttons-container">
+              <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
+              <button class="select-button" @click="handleSelectImage(image)">Select</button>
+              <button class="edit-button" @click="handleEditImage(image)">Edit</button>
+            </div>
+            <div class="category-container">
+              <div class="edit-category" v-if="isEditing(image)">
+                <select v-model="editedCategory" @keyup.enter="saveImageEdit(image)">
+                  <option v-for="category in uniqueCategories" :key="category" :value="category">{{ category }}</option>
+                </select>
+                <button @click="saveImageEdit(image)">Save</button>
+                <button @click="cancelImageEdit()">Cancel</button>
+              </div>
+              <div class="image-category">{{ image.category }}</div>
+            </div>
           </div>
         </div>
       </div>
+      
     </div>
   </div>
 </template>
@@ -223,7 +239,6 @@ export default {
       this.selectedCategory = category;
       console.log(this.selectedCategory);
     },
-
   },
 };
 </script>
@@ -263,8 +278,17 @@ export default {
 
 .card-info {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.card-buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .category-buttons-container {
@@ -298,6 +322,7 @@ export default {
 
 .delete-button {
   display: block;
+  margin: 5px;
   margin-top: 10px;
   padding: 5px 10px;
   background-color: #50C878;
@@ -315,6 +340,7 @@ export default {
 
 .edit-button {
   display: block;
+  margin: 5px;
   margin-top: 10px;
   padding: 5px 10px;
   background-color: #50C878;
@@ -330,6 +356,13 @@ export default {
   color: black;
 }
 
+.category-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
 .image-category {
   margin-top: 5px;
   font-size: 14px;
@@ -339,6 +372,7 @@ export default {
 
 .select-button {
   display: block;
+  margin: 5px;
   margin-top: 10px;
   padding: 5px 10px;
   background-color: #50C878;
