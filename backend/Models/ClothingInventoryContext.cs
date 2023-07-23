@@ -17,6 +17,7 @@ namespace ClothingInventory.Models
         public ClothingInventoryContext(DbContextOptions<ClothingInventoryContext> options)
             : base(options)
         {
+
         }
 
         public DbSet<ClothingItem> ClothingItems { get; set; }
@@ -25,6 +26,7 @@ namespace ClothingInventory.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
         }
     }
 }
