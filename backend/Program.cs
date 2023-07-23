@@ -26,6 +26,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.StaticFiles;
 using Newtonsoft.Json.Serialization;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,9 +44,15 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
+
 builder.Services.AddDbContext<ClothingInventoryContext>(options =>
     options.UseSqlServer(connectionString));
 
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+{
+    // Configure Identity options
+})
+.AddEntityFrameworkStores<ClothingInventoryContext>();
 // Create and migrate the database
 using (var scope = builder.Services.BuildServiceProvider().CreateScope())
 {

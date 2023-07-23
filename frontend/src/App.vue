@@ -5,6 +5,9 @@
       <ul class="navbar-menu">
         <li><a href="/">Kristo's Closet</a></li>
       </ul>
+
+    <button @click="showRegistrationModal">Register</button>
+    <button @click="showLoginModal">Login</button>
     </nav>
 
     <div class="image-uploader-container">
@@ -51,6 +54,10 @@
         />
       </div>
     </div>
+
+    <RegistrationModal v-if="isRegistrationModalVisible" @close="closeRegistrationModal" />
+    <LoginModal v-if="isLoginModalVisible" @close="closeLoginModal" />
+
   </div>
 </template>
 
@@ -58,13 +65,17 @@
 import ImageUploader from './components/ImageUploader.vue';
 import PhotoStream from './components/PhotoStream.vue';
 import OutfitView from './components/OutfitView.vue';
+import RegistrationModal from './components/RegistrationModal.vue';
+import LoginModal from './components/LoginModal.vue';
 
 export default {
   name: 'App',
   components: {
     ImageUploader,
     PhotoStream,
-    OutfitView
+    OutfitView,
+    RegistrationModal,
+    LoginModal,
   },
 
   props: {
@@ -77,6 +88,8 @@ export default {
   data() {
     return {
       isDesktop: false,
+      isRegistrationModalVisible: false,
+      isLoginModalVisible: false,
       selectedItems: { 
         hat: null,
         top: null,
@@ -96,6 +109,7 @@ export default {
     window.removeEventListener('resize', this.checkScreenSize);
   },
   methods: {
+
     checkScreenSize() {
       this.isDesktop = window.innerWidth >= 768;
     },
@@ -103,48 +117,61 @@ export default {
       this.$refs.photostream.fetchImages();
     },
 
-  handleSelectImage(image) {
-  const { category } = image;
-  console.log("handleSelectImage hit:", image);
-  console.log("handleSelectImage hit:", image);
+    showRegistrationModal() {
+      this.isRegistrationModalVisible = true;
+    },
+    closeRegistrationModal() {
+      this.isRegistrationModalVisible = false;
+    },
 
-  if (category.toLowerCase() === 'shoes') {
-      console.log("handleSelectImage LOGIC hit:", category);
-      this.selectedItems.shoes = image;
-  } else if (category.toLowerCase() === 'bottom') {
-      console.log("handleSelectImage LOGIC hit:", category);
-      this.selectedItems.bottom = image;
-      this.selectedItems.onepiece = null;
-  } else if (category.toLowerCase() === 'top') {
-      console.log("handleSelectImage LOGIC hit:", category);
-      this.selectedItems.top = image;
-      this.selectedItems.onepiece = null;
-  } else if (category.toLowerCase() === 'hat') {
-      console.log("handleSelectImage LOGIC hit:", category);
-      this.selectedItems.hat = image;
-  } else if (category.toLowerCase() === 'accessory') {
-      console.log("handleSelectImage Accessory hit:", category);
-      if (this.selectedItems.accessory.length === 3) {
-      console.log("too many accessories") 
+    showLoginModal() {
+      this.isLoginModalVisible = true;
+    },
+    closeLoginModal() {
+      this.isLoginModalVisible = false;
+    },
+
+    handleSelectImage(image) {
+      const { category } = image;
+      console.log("handleSelectImage hit:", image);
+      console.log("handleSelectImage hit:", image);
+
+      if (category.toLowerCase() === 'shoes') {
+        console.log("handleSelectImage LOGIC hit:", category);
+        this.selectedItems.shoes = image;
+      } else if (category.toLowerCase() === 'bottom') {
+          console.log("handleSelectImage LOGIC hit:", category);
+          this.selectedItems.bottom = image;
+          this.selectedItems.onepiece = null;
+      } else if (category.toLowerCase() === 'top') {
+          console.log("handleSelectImage LOGIC hit:", category);
+          this.selectedItems.top = image;
+          this.selectedItems.onepiece = null;
+      } else if (category.toLowerCase() === 'hat') {
+          console.log("handleSelectImage LOGIC hit:", category);
+          this.selectedItems.hat = image;
+      } else if (category.toLowerCase() === 'accessory') {
+          console.log("handleSelectImage Accessory hit:", category);
+          if (this.selectedItems.accessory.length === 3) {
+          console.log("too many accessories") 
       } else {
-      this.selectedItems.accessory.push(image);
-      const firstAccessoryData = this.selectedItems.accessory[0].data;
-      console.log(firstAccessoryData);
-      console.log("accessory added");
-      console.log("accessory list:", this.selectedItems.accessory[0].id);
-      }
-  } else if (category.toLowerCase() === 'onepiece') {
-      console.log("handleSelectImage LOGIC hit:", category);
-      this.selectedItems.onepiece = image;
-      this.selectedItems.top = null;
-      this.selectedItems.bottom = null;
-  }
-
-  console.log("Updated selectedItems:", this.selectedItems);
+          this.selectedItems.accessory.push(image);
+          const firstAccessoryData = this.selectedItems.accessory[0].data;
+          console.log(firstAccessoryData);
+          console.log("accessory added");
+          console.log("accessory list:", this.selectedItems.accessory[0].id);
+        }
+      } else if (category.toLowerCase() === 'onepiece') {
+          console.log("handleSelectImage LOGIC hit:", category);
+          this.selectedItems.onepiece = image;
+          this.selectedItems.top = null;
+          this.selectedItems.bottom = null;
+        }
+      console.log("Updated selectedItems:", this.selectedItems);
 },
 
-  handleRemoveItem(item, category) {
-    console.log("handleRemoveItem ran:", category);
+    handleRemoveItem(item, category) {
+      console.log("handleRemoveItem ran:", category);
 
     if (category === 'accessory') {
     
