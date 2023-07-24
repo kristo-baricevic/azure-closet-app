@@ -3,17 +3,11 @@ using ClothingInventory.Models;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Identity;
 
-
 namespace ClothingInventory.Models
 {
-    public class User : IdentityUser
-        {
 
-        }
-        
     public class ClothingInventoryContext : DbContext
     {
-    
         public ClothingInventoryContext(DbContextOptions<ClothingInventoryContext> options)
             : base(options)
         {
@@ -22,11 +16,13 @@ namespace ClothingInventory.Models
 
         public DbSet<ClothingItem> ClothingItems { get; set; }
 
-        // Define your entity sets (DbSets) here
+        public DbSet<User> Users { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<User>().ToTable("Users");
         }
     }
 }

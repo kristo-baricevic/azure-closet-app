@@ -1,5 +1,4 @@
 <template>
-  <div class="modal">
     <div class="modal-content">
       <h2>Login</h2>
       <form @submit.prevent="loginUser">
@@ -11,38 +10,52 @@
           <label for="password">Password:</label>
           <input type="password" id="password" v-model="password" required>
         </div>
-        <button type="submit">Login</button>
+        <button class="login-button" type="submit">Login</button>
+        <button class="close-button" @click="handleCloseModal">Close</button> 
       </form>
     </div>
-  </div>
 </template>
+
 
 <script>
 import axios from 'axios';
 
 export default {
+  props: {
+    loginModal: {
+      type: Boolean,
+    },
+  },
+
   data() {
     return {
       username: "",
       password: "",
     };
   },
-  methods: {
-    loginUser() {
-      const userData = {
-        username: this.username,
-        password: this.password,
-      };
 
-      // HTTP POST request to backend for login
-      axios.post('/backend/Login', userData)
+  methods: {
+      loginUser() {
+        const userData = {
+          username: this.username,
+          password: this.password,
+        };
+
+        // HTTP POST request to backend for login
+        axios.post('/backend/User/login', userData)
         .then(response => {
-          console.log('User logged in:', response.data);
+          console.log('response:', response);
+          console.log('response data', response.data);
           // You can store the user token or authentication status in the frontend
         })
         .catch(error => {
-          console.error('Login failed:', error.response.data);
+          console.error('Login failed:', error);
+          console.error('Error Response:', error.response);
         });
+      },
+
+    handleCloseModal() {
+      this.$emit('close-modal'); 
     },
   },
 };
@@ -89,7 +102,7 @@ input[type="password"] {
   border-radius: 4px;
 }
 
-button {
+.login-button {
   padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
@@ -99,7 +112,7 @@ button {
   font-size: 16px;
 }
 
-button:hover {
+.login-button:hover {
   background-color: #0056b3;
 }
 </style>
