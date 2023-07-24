@@ -39,26 +39,24 @@ export default {
   },
 
   methods: {
-    registerUser() {
+    
+    async registerUser() {
       const userData = {
         username: this.username,
         email: this.email,
         password: this.password,
       };
 
-      // HTTP POST request to backend for registration
-      axios.post('/backend/User/Register', userData)
-        .then(response => {
-          console.log('User registered:', response.data);
-        })
-      .catch(error => {
-        console.error('Registration failed:', error.response.data);
-      });
+      //Call register action in the Vuex store
+      await this.registerUser(userData);
+      console.log('User registered successfully!');
     },
 
     handleCloseModal() {
       this.$emit('close-modal'); //
-    },
+    } catch (error) {
+      console.error('Registration failed:', error);
+    }
   },
 };
 

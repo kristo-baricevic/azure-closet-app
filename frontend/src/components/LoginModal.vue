@@ -18,7 +18,6 @@
 
 
 <script>
-import axios from 'axios';
 
 export default {
   props: {
@@ -42,7 +41,7 @@ export default {
         };
 
         // HTTP POST request to backend for login
-        axios.post('/backend/User/login', userData)
+        this.$store.dispatch("loginUser", userData)
         .then(response => {
           console.log('response:', response);
           console.log('response data', response.data);

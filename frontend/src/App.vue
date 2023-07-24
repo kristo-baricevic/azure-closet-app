@@ -8,15 +8,22 @@
           <button @click="showRegistrationModal">Register</button>
         </li>
         <li>
-          <button @click="showLoginModal">Login</button>
+          <button v-if="!isAuthenticated" @click="showLoginModal">Login</button>
+          <button v-else @click="logoutUser">Logout</button>
         </li>
       </ul>
 
     </nav>
 
 
-    <RegistrationModal v-if="isRegistrationModalVisible" @close-modal="handleCloseRegistrationModal" />
-    <LoginModal v-if="isLoginModalVisible" @close-modal="handleCloseLoginModal" />
+    <RegistrationModal 
+      v-if="this.$store.state.registrationModalVisible" 
+      @close-modal="handleCloseRegistrationModal" 
+    />
+    <LoginModal 
+      v-if="this.$store.state.loginModalVisible" 
+      @close-modal="handleCloseLoginModal" 
+    />
 
     <div class="image-uploader-container">
       <ImageUploader msg="Welcome to The Image Uploader!" @imageUploaded="refreshPhotostream" />
@@ -72,6 +79,7 @@ import PhotoStream from './components/PhotoStream.vue';
 import OutfitView from './components/OutfitView.vue';
 import RegistrationModal from './components/RegistrationModal.vue';
 import LoginModal from './components/LoginModal.vue';
+import { mapState } from 'vuex';
 
 export default {
   name: 'App',
@@ -112,9 +120,15 @@ export default {
     this.checkScreenSize();
     window.addEventListener('resize', this.checkScreenSize);
   },
+
   beforeUnmount() {
     window.removeEventListener('resize', this.checkScreenSize);
   },
+  
+  computed: {
+    ...mapState(['isAuthenticated'])
+  },
+
   methods: {
 
     checkScreenSize() {
@@ -126,20 +140,24 @@ export default {
 
     showRegistrationModal() {
       console.log("test registration click");
-      this.isRegistrationModalVisible = true;
-      console.log(this.isRegistrationModalVisible);
+      this.$store.commit('SET_REGISTRATION_MODAL_VISIBLE', true);
     },
     handleCloseRegistrationModal() {
-      this.isRegistrationModalVisible = false;
+      this.$store.commit('SET_REGISTRATION_MODAL_VISIBLE', false);
     },
 
     showLoginModal() {
-      console.log("test registration click");
-      this.isLoginModalVisible = true;
-      console.log(this.isLoginModalVisible);
+      console.log("test login click");
+      this.$store.commit('SET_LOGIN_MODAL_VISIBLE', true);
     },
     handleCloseLoginModal() {
-      this.isLoginModalVisible = false;
+      this.$store.commit('SET_LOGIN_MODAL_VISIBLE', false);
+    },
+
+    logoutUser() {
+    // Perform logout logic here, like clearing the user data and setting isAuthenticated to false.
+    // You can create a logout action in the Vuex store to handle this.
+    this.$store.dispatch('logout');
     },
 
     handleSelectImage(image) {
