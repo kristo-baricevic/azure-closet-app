@@ -4,11 +4,19 @@
     <nav class="navbar">
       <ul class="navbar-menu">
         <li><a href="/">Kristo's Closet</a></li>
+        <li>    
+          <button @click="showRegistrationModal">Register</button>
+        </li>
+        <li>
+          <button @click="showLoginModal">Login</button>
+        </li>
       </ul>
 
-    <button @click="showRegistrationModal">Register</button>
-    <button @click="showLoginModal">Login</button>
     </nav>
+
+
+    <RegistrationModal v-if="isRegistrationModalVisible" @close-modal="handleCloseRegistrationModal" />
+    <LoginModal v-if="isLoginModalVisible" @close-modal="handleCloseLoginModal" />
 
     <div class="image-uploader-container">
       <ImageUploader msg="Welcome to The Image Uploader!" @imageUploaded="refreshPhotostream" />
@@ -55,9 +63,6 @@
       </div>
     </div>
 
-    <RegistrationModal v-if="isRegistrationModalVisible" @close="closeRegistrationModal" />
-    <LoginModal v-if="isLoginModalVisible" @close="closeLoginModal" />
-
   </div>
 </template>
 
@@ -89,7 +94,9 @@ export default {
     return {
       isDesktop: false,
       isRegistrationModalVisible: false,
+      registrationModal: false,
       isLoginModalVisible: false,
+      loginModal: false,
       selectedItems: { 
         hat: null,
         top: null,
@@ -118,16 +125,20 @@ export default {
     },
 
     showRegistrationModal() {
+      console.log("test registration click");
       this.isRegistrationModalVisible = true;
+      console.log(this.isRegistrationModalVisible);
     },
-    closeRegistrationModal() {
+    handleCloseRegistrationModal() {
       this.isRegistrationModalVisible = false;
     },
 
     showLoginModal() {
+      console.log("test registration click");
       this.isLoginModalVisible = true;
+      console.log(this.isLoginModalVisible);
     },
-    closeLoginModal() {
+    handleCloseLoginModal() {
       this.isLoginModalVisible = false;
     },
 

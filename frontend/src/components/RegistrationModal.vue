@@ -1,5 +1,4 @@
 <template>
-  <div class="modal">
     <div class="modal-content">
       <h2>Register</h2>
       <form @submit.prevent="registerUser">
@@ -15,16 +14,22 @@
           <label for="password">Password:</label>
           <input type="password" id="password" v-model="password" required>
         </div>
-        <button type="submit">Register</button>
+        <button class="submit-button" type="submit">Register</button>
+        <button class="close-button" @click="handleCloseModal">Close</button> 
       </form>
     </div>
-  </div>
 </template>
 
 <script>
 import axios from 'axios';
 
 export default {
+  props: {
+    registrationModal: {
+      type: Boolean,
+    },
+  },
+
   data() {
     return {
       username: "",
@@ -32,26 +37,31 @@ export default {
       password: "",
     };
   },
+
   methods: {
     registerUser() {
-      // Call the API endpoint to register the user
       const userData = {
         username: this.username,
         email: this.email,
         password: this.password,
       };
 
-      // HTTP POST request to backend
-        axios.post('/backend/Register', userData)
+      // HTTP POST request to backend for registration
+      axios.post('/backend/User/Register', userData)
         .then(response => {
-            console.log('User registered:', response.data);
+          console.log('User registered:', response.data);
         })
       .catch(error => {
-        console.log(error);
+        console.error('Registration failed:', error.response.data);
       });
+    },
+
+    handleCloseModal() {
+      this.$emit('close-modal'); //
     },
   },
 };
+
 </script>
 
 <style>
@@ -96,7 +106,7 @@ input[type="password"] {
   border-radius: 4px;
 }
 
-button {
+submit-button {
   padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
@@ -106,7 +116,11 @@ button {
   font-size: 16px;
 }
 
-button:hover {
+submit-button:hover {
   background-color: #0056b3;
 }
+
+close-button {
+}
+
 </style>
