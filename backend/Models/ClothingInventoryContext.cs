@@ -17,6 +17,7 @@ namespace ClothingInventory.Models
         }
 
         public DbSet<ClothingItem> ClothingItems { get; set; }
+        public DbSet<UserClothingItem> UserClothingItems { get; set; }
 
         public DbSet<User> Users { get; set; }
 
