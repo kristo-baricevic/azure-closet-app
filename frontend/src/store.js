@@ -59,13 +59,14 @@ const store = createStore({
       try {
         // Send credentials to backend for authentication
         const response = await axios.post('backend/User/login', userData);
-
+        console.log("loginUser hit");
         // Assuming the response contains authentication information
         const isAuthenticated = response.isAuthenticated;
         const user = response.user;
-
+        console.log(isAuthenticated);
+        console.log(user);
         // Commit the mutations to update the state
-        commit('SET_AUTHENTICATION', isAuthenticated);
+        commit('SET_AUTHENTICATION', true);
         commit('SET_USER', user);
       } catch (error) {
         // Handle login error

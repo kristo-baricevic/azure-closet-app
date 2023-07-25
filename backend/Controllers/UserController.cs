@@ -55,12 +55,11 @@ namespace ClothingInventory.Controllers
             if (result.Succeeded)
             {
                 // User login successful
-                // You can return a token or any other information you want to include in the response
-                return Ok(new { Message = "Login successful" });
+                return Ok(new { isAuthenticated = true, user = new { username = model.Username } });
             }
 
             // Login failed, return error message
-            return BadRequest("Invalid login attempt");
+            return BadRequest(new { isAuthenticated = false, error = "Invalid login attempt" });
         }
     }
 }

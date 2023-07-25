@@ -19,6 +19,8 @@
 <script>
 import { ref } from 'vue';
 import { useStore } from 'vuex';
+// eslint-disable-next-line no-unused-vars
+import { loginUser } from '../store.js';
 
 export default {
   
@@ -37,8 +39,8 @@ export default {
         store.dispatch("loginUser", userData)
         .then((response) => {
           console.log('response:', response);
-          //console.log('response data', response.data);
-          // You can store the user token or authentication status in the frontend
+          //close modal          
+          handleCloseModal();
         })
         .catch((error) => {
           console.error('Login failed:', error);

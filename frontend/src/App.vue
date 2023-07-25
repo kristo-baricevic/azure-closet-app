@@ -79,7 +79,7 @@ import OutfitView from './components/OutfitView.vue';
 import RegistrationModal from './components/RegistrationModal.vue';
 import LoginModal from './components/LoginModal.vue';
 
-import { ref, watchEffect, onMounted, onBeforeUnmount, computed } from 'vue';
+import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
 import { useStore } from 'vuex';
 
 export default {
@@ -115,7 +115,6 @@ export default {
       accessory: [],
     });
 
-    // Computed property
     const isAuthenticated = computed(() => store.state.isAuthenticated);
 
     // Methods
@@ -201,13 +200,6 @@ export default {
         selectedItems.value[category] = null;
       }
     };
-
-    // Watch for changes in the isAuthenticated state
-     watchEffect(() => {
-      const isAuthenticated = store.state.isAuthenticated;
-      // Do something when isAuthenticated changes
-      console.log('isAuthenticated changed:', isAuthenticated);
-    });
 
     // Check screen size on mount and update on resize
     onMounted(() => {

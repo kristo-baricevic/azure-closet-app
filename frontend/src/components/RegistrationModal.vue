@@ -23,6 +23,9 @@
 <script>
 import { ref } from 'vue';
 import { useStore } from 'vuex';
+// eslint-disable-next-line no-unused-vars
+import { registerUser } from '../store.js';
+
 
 export default {
 
