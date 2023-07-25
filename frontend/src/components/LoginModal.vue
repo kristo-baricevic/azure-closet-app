@@ -11,8 +11,8 @@
         <input type="password" id="password" v-model="password" required>
       </div>
       <button class="login-button" type="submit">Login</button>
-      <button class="close-button" @click="handleCloseModal">Close</button>
     </form>
+    <button class="close-button" @click="handleCloseModal">Close</button>
   </div>
 </template>
 
@@ -21,41 +21,44 @@ import { ref } from 'vue';
 import { useStore } from 'vuex';
 
 export default {
+  
   setup() {
     const username = ref("");
     const password = ref("");
     const store = useStore();
 
-    const loginUser = () => {
-      const userData = {
-        username: username.value,
-        password: password.value,
-      };
+      const loginUser = () => {
+        const userData = {
+          username: username.value,
+          password: password.value,
+        };
 
-      // HTTP POST request to backend for login
-      store.dispatch("loginUser", userData)
+        // HTTP POST request to backend for login
+        store.dispatch("loginUser", userData)
         .then((response) => {
           console.log('response:', response);
-          console.log('response data', response.data);
+          //console.log('response data', response.data);
           // You can store the user token or authentication status in the frontend
         })
         .catch((error) => {
           console.error('Login failed:', error);
-          console.error('Error Response:', error.response);
+          //console.error('Error Response:', error.response);
           console.log(userData);
         });
-    };
+      };
 
-    const handleCloseModal = () => {
-      // Emit the event to the parent component to close the modal
-      store.commit('SET_LOGIN_MODAL_VISIBLE', false);
-    };
+      // eslint-disable-next-line no-unused-vars
+      const handleCloseModal = () => {
+        store.commit("SET_LOGIN_MODAL_VISIBLE", false);
+        console.log("close");
+      };
 
     return {
       username,
       password,
       loginUser,
       handleCloseModal,
+      isLoginModalVisible: store.state.isLoginModalVisible,
     };
   },
 };

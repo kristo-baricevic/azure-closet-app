@@ -15,7 +15,7 @@
         <input type="password" id="password" v-model="password" required>
       </div>
       <button class="submit-button" type="submit">Register</button>
-      <button class="close-button" @click="handleCloseModal">Close</button>
+      <button class="close-button" @click="$emit('close-modal')">Close</button>
     </form>
   </div>
 </template>
@@ -25,6 +25,7 @@ import { ref } from 'vue';
 import { useStore } from 'vuex';
 
 export default {
+
   setup() {
     const username = ref("");
     const email = ref("");
@@ -47,17 +48,11 @@ export default {
       }
     };
 
-    const handleCloseModal = () => {
-      // Emit the event to the parent component to close the modal
-      store.commit('SET_REGISTRATION_MODAL_VISIBLE', false);
-    };
-
     return {
       username,
       email,
       password,
       registerUser,
-      handleCloseModal,
     };
   },
 };

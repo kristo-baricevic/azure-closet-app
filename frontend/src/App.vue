@@ -22,7 +22,6 @@
     />
     <LoginModal 
       v-if="isLoginModalVisible" 
-      @close-modal="handleCloseLoginModal" 
     />
 
     <div class="image-uploader-container">
@@ -106,7 +105,7 @@ export default {
     // Reactive data properties
     const isDesktop = ref(false);
     const isRegistrationModalVisible = ref(false);
-    const isLoginModalVisible = ref(false);
+    const isLoginModalVisible = computed(() => store.state.isLoginModalVisible);
     const selectedItems = ref({
       hat: null,
       top: null,
@@ -136,18 +135,10 @@ export default {
       isRegistrationModalVisible.value = true;
     };
 
-    const handleCloseRegistrationModal = () => {
-      isRegistrationModalVisible.value = false;
-    };
-
     const showLoginModal = () => {
       console.log("test login click");
-      isLoginModalVisible.value = true;
+      store.commit('SET_LOGIN_MODAL_VISIBLE', true);
       console.log(isLoginModalVisible.value);
-    };
-
-    const handleCloseLoginModal = () => {
-      isLoginModalVisible.value = false;
     };
 
     const logoutUser = () => {
@@ -236,9 +227,7 @@ export default {
       isAuthenticated,
       refreshPhotostream,
       showRegistrationModal,
-      handleCloseRegistrationModal,
       showLoginModal,
-      handleCloseLoginModal,
       logoutUser,
       handleSelectImage,
       handleRemoveItem,

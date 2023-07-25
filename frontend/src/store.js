@@ -5,8 +5,8 @@ const store = createStore({
   state: {
     isAuthenticated: false,
     user: null,
-    registrationModalVisible: false,
-    loginModalVisible: false,
+    isRegistrationModalVisible: false,
+    isLoginModalVisible: false,
   },
 
   mutations: {
@@ -21,13 +21,22 @@ const store = createStore({
       state.user = null;
     },
     SET_REGISTRATION_MODAL_VISIBLE(state, visible) {
-      state.registrationModalVisible = visible;
+      state.isRegistrationModalVisible = visible;
     },
     SET_LOGIN_MODAL_VISIBLE(state, visible) {
-      state.loginModalVisible = visible;
+      state.isLoginModalVisible = visible;
     },
   },
   actions: {
+    
+    showLoginModal({ commit }) {
+        commit('SET_LOGIN_MODAL_VISIBLE', true);
+    },
+
+    closeLoginModal({ commit }) {
+        commit('SET_LOGIN_MODAL_VISIBLE', false);
+    },
+
     async registerUser({ commit }, userData) {
       // HTTP POST request
       const response = await axios.post('/backend/User/register', userData);
