@@ -3,7 +3,11 @@ using System.Threading.Tasks;
 using ClothingInventory.Models;
 using Microsoft.AspNetCore.Identity;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
+
 
 namespace ClothingInventory.Controllers
 {

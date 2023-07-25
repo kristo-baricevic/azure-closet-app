@@ -27,6 +27,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.StaticFiles;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 
 var builder = WebApplication.CreateBuilder(args);
 

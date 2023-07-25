@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "+ajd54oAxOXMjKBLQdhI38HGyGlxJA7GIsZN0Xp0BudoVbKJpz3K9MeEbf9OQC2RGhojMcbDd8pH8SViReFiSQ==",
+  "dgSpecHash": "NKzIwkHlhRRzaYBjVZG0adexOTfwo1+n2eR4oUA2f2mSXK4BMcT8mmH5xHQ2Pmm3ewRzzxiewsHNzNvMIGnoiA==",
   "success": true,
   "projectFilePath": "/Users/kristo/closet/backend/closet.csproj",
   "expectedPackageFiles": [
     "/Users/kristo/.nuget/packages/azure.core/1.24.0/azure.core.1.24.0.nupkg.sha512",
     "/Users/kristo/.nuget/packages/azure.identity/1.6.0/azure.identity.1.6.0.nupkg.sha512",
     "/Users/kristo/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
+    "/Users/kristo/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/7.0.9/microsoft.aspnetcore.authentication.jwtbearer.7.0.9.nupkg.sha512",
     "/Users/kristo/.nuget/packages/microsoft.aspnetcore.cryptography.internal/7.0.9/microsoft.aspnetcore.cryptography.internal.7.0.9.nupkg.sha512",
     "/Users/kristo/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/7.0.9/microsoft.aspnetcore.cryptography.keyderivation.7.0.9.nupkg.sha512",
     "/Users/kristo/.nuget/packages/microsoft.aspnetcore.identity.entityframeworkcore/7.0.9/microsoft.aspnetcore.identity.entityframeworkcore.7.0.9.nupkg.sha512",
