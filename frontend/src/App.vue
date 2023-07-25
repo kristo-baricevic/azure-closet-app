@@ -104,7 +104,7 @@ export default {
 
     // Reactive data properties
     const isDesktop = ref(false);
-    const isRegistrationModalVisible = ref(false);
+    const isRegistrationModalVisible = computed(() => store.state.isRegistrationModalVisible);
     const isLoginModalVisible = computed(() => store.state.isLoginModalVisible);
     const selectedItems = ref({
       hat: null,
@@ -132,7 +132,7 @@ export default {
 
     const showRegistrationModal = () => {
       console.log("test registration click");
-      isRegistrationModalVisible.value = true;
+      store.commit('SET_REGISTRATION_MODAL_VISIBLE', true);
     };
 
     const showLoginModal = () => {

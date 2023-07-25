@@ -15,8 +15,8 @@
         <input type="password" id="password" v-model="password" required>
       </div>
       <button class="submit-button" type="submit">Register</button>
-      <button class="close-button" @click="$emit('close-modal')">Close</button>
     </form>
+    <button class="close-button" @click="handleCloseModal">Close</button>
   </div>
 </template>
 
@@ -48,11 +48,19 @@ export default {
       }
     };
 
+     // eslint-disable-next-line no-unused-vars
+      const handleCloseModal = () => {
+        store.commit("SET_REGISTRATION_MODAL_VISIBLE", false);
+        console.log("close");
+      };
+
     return {
       username,
       email,
       password,
+      handleCloseModal,
       registerUser,
+      isRegistrationModalVisible: store.state.isRegistrationModalVisible,
     };
   },
 };

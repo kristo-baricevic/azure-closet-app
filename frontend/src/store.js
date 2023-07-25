@@ -37,6 +37,14 @@ const store = createStore({
         commit('SET_LOGIN_MODAL_VISIBLE', false);
     },
 
+    showRegistrationModal({ commit }) {
+        commit('SET_REGISTRATION_MODAL_VISIBLE', true);
+    },
+
+    closeRegistrationModal({ commit }) {
+        commit('SET_REGISTRATION_MODAL_VISIBLE', false);
+    },
+
     async registerUser({ commit }, userData) {
       // HTTP POST request
       const response = await axios.post('/backend/User/register', userData);
