@@ -8,6 +8,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ClothingInventory.Controllers
 {
@@ -18,6 +19,8 @@ namespace ClothingInventory.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IConfiguration _configuration; 
+        private readonly ClothingInventoryContext _dbContext;
+
 
         public UserController(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
         {
@@ -84,6 +87,28 @@ namespace ClothingInventory.Controllers
                 
             return Ok(new { Message = "User logged out successfully" });
 
+        }
+
+        [HttpGet("current")]
+        [Authorize]
+        public IActionResult GetCurrentUserData()
+        {
+            // Get the authenticated user's username from the claims
+            var username = User.FindFirstValue(ClaimTypes.Name);
+
+            // Retrieve the authenticated user's data from the database based on the username
+            var user = _dbContext.Users.FirstOrDefault(u => u.UserName == username);
+
+            if (user != null)
+            {
+                // Return the authenticated user's data as JSON
+                return Ok(user);
+            }
+            else
+            {
+                // If the user is not found, return a 404 Not Found response
+                return NotFound();
+            }
         }
 
         private string GenerateToken(User user)

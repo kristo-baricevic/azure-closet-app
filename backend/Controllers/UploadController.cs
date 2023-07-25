@@ -16,8 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.StaticFiles;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Cors;
-
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace ClothingInventory.Controllers
 {
@@ -26,13 +25,13 @@ namespace ClothingInventory.Controllers
     public class UploadController : ControllerBase
     {
         private readonly ClothingInventoryContext _dbContext;
-
         public UploadController(ClothingInventoryContext dbContext)
         {
             _dbContext = dbContext;
         }
 
         [HttpPost]
+        [Authorize]
         [EnableCors]
         public ActionResult Upload([FromForm] string category, [FromForm] IFormFile imageFile)
         {
@@ -45,6 +44,9 @@ namespace ClothingInventory.Controllers
                     // Read the image file into a byte array
                     using (var memoryStream = new MemoryStream())
                     {
+                        // Get authenticated user
+                        var userId = User.Identity.Name;
+
                         imageFile.CopyTo(memoryStream);
                         var imageBytes = memoryStream.ToArray();
                         Console.WriteLine("image coverted to imageBytes.");
@@ -60,7 +62,7 @@ namespace ClothingInventory.Controllers
 
 
                         // Save the image and category to the database
-                        SaveImageAndCategory(processedImage, predictedCategory);
+                        SaveImageAndCategory(processedImage, predictedCategory, userId);
                         Console.WriteLine("Upload endpoint called.");
 
 
@@ -114,16 +116,20 @@ namespace ClothingInventory.Controllers
                 return "Unknown";
         }
 
-        private void SaveImageAndCategory(byte[] image, string category)
+        private void SaveImageAndCategory(byte[] image, string category, string userId)
         {
+            // Get the authenticated user
+            var user = _dbContext.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+
             // Save the image and category to the database
-            var clothingItem = new ClothingItem
+            var userClothingItem = new UserClothingItem
             {
                 Image = image,
-                Category = category
+                Category = category,
+                UserId = userId
             };
 
-            _dbContext.ClothingItems.Add(clothingItem);
+            _dbContext.UserClothingItems.Add(userClothingItem);
             _dbContext.SaveChanges();
         }
     }

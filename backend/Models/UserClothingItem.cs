@@ -12,7 +12,7 @@ namespace ClothingInventory.Models
         public int Id { get; set; }
         public required byte[] Image { get; set; }
         public required string Category { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public User User { get; set; }
 
         public class EditUserClothingItem

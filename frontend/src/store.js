@@ -46,14 +46,37 @@ const store = createStore({
     },
 
     async registerUser({ commit }, userData) {
+      try {
       // HTTP POST request
       const response = await axios.post('/backend/User/register', userData);
 
       const registeredUser = response.data;
 
+      // Assuming the response contains the authentication token
+      const token = registeredUser.token;
+
+      // Save the token in local storage
+      localStorage.setItem('token', token);
+
+      // Include the JWT token in the request headers
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      const authenticatedUser = userResponse.data;
+      console.log('Authenticated user:', authenticatedUser);
+
+      // Make another request to the backend to get the authenticated user data
+      const userResponse = await axios.get('/backend/User/current', {
+        headers: headers,
+      });
+
       commit('SET_USER', registeredUser);
       commit('SET_AUTHENTICATION', true);
-    },
+    } catch (error) {
+      console.error('registration failed!!')
+    }
+  },
 
     async loginUser({ commit }, userData) {
       try {
@@ -72,6 +95,18 @@ const store = createStore({
         // save token in local storage
         localStorage.setItem('token', token);
 
+        // Include the JWT token in the request headers
+        const headers = {
+          Authorization: `Bearer ${token}`,
+        };
+
+        // Make another request to the backend with the JWT token included
+        const userResponse = await axios.get('/backend/User/current', {
+          headers: headers,
+        });
+
+        const authenticatedUser = userResponse.data;
+        console.log('Authenticated user:', authenticatedUser);
 
         // Commit the mutations to update the state
         commit('SET_AUTHENTICATION', true);
