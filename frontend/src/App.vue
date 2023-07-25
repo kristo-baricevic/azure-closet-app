@@ -19,9 +19,11 @@
     <RegistrationModal 
       v-if="isRegistrationModalVisible" 
       @close-modal="handleCloseRegistrationModal" 
+      class="overlay"
     />
     <LoginModal 
       v-if="isLoginModalVisible" 
+      class="overlay"
     />
 
     <div class="image-uploader-container">
@@ -311,4 +313,18 @@ export default {
   font-weight: bold;
   line-height: 80px; 
 }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; 
+}
+
 </style>

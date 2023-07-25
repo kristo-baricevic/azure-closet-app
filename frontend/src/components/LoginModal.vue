@@ -1,4 +1,5 @@
 <template>
+<div class="modal">
   <div class="modal-content">
     <h2>Login</h2>
     <form @submit.prevent="loginUser">
@@ -13,6 +14,7 @@
       <button class="login-button" type="submit">Login</button>
     </form>
     <button class="close-button" @click="handleCloseModal">Close</button>
+  </div>
   </div>
 </template>
 
@@ -82,7 +84,9 @@ export default {
 .modal-content {
   background-color: #f9f9f9;
   padding: 20px;
-  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 400px;
 }
 
 h2 {
@@ -119,5 +123,20 @@ input[type="password"] {
 
 .login-button:hover {
   background-color: #0056b3;
+}
+
+.close-button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #ccc;
+  color: #333;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.close-button:hover {
+  background-color: #b3b3b3;
 }
 </style>
