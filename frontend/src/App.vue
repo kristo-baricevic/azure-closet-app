@@ -17,11 +17,11 @@
 
 
     <RegistrationModal 
-      v-if="this.$store.state.registrationModalVisible" 
+      v-if="isRegistrationModalVisible" 
       @close-modal="handleCloseRegistrationModal" 
     />
     <LoginModal 
-      v-if="this.$store.state.loginModalVisible" 
+      v-if="isLoginModalVisible" 
       @close-modal="handleCloseLoginModal" 
     />
 
@@ -79,7 +79,9 @@ import PhotoStream from './components/PhotoStream.vue';
 import OutfitView from './components/OutfitView.vue';
 import RegistrationModal from './components/RegistrationModal.vue';
 import LoginModal from './components/LoginModal.vue';
-import { mapState } from 'vuex';
+
+import { ref, watchEffect, onMounted, onBeforeUnmount, computed } from 'vue';
+import { useStore } from 'vuex';
 
 export default {
   name: 'App',
@@ -98,127 +100,153 @@ export default {
     },
   },
 
-  data() {
-    return {
-      isDesktop: false,
-      isRegistrationModalVisible: false,
-      registrationModal: false,
-      isLoginModalVisible: false,
-      loginModal: false,
-      selectedItems: { 
-        hat: null,
-        top: null,
-        bottom: null,
-        onepiece: null,
-        shoes: null,
-        accessory: [],
-      },
+  setup() {
+    const store = useStore();
+
+    // Reactive data properties
+    const isDesktop = ref(false);
+    const isRegistrationModalVisible = ref(false);
+    const isLoginModalVisible = ref(false);
+    const selectedItems = ref({
+      hat: null,
+      top: null,
+      bottom: null,
+      onepiece: null,
+      shoes: null,
+      accessory: [],
+    });
+
+    // Computed property
+    const isAuthenticated = computed(() => store.state.isAuthenticated);
+
+    // Methods
+    const checkScreenSize = () => {
+      isDesktop.value = window.innerWidth >= 768;
     };
-  },
-    
-  mounted() {
-    this.checkScreenSize();
-    window.addEventListener('resize', this.checkScreenSize);
-  },
 
-  beforeUnmount() {
-    window.removeEventListener('resize', this.checkScreenSize);
-  },
-  
-  computed: {
-    ...mapState(['isAuthenticated'])
-  },
+    const refreshPhotostream = () => {
+      const photostreamComponent = document.getElementById('photostream');
+      if (photostreamComponent) {
+        photostreamComponent.fetchImages();
+      }
+    };
 
-  methods: {
-
-    checkScreenSize() {
-      this.isDesktop = window.innerWidth >= 768;
-    },
-    refreshPhotostream() {
-      this.$refs.photostream.fetchImages();
-    },
-
-    showRegistrationModal() {
+    const showRegistrationModal = () => {
       console.log("test registration click");
-      this.$store.commit('SET_REGISTRATION_MODAL_VISIBLE', true);
-    },
-    handleCloseRegistrationModal() {
-      this.$store.commit('SET_REGISTRATION_MODAL_VISIBLE', false);
-    },
+      isRegistrationModalVisible.value = true;
+    };
 
-    showLoginModal() {
+    const handleCloseRegistrationModal = () => {
+      isRegistrationModalVisible.value = false;
+    };
+
+    const showLoginModal = () => {
       console.log("test login click");
-      this.$store.commit('SET_LOGIN_MODAL_VISIBLE', true);
-    },
-    handleCloseLoginModal() {
-      this.$store.commit('SET_LOGIN_MODAL_VISIBLE', false);
-    },
+      isLoginModalVisible.value = true;
+      console.log(isLoginModalVisible.value);
+    };
 
-    logoutUser() {
-    // Perform logout logic here, like clearing the user data and setting isAuthenticated to false.
-    // You can create a logout action in the Vuex store to handle this.
-    this.$store.dispatch('logout');
-    },
+    const handleCloseLoginModal = () => {
+      isLoginModalVisible.value = false;
+    };
 
-    handleSelectImage(image) {
+    const logoutUser = () => {
+      // Perform logout logic here, like clearing the user data and setting isAuthenticated to false.
+      // You can create a logout action in the Vuex store to handle this.
+      store.dispatch('logout');
+    };
+
+    const handleSelectImage = (image) => {
       const { category } = image;
       console.log("handleSelectImage hit:", image);
       console.log("handleSelectImage hit:", image);
 
       if (category.toLowerCase() === 'shoes') {
         console.log("handleSelectImage LOGIC hit:", category);
-        this.selectedItems.shoes = image;
+        selectedItems.value.shoes = image;
       } else if (category.toLowerCase() === 'bottom') {
-          console.log("handleSelectImage LOGIC hit:", category);
-          this.selectedItems.bottom = image;
-          this.selectedItems.onepiece = null;
+        console.log("handleSelectImage LOGIC hit:", category);
+        selectedItems.value.bottom = image;
+        selectedItems.value.onepiece = null;
       } else if (category.toLowerCase() === 'top') {
-          console.log("handleSelectImage LOGIC hit:", category);
-          this.selectedItems.top = image;
-          this.selectedItems.onepiece = null;
+        console.log("handleSelectImage LOGIC hit:", category);
+        selectedItems.value.top = image;
+        selectedItems.value.onepiece = null;
       } else if (category.toLowerCase() === 'hat') {
-          console.log("handleSelectImage LOGIC hit:", category);
-          this.selectedItems.hat = image;
+        console.log("handleSelectImage LOGIC hit:", category);
+        selectedItems.value.hat = image;
       } else if (category.toLowerCase() === 'accessory') {
-          console.log("handleSelectImage Accessory hit:", category);
-          if (this.selectedItems.accessory.length === 3) {
-          console.log("too many accessories") 
-      } else {
-          this.selectedItems.accessory.push(image);
-          const firstAccessoryData = this.selectedItems.accessory[0].data;
+        console.log("handleSelectImage Accessory hit:", category);
+        if (selectedItems.value.accessory.length === 3) {
+          console.log("too many accessories");
+        } else {
+          selectedItems.value.accessory.push(image);
+          const firstAccessoryData = selectedItems.value.accessory[0].data;
           console.log(firstAccessoryData);
           console.log("accessory added");
-          console.log("accessory list:", this.selectedItems.accessory[0].id);
+          console.log("accessory list:", selectedItems.value.accessory[0].id);
         }
       } else if (category.toLowerCase() === 'onepiece') {
-          console.log("handleSelectImage LOGIC hit:", category);
-          this.selectedItems.onepiece = image;
-          this.selectedItems.top = null;
-          this.selectedItems.bottom = null;
-        }
-      console.log("Updated selectedItems:", this.selectedItems);
-},
+        console.log("handleSelectImage LOGIC hit:", category);
+        selectedItems.value.onepiece = image;
+        selectedItems.value.top = null;
+        selectedItems.value.bottom = null;
+      }
+      console.log("Updated selectedItems:", selectedItems.value);
+    };
 
-    handleRemoveItem(item, category) {
+    const handleRemoveItem = (item, category) => {
       console.log("handleRemoveItem ran:", category);
 
-    if (category === 'accessory') {
-    
-      const index = this.selectedItems.accessory.indexOf(item);
+      if (category === 'accessory') {
+        const index = selectedItems.value.accessory.indexOf(item);
+        if (index !== -1) {
+          // Remove the item from the accessories array
+          selectedItems.value.accessory.splice(index, 1);
+        }
+      } else {
+        // Reset the category to null
+        console.log("else remove RAN:", selectedItems.value[category]);
+        selectedItems.value[category] = null;
+      }
+    };
 
-      if (index !== -1) {
-        // Remove the item from the accessories array
-        this.selectedItems.accessory.splice(index, 1);
-      }
-    } else {
-      // Reset the category to null
-      console.log("else remove RAN:", this.selectedItems[category]);
-      this.selectedItems[category] = null;
-      }
-    },
+    // Watch for changes in the isAuthenticated state
+     watchEffect(() => {
+      const isAuthenticated = store.state.isAuthenticated;
+      // Do something when isAuthenticated changes
+      console.log('isAuthenticated changed:', isAuthenticated);
+    });
+
+    // Check screen size on mount and update on resize
+    onMounted(() => {
+      checkScreenSize();
+      window.addEventListener('resize', checkScreenSize);
+    });
+
+    onBeforeUnmount(() => {
+      window.removeEventListener('resize', checkScreenSize);
+    });
+
+    return {
+      isDesktop,
+      isRegistrationModalVisible,
+      isLoginModalVisible,
+      selectedItems,
+      isAuthenticated,
+      refreshPhotostream,
+      showRegistrationModal,
+      handleCloseRegistrationModal,
+      showLoginModal,
+      handleCloseLoginModal,
+      logoutUser,
+      handleSelectImage,
+      handleRemoveItem,
+    };
   },
 };
 </script>
+
 
 <style>
 .body-container {

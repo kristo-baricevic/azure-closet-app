@@ -1,62 +1,62 @@
 <template>
-    <div class="modal-content">
-      <h2>Login</h2>
-      <form @submit.prevent="loginUser">
-        <div class="form-group">
-          <label for="username">Username:</label>
-          <input type="text" id="username" v-model="username" required>
-        </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" id="password" v-model="password" required>
-        </div>
-        <button class="login-button" type="submit">Login</button>
-        <button class="close-button" @click="handleCloseModal">Close</button> 
-      </form>
-    </div>
+  <div class="modal-content">
+    <h2>Login</h2>
+    <form @submit.prevent="loginUser">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" v-model="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" v-model="password" required>
+      </div>
+      <button class="login-button" type="submit">Login</button>
+      <button class="close-button" @click="handleCloseModal">Close</button>
+    </form>
+  </div>
 </template>
 
-
 <script>
+import { ref } from 'vue';
+import { useStore } from 'vuex';
 
 export default {
-  props: {
-    loginModal: {
-      type: Boolean,
-    },
-  },
+  setup() {
+    const username = ref("");
+    const password = ref("");
+    const store = useStore();
 
-  data() {
-    return {
-      username: "",
-      password: "",
-    };
-  },
+    const loginUser = () => {
+      const userData = {
+        username: username.value,
+        password: password.value,
+      };
 
-  methods: {
-      loginUser() {
-        const userData = {
-          username: this.username,
-          password: this.password,
-        };
-
-        // HTTP POST request to backend for login
-        this.$store.dispatch("loginUser", userData)
-        .then(response => {
+      // HTTP POST request to backend for login
+      store.dispatch("loginUser", userData)
+        .then((response) => {
           console.log('response:', response);
           console.log('response data', response.data);
           // You can store the user token or authentication status in the frontend
         })
-        .catch(error => {
+        .catch((error) => {
           console.error('Login failed:', error);
           console.error('Error Response:', error.response);
           console.log(userData);
         });
-      },
+    };
 
-    handleCloseModal() {
-      this.$emit('close-modal'); 
-    },
+    const handleCloseModal = () => {
+      // Emit the event to the parent component to close the modal
+      store.commit('SET_LOGIN_MODAL_VISIBLE', false);
+    };
+
+    return {
+      username,
+      password,
+      loginUser,
+      handleCloseModal,
+    };
   },
 };
 </script>

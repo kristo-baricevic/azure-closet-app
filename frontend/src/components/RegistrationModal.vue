@@ -1,65 +1,66 @@
 <template>
-    <div class="modal-content">
-      <h2>Register</h2>
-      <form @submit.prevent="registerUser">
-        <div class="form-group">
-          <label for="username">Username:</label>
-          <input type="text" id="username" v-model="username" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" id="email" v-model="email" required>
-        </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" id="password" v-model="password" required>
-        </div>
-        <button class="submit-button" type="submit">Register</button>
-        <button class="close-button" @click="handleCloseModal">Close</button> 
-      </form>
-    </div>
+  <div class="modal-content">
+    <h2>Register</h2>
+    <form @submit.prevent="registerUser">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" v-model="username" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" v-model="email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" v-model="password" required>
+      </div>
+      <button class="submit-button" type="submit">Register</button>
+      <button class="close-button" @click="handleCloseModal">Close</button>
+    </form>
+  </div>
 </template>
 
 <script>
-import axios from 'axios';
+import { ref } from 'vue';
+import { useStore } from 'vuex';
 
 export default {
-  props: {
-    registrationModal: {
-      type: Boolean,
-    },
-  },
+  setup() {
+    const username = ref("");
+    const email = ref("");
+    const password = ref("");
+    const store = useStore();
 
-  data() {
+    const registerUser = async () => {
+      try {
+        const userData = {
+          username: username.value,
+          email: email.value,
+          password: password.value,
+        };
+
+        // Call register action in the Vuex store
+        await store.dispatch('registerUser', userData);
+        console.log('User registered successfully!');
+      } catch (error) {
+        console.error('Registration failed:', error);
+      }
+    };
+
+    const handleCloseModal = () => {
+      // Emit the event to the parent component to close the modal
+      store.commit('SET_REGISTRATION_MODAL_VISIBLE', false);
+    };
+
     return {
-      username: "",
-      email: "",
-      password: "",
+      username,
+      email,
+      password,
+      registerUser,
+      handleCloseModal,
     };
   },
-
-  methods: {
-    
-    async registerUser() {
-      const userData = {
-        username: this.username,
-        email: this.email,
-        password: this.password,
-      };
-
-      //Call register action in the Vuex store
-      await this.registerUser(userData);
-      console.log('User registered successfully!');
-    },
-
-    handleCloseModal() {
-      this.$emit('close-modal'); //
-    } catch (error) {
-      console.error('Registration failed:', error);
-    }
-  },
 };
-
 </script>
 
 <style>
