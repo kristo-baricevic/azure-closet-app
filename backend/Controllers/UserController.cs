@@ -61,5 +61,15 @@ namespace ClothingInventory.Controllers
             // Login failed, return error message
             return BadRequest(new { isAuthenticated = false, error = "Invalid login attempt" });
         }
+
+        // API endpoint for user logout
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+                
+            return Ok(new { Message = "User logged out successfully" });
+
+        }
     }
 }

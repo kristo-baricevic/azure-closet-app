@@ -77,7 +77,7 @@ const store = createStore({
       try {
         // asynchronous logout request to the server
         await axios.post('/backend/User/logout');
-
+        console.log("logout");
         // Commit the mutation to clear the authentication state
         commit('CLEAR_AUTHENTICATION');
       } catch (error) {

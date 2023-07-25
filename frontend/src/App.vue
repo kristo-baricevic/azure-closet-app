@@ -141,9 +141,8 @@ export default {
     };
 
     const logoutUser = () => {
-      // Perform logout logic here, like clearing the user data and setting isAuthenticated to false.
-      // You can create a logout action in the Vuex store to handle this.
-      store.dispatch('logout');
+      console.log("click logout");
+      store.dispatch('logoutUser');
     };
 
     const handleSelectImage = (image) => {
