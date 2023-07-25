@@ -33,6 +33,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add configuration
 builder.Configuration.AddJsonFile("appsettings.json");
 
+// Get the token secret key from appsettings.json
+var tokenSecretKey = builder.Configuration["TokenSecretKey"];
+var key = Encoding.ASCII.GetBytes(tokenSecretKey);
+
 // Add services to the container
 var connectionString = builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
 builder.Services.AddControllers();
@@ -53,6 +57,27 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
     // Configure Identity options
 })
 .AddEntityFrameworkStores<ClothingInventoryContext>();
+
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidIssuer = "Clothing Inventory App", 
+        ValidAudience = "Clothing Inventory API", 
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+    };
+});
+
 // Create and migrate the database
 using (var scope = builder.Services.BuildServiceProvider().CreateScope())
 {
@@ -72,6 +97,10 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseCors();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {

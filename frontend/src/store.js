@@ -63,8 +63,16 @@ const store = createStore({
         // Assuming the response contains authentication information
         const isAuthenticated = response.isAuthenticated;
         const user = response.user;
+        const token = response.data.token;
+
+        //debug statements
         console.log(isAuthenticated);
         console.log(user);
+
+        // save token in local storage
+        localStorage.setItem('token', token);
+
+
         // Commit the mutations to update the state
         commit('SET_AUTHENTICATION', true);
         commit('SET_USER', user);
@@ -78,6 +86,10 @@ const store = createStore({
         // asynchronous logout request to the server
         await axios.post('/backend/User/logout');
         console.log("logout");
+
+        // Remove the token from local storage
+        localStorage.removeItem('token');
+
         // Commit the mutation to clear the authentication state
         commit('CLEAR_AUTHENTICATION');
       } catch (error) {

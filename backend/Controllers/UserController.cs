@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using ClothingInventory.Models;
 using Microsoft.AspNetCore.Identity;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace ClothingInventory.Controllers
 {
@@ -11,11 +13,13 @@ namespace ClothingInventory.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IConfiguration _configuration; 
 
         public UserController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _configuration = configuration;
         }
 
         // API endpoint for user registration
@@ -55,7 +59,13 @@ namespace ClothingInventory.Controllers
             if (result.Succeeded)
             {
                 // User login successful
-                return Ok(new { isAuthenticated = true, user = new { username = model.Username } });
+
+                // Retrieve the authenticated user
+                var user = await _userManager.FindByNameAsync(model.Username);
+
+                // Generate the token
+                var token = GenerateToken(user);
+                return Ok(new { isAuthenticated = true, token, user = new { username = model.Username } });
             }
 
             // Login failed, return error message
@@ -70,6 +80,43 @@ namespace ClothingInventory.Controllers
                 
             return Ok(new { Message = "User logged out successfully" });
 
+        }
+
+        private string GenerateToken(User user)
+        {
+            // Set token expiration time
+            var tokenExpiration = DateTime.UtcNow.AddHours(1);
+
+            // Get the token secret key from the configuration
+            var tokenSecretKey = _configuration["TokenSecretKey"];
+
+            // Create the security key 
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenSecretKey));
+
+            // Creating the signing Credentials
+            var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+        
+            // Create the claims for the token (you can add any additional claims you need)
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.Name, user.UserName),
+                // Add any additional claims if needed
+            };
+
+            // Create the token
+            var token = new JwtSecurityToken(
+                issuer: "Clothing Inventory App",
+                audience: "Clothing Inventory API",
+                claims: claims,
+                expires: tokenExpiration,
+                signingCredentials: signingCredentials
+            );
+
+            // Serialize the token to a string
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return tokenString;
         }
     }
 }
