@@ -35,7 +35,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add configuration
-builder.Configuration.AddJsonFile("appsettings.json");
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
 // Get the token secret key from appsettings.json
 var tokenSecretKey = builder.Configuration["TokenSecretKey"];

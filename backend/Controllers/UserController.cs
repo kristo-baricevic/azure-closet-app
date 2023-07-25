@@ -7,7 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
-
+using Microsoft.Extensions.Configuration;
 
 namespace ClothingInventory.Controllers
 {
@@ -19,7 +19,7 @@ namespace ClothingInventory.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly IConfiguration _configuration; 
 
-        public UserController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public UserController(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
