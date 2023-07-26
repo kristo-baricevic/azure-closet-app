@@ -22,11 +22,12 @@ namespace ClothingInventory.Controllers
         private readonly ClothingInventoryContext _dbContext;
 
 
-        public UserController(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
+        public UserController(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration, ClothingInventoryContext dbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
+            _dbContext = dbContext;
         }
 
         // API endpoint for user registration
@@ -95,6 +96,12 @@ namespace ClothingInventory.Controllers
         {
             // Get the authenticated user's username from the claims
             var username = User.FindFirstValue(ClaimTypes.Name);
+
+            if (string.IsNullOrEmpty(username))
+            {
+                // If the username is null or empty, return a 404 Not Found response
+                return NotFound();
+            }
 
             // Retrieve the authenticated user's data from the database based on the username
             var user = _dbContext.Users.FirstOrDefault(u => u.UserName == username);

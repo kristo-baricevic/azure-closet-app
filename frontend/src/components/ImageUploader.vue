@@ -46,10 +46,18 @@ export default {
       const formData = new FormData();
       formData.append('imageFile', file);
       formData.append('category', this.selectedCategory);
+      formData.append('userId', this.$store.state.user.id);
+
+      // Get the JWT token from local storage
+      const token = localStorage.getItem('token');
+      console.log(token);
 
       fetch('/backend/Upload', {
-        method: 'POST',
-        body: formData
+        method: 'POST', 
+        body: formData,
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
       })
         .then(response => response.json())
         .then(data => {

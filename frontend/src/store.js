@@ -84,13 +84,15 @@ const store = createStore({
         const response = await axios.post('backend/User/login', userData);
         console.log("loginUser hit");
         // Assuming the response contains authentication information
-        const isAuthenticated = response.isAuthenticated;
-        const user = response.user;
+        const isAuthenticated = response.data.isAuthenticated;
+        const user = response.data.user;
         const token = response.data.token;
 
         //debug statements
+        console.log(response.data)
         console.log(isAuthenticated);
         console.log(user);
+        console.log(token);
 
         // save token in local storage
         localStorage.setItem('token', token);

@@ -4,6 +4,8 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Text;
+using System.Linq;
 using ClothingInventory.Models;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
@@ -17,18 +19,30 @@ using Microsoft.AspNetCore.StaticFiles;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+
+
+
 
 namespace ClothingInventory.Controllers
 {
+
     [ApiController]
     [Route("backend/[controller]")]
     public class UploadController : ControllerBase
     {
         private readonly ClothingInventoryContext _dbContext;
-        public UploadController(ClothingInventoryContext dbContext)
+
+        private readonly IConfiguration _configuration;
+
+        public UploadController(ClothingInventoryContext dbContext, IConfiguration configuration)
         {
             _dbContext = dbContext;
+            _configuration = configuration;
         }
+
 
         [HttpPost]
         [Authorize]
@@ -37,6 +51,9 @@ namespace ClothingInventory.Controllers
         {
             Console.WriteLine("Upload endpoint called.");
 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+
             if (imageFile != null && imageFile.Length > 0)
             {
                 try
@@ -44,9 +61,6 @@ namespace ClothingInventory.Controllers
                     // Read the image file into a byte array
                     using (var memoryStream = new MemoryStream())
                     {
-                        // Get authenticated user
-                        var userId = User.Identity.Name;
-
                         imageFile.CopyTo(memoryStream);
                         var imageBytes = memoryStream.ToArray();
                         Console.WriteLine("image coverted to imageBytes.");
@@ -118,9 +132,6 @@ namespace ClothingInventory.Controllers
 
         private void SaveImageAndCategory(byte[] image, string category, string userId)
         {
-            // Get the authenticated user
-            var user = _dbContext.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
-
             // Save the image and category to the database
             var userClothingItem = new UserClothingItem
             {
