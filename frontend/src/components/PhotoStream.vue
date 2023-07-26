@@ -77,7 +77,10 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex';
+
 export default {
+
   data() {
     return {
       isDesktop: false,
@@ -99,6 +102,8 @@ export default {
   },
 
   computed: {
+    ...mapState(['isAuthenticated']),
+
     uniqueCategories() {
       const categories = new Set();
       this.images.forEach((image) => {
@@ -146,7 +151,15 @@ export default {
 
     async fetchImages() {
       try {
-        const response = await fetch('/backend/Images');
+        // Get the token from local storage
+        const token = localStorage.getItem('token');
+
+        // Include the token in the request headers
+        const headers = {
+          Authorization: `Bearer ${token}`,
+        };
+
+        const response = await fetch('/backend/Images', { headers });
         const data = await response.json();
         console.log('Retrieved images:', data);
         this.images = data;
@@ -240,6 +253,19 @@ export default {
       console.log(this.selectedCategory);
     },
   },
+
+  watch: {
+    isAuthenticated: {
+      immediate: true,
+      handler: function (newVal) {
+        if (newVal) {
+          console.log("User is authenticated. Calling fetchImages");
+          this.fetchImages();
+        }
+      },
+    },
+  },
+
 };
 </script>
 

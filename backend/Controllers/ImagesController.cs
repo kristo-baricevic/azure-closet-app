@@ -5,6 +5,7 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using static ClothingInventory.Models.ClothingItem;
+using System.Security.Claims;
 
 namespace ClothingInventory.Controllers
 {
@@ -22,16 +23,34 @@ namespace ClothingInventory.Controllers
         [HttpGet]
         public IActionResult GetImages()
         {
-            var clothingItems = _dbContext.ClothingItems.ToList();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            Console.WriteLine("userId retrieved", userId);
+
+            var userClothingItems = _dbContext.UserClothingItems
+            .Where(item => item.UserId == userId)
+            .ToList();
+
+            var sharedClothingItems = _dbContext.ClothingItems.ToList();
             var images = new List<object>();
 
-            foreach (var clothingItem in clothingItems)
+            foreach (var sharedClothingItem in sharedClothingItems)
             {
                 images.Add(new
                 {
-                    id = clothingItem.Id,
-                    data = clothingItem.Image,
-                    category = clothingItem.Category
+                    id = sharedClothingItem.Id,
+                    data = sharedClothingItem.Image,
+                    category = sharedClothingItem.Category,
+                });
+            }
+
+            foreach (var userClothingItem in userClothingItems)
+            {
+                images.Add(new
+                {
+                    id = userClothingItem.Id,
+                    data = userClothingItem.Image,
+                    category = userClothingItem.Category,
                 });
             }
 
