@@ -88,6 +88,7 @@ export default {
       selectedCategory: null,
       editedCategory: null,
       editingImageId: null,
+      isFetched: false,
     };
   },
 
@@ -257,10 +258,15 @@ export default {
   watch: {
     isAuthenticated: {
       immediate: true,
-      handler: function (newVal) {
-        if (newVal) {
-          console.log("User is authenticated. Calling fetchImages");
+      handler(newVal) {
+        if (!newVal) {
+          // When the user logs out, reset the isFetched flag and the images array
+          this.isFetched = false;
+          this.images = [];
+        } else {
+          // When the user logs in, fetch images
           this.fetchImages();
+          this.isFetched = true;
         }
       },
     },
