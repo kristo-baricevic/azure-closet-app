@@ -258,16 +258,9 @@ export default {
   watch: {
     isAuthenticated: {
       immediate: true,
-      handler(newVal) {
-        if (!newVal) {
-          // When the user logs out, reset the isFetched flag and the images array
-          this.isFetched = false;
-          this.images = [];
-        } else {
-          // When the user logs in, fetch images
+      handler: function () {
+          console.log("who watches the watcher");
           this.fetchImages();
-          this.isFetched = true;
-        }
       },
     },
   },
