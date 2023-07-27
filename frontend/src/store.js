@@ -17,8 +17,10 @@ const store = createStore({
       state.user = user;
     },
     CLEAR_AUTHENTICATION(state) {
+      console.log('Before setting isAuthenticated to false:', state.isAuthenticated);
       state.isAuthenticated = false;
       state.user = null;
+      console.log('After setting isAuthenticated to false:', state.isAuthenticated);
     },
     SET_REGISTRATION_MODAL_VISIBLE(state, visible) {
       state.isRegistrationModalVisible = visible;

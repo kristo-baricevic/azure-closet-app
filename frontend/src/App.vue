@@ -129,6 +129,7 @@ export default {
       if (photostreamComponent) {
         photostreamComponent.fetchImages();
       }
+      console.log("refreshPhotostream has run");
     };
 
     const showRegistrationModal = () => {
