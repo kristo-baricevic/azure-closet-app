@@ -5,11 +5,11 @@
       <ul class="navbar-menu">
         <li><a href="/">Kristo's Closet</a></li>
         <li>    
-          <button @click="showRegistrationModal">Register</button>
+          <button class="registration-button" @click="showRegistrationModal">Register</button>
         </li>
         <li>
-          <button v-if="!isAuthenticated" @click="showLoginModal">Login</button>
-          <button v-else @click="logoutUser">Logout</button>
+          <button class="login-button" v-if="!isAuthenticated" @click="showLoginModal">Login</button>
+          <button class="logout-button" v-else @click="logoutUser">Logout</button>
         </li>
       </ul>
 
@@ -313,6 +313,63 @@ export default {
   color: #333;
   font-weight: bold;
   line-height: 80px; 
+}
+
+.registration-button {
+  margin: 5px;
+  font-size: 14px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #50C878;
+  color: black;
+  border: 1px solid black;
+  border-radius: 4px;
+  width: 83px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.registation-button:hover {
+  background-color: #228B22;
+  color: black;
+}
+
+.login-button {
+  margin: 5px;
+  font-size: 14px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #50C878;
+  color: black;
+  border: 1px solid black;
+  border-radius: 4px;
+  width: 83px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #228B22;
+  color: black;
+}
+
+.logout-button {
+  margin: 5px;
+  font-size: 14px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #50C878;
+  color: black;
+  border: 1px solid black;
+  border-radius: 4px;
+  width: 83px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover{
+  background-color: #228B22;
+  color: black;
 }
 
 .overlay {

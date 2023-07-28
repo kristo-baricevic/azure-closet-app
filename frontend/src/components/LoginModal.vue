@@ -13,7 +13,7 @@
       </div>
       <button class="login-button" type="submit">Login</button>
     </form>
-    <button class="close-button" @click="handleCloseModal">Close</button>
+    <button class="close-button-login" @click="handleCloseModal">Close</button>
   </div>
   </div>
 </template>
@@ -98,7 +98,6 @@ h2 {
 }
 
 label {
-  display: block;
   margin-bottom: 5px;
 }
 
@@ -112,31 +111,39 @@ input[type="password"] {
 }
 
 .login-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
+  display: block;
+  margin: 5px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #50C878;
+  color: black;
+  border: 1px solid black;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .login-button:hover {
-  background-color: #0056b3;
+  background-color: #228B22;
+  color: black;
 }
 
-.close-button {
+.close-button-login {
+  display: block;
+  margin: 5px;
+  width: 83px;
   margin-top: 10px;
   padding: 5px 10px;
-  background-color: #ccc;
-  color: #333;
-  border: none;
+  background-color: #50C878;
+  color: black;
+  border: 1px solid black;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
+  transition: background-color 0.3s ease;
 }
 
-.close-button:hover {
-  background-color: #b3b3b3;
+.close-button-login:hover {
+  background-color: #228B22;
+  color: black;
 }
 </style>

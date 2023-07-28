@@ -17,7 +17,7 @@
       </div>
       <button class="submit-button" type="submit">Register</button>
     </form>
-    <button class="close-button" @click="handleCloseModal">Close</button>
+    <button class="close-button-register" @click="handleCloseModal">Close</button>
   </div>
   </div>
 </template>
@@ -101,7 +101,6 @@ h2 {
 }
 
 label {
-  display: block;
   margin-bottom: 5px;
 }
 
@@ -116,32 +115,39 @@ input[type="password"] {
 }
 
 .submit-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
+  display: block;
+  margin: 5px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #50C878;
+  color: black;
+  border: 1px solid black;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .submit-button:hover {
   background-color: #0056b3;
 }
 
-.close-button {
+.close-button-register {
+  display: block;
+  margin: 5px;
+  width: 71px;
   margin-top: 10px;
   padding: 5px 10px;
-  background-color: #ccc;
-  color: #333;
-  border: none;
+  background-color: #50C878;
+  color: black;
+  border: 1px solid black;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
+  transition: background-color 0.3s ease;
 }
 
-.close-button:hover {
-  background-color: #b3b3b3;
+.close-button-register:hover {
+  background-color: #228B22;
+  color: black;
 }
 
 </style>

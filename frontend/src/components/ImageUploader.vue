@@ -1,21 +1,24 @@
 <template>
   <div>
-    <h2>Upload Your Article of Clothing</h2>
-
-    <form id="imageForm" @submit.prevent="classifyImage">
-      <label for="category">Category:</label>
-      <select id="category" v-model="selectedCategory" required>
-        <option value="Top">Top</option>
-        <option value="Bottom">Bottom</option>
-        <option value="onePiece">One-piece</option>
-        <option value="Shoes">Shoes</option>
-        <option value="Hat">Hat</option>
-        <option value="Accessory">Accessory</option>
-      </select>
-
-      <input type="file" id="imageFile" accept=".jpg,.jpeg,.png,.gif" required @change="handleFileUpload">
-      <button id="classifyButton" type="submit">Classify Image</button>
-    </form>
+    <h2 class="upload-title">Upload Your Article of Clothing</h2>
+    <div class="upload-container">
+      <form id="imageForm" @submit.prevent="classifyImage">
+        <label for="category">Category:</label>
+        <select id="category" v-model="selectedCategory" required>
+          <option value="Top">Top</option>
+          <option value="Bottom">Bottom</option>
+          <option value="onePiece">One-piece</option>
+          <option value="Shoes">Shoes</option>
+          <option value="Hat">Hat</option>
+          <option value="Accessory">Accessory</option>
+        </select>
+        <label class="choose-file">
+          <input type="file" id="imageFile" accept=".jpg,.jpeg,.png,.gif" required @change="handleFileUpload">
+          Choose File
+        </label>
+        <button class="classify-button" id="classifyButton" type="submit">Upload Image</button>
+      </form>
+    </div>
 
     <p id="resultLabel"></p>
 
@@ -82,8 +85,10 @@ export default {
 </script>
 
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
+.upload-container {
+  display: inline-block;
+}
 h3 {
   margin: 40px 0 0;
 }
@@ -92,10 +97,48 @@ ul {
   padding: 0;
 }
 li {
-  display: inline-block;
   margin: 0 10px;
 }
 a {
   color: #42b983;
+}
+.upload-title {
+  margin-left: 10px;
+  margin-top: 15px;
+}
+.choose-file {
+  margin: 5px;
+  font-size: 14px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #50C878;
+  color: black;
+  border: 1px solid black;
+  border-radius: 4px;
+  width: 83px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.choose-file:hover {
+  background-color: #228B22;
+  color: black;
+}
+input[type="file"] {
+    display: none;
+}
+.classify-button {
+  margin: 5px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #50C878;
+  color: black;
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.classify-button:hover {
+  background-color: #228B22;
+  color: black;
 }
 </style>
