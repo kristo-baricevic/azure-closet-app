@@ -42,6 +42,12 @@ export default {
     },
     
     classifyImage() {
+      // Check if the user is authenticated and throw a pop-up error if they are not
+      if (!this.$store.state.isAuthenticated) {
+        alert('You need to be logged in to upload an image.');
+        return;
+      }
+
       const file = document.getElementById('imageFile').files[0];
       const formData = new FormData();
       formData.append('imageFile', file);
