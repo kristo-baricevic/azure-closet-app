@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fEjNuBRgAW9FCwbRoop3RlcNnzKWi8S4wilpyrhQh64=",
+  "Hash": "3zjkoEekZBNBK8H2iu8dKbW1iRGIev9zjeAZEMOA7Go=",
   "Source": "closet",
   "BasePath": "_content/closet",
   "Mode": "Default",
@@ -68,12 +68,12 @@
       "OriginalItemSpec": "wwwroot/index.html"
     },
     {
-      "Identity": "/Users/kristo/closet/backend/wwwroot/js/app.560d39b0.js",
+      "Identity": "/Users/kristo/closet/backend/wwwroot/js/app.fdc8749d.js",
       "SourceId": "closet",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/kristo/closet/backend/wwwroot/",
       "BasePath": "_content/closet",
-      "RelativePath": "js/app.560d39b0.js",
+      "RelativePath": "js/app.fdc8749d.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -82,15 +82,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/js/app.560d39b0.js"
+      "OriginalItemSpec": "wwwroot/js/app.fdc8749d.js"
     },
     {
-      "Identity": "/Users/kristo/closet/backend/wwwroot/js/app.560d39b0.js.map",
+      "Identity": "/Users/kristo/closet/backend/wwwroot/js/app.fdc8749d.js.map",
       "SourceId": "closet",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/kristo/closet/backend/wwwroot/",
       "BasePath": "_content/closet",
-      "RelativePath": "js/app.560d39b0.js.map",
+      "RelativePath": "js/app.fdc8749d.js.map",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -99,7 +99,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/js/app.560d39b0.js.map"
+      "OriginalItemSpec": "wwwroot/js/app.fdc8749d.js.map"
     },
     {
       "Identity": "/Users/kristo/closet/backend/wwwroot/js/chunk-vendors.e071d504.js",

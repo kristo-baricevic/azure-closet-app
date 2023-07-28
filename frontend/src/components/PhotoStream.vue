@@ -172,7 +172,8 @@ export default {
     async deleteImage(imageId) {
       // Check to see if user is logged in
       if (!this.isAuthenticated) {
-      alert('you must be logged in to delete items.');
+        alert('you must be logged in to delete items.');
+        return
       }
 
       // Check if the image belongs to the UserClothingItem table
@@ -212,6 +213,12 @@ export default {
 
 
     handleEditImage(image) {
+      // check to see if user is logged in
+      if (!this.isAuthenticated) {
+        alert('you must be logged in to edit items.');
+        return
+      }
+
       console.log("edit hit");
       //Change to new category
       this.editingImageId = image.id;
@@ -224,6 +231,7 @@ export default {
     },
 
    async saveImageEdit(image) {
+
     const updatedCategory = this.editedCategory.trim();
     if (updatedCategory !== "") {
     // update the category 
