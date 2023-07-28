@@ -170,6 +170,19 @@ export default {
     },
 
     async deleteImage(imageId) {
+      // Check to see if user is logged in
+      if (!this.isAuthenticated) {
+      alert('you must be logged in to delete items.');
+      }
+
+      // Check if the image belongs to the UserClothingItem table
+      const isUserClothingItem = this.isUserClothingItem(imageId);
+
+      if (!isUserClothingItem) {
+        alert('You cannot delete shared items.');
+        return;
+      }  
+
       try {
         const response = await fetch(`/backend/Images/${imageId}`, {
           method: 'DELETE',
@@ -185,6 +198,18 @@ export default {
         console.error('Error deleting image:', error);
       }
     },
+
+    async isUserClothingItem(imageId) {
+    try {
+      const response = await fetch(`/backend/Images/${imageId}`);
+      const data = await response.json();
+      return Object.prototype.hasOwnProperty.call(data, 'userId');
+    } catch (error) {
+      console.error('Error checking if the image belongs to UserClothingItem:', error);
+      return false;
+    }
+  },
+
 
     handleEditImage(image) {
       console.log("edit hit");

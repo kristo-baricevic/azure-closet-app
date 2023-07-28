@@ -106,6 +106,7 @@ export default {
 
     // Reactive data properties
     const isDesktop = ref(false);
+    const isAuthenticated = computed(() => store.state.isAuthenticated);
     const isRegistrationModalVisible = computed(() => store.state.isRegistrationModalVisible);
     const isLoginModalVisible = computed(() => store.state.isLoginModalVisible);
     const selectedItems = ref({
@@ -117,7 +118,6 @@ export default {
       accessory: [],
     });
 
-    const isAuthenticated = computed(() => store.state.isAuthenticated);
 
     // Methods
     const checkScreenSize = () => {

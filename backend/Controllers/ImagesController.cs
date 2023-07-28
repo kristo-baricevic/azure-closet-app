@@ -60,7 +60,7 @@ namespace ClothingInventory.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateImage(int id,[FromBody] EditClothingItemModel editModel)    
         {
-            var clothingItem = _dbContext.ClothingItems.FirstOrDefault(c => c.Id == id);
+            var clothingItem = _dbContext.UserClothingItems.FirstOrDefault(c => c.Id == id);
             if (clothingItem == null)
             {
                 return NotFound();
@@ -81,13 +81,13 @@ namespace ClothingInventory.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteImage(int id)
         {
-            var clothingItem = _dbContext.ClothingItems.FirstOrDefault(c => c.Id == id);
+            var clothingItem = _dbContext.UserClothingItems.FirstOrDefault(c => c.Id == id);
             if (clothingItem == null)
             {
                 return NotFound();
             }
 
-            _dbContext.ClothingItems.Remove(clothingItem);
+            _dbContext.UserClothingItems.Remove(clothingItem);
             _dbContext.SaveChanges();
 
             return NoContent();
