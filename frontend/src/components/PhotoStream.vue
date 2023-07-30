@@ -170,6 +170,8 @@ export default {
     },
 
     async deleteImage(imageId) {
+      console.log("delete function ran");
+
       // Check to see if user is logged in
       if (!this.isAuthenticated) {
         alert('you must be logged in to delete items.');
@@ -177,9 +179,10 @@ export default {
       }
 
       // Check if the image belongs to the UserClothingItem table
-      const isUserClothingItem = this.isUserClothingItem(imageId);
+      const isUserClothingItem = await this.isUserClothingItem(imageId);
 
       if (!isUserClothingItem) {
+        console.log("isUserClothingItem check");
         alert('You cannot delete shared items.');
         return;
       }  
@@ -204,9 +207,9 @@ export default {
 
     async isUserClothingItem(imageId) {
     try {
+      console.log("running isUserClothingItem")
       const response = await fetch(`/backend/Images/${imageId}`);
-      const data = await response.json();
-      return Object.prototype.hasOwnProperty.call(data, 'userId');
+      return Object.prototype.hasOwnProperty.call(response, 'userId');
     } catch (error) {
       console.error('Error checking if the image belongs to UserClothingItem:', error);
       return false;
