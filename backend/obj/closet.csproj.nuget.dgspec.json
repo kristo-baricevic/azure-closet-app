@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/kristo/closet/backend/closet.csproj": {}
+    "/Users/kristo/azure-closet-app/backend/closet.csproj": {}
   },
   "projects": {
-    "/Users/kristo/closet/backend/closet.csproj": {
+    "/Users/kristo/azure-closet-app/backend/closet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/kristo/closet/backend/closet.csproj",
+        "projectUniqueName": "/Users/kristo/azure-closet-app/backend/closet.csproj",
         "projectName": "closet",
-        "projectPath": "/Users/kristo/closet/backend/closet.csproj",
+        "projectPath": "/Users/kristo/azure-closet-app/backend/closet.csproj",
         "packagesPath": "/Users/kristo/.nuget/packages/",
-        "outputPath": "/Users/kristo/closet/backend/obj/",
+        "outputPath": "/Users/kristo/azure-closet-app/backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/kristo/.nuget/NuGet/NuGet.Config"

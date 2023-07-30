@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NKzIwkHlhRRzaYBjVZG0adexOTfwo1+n2eR4oUA2f2mSXK4BMcT8mmH5xHQ2Pmm3ewRzzxiewsHNzNvMIGnoiA==",
+  "dgSpecHash": "V8MShjvwJqs7whij8saDC6Dw/Ein+GFDsfqIIPQARUxKNyo29PFUKjRDVLwpwz8W9J0xpefpC9lN7a2F98HJXA==",
   "success": true,
-  "projectFilePath": "/Users/kristo/closet/backend/closet.csproj",
+  "projectFilePath": "/Users/kristo/azure-closet-app/backend/closet.csproj",
   "expectedPackageFiles": [
     "/Users/kristo/.nuget/packages/azure.core/1.24.0/azure.core.1.24.0.nupkg.sha512",
     "/Users/kristo/.nuget/packages/azure.identity/1.6.0/azure.identity.1.6.0.nupkg.sha512",

@@ -173,7 +173,7 @@ export default {
       // Check to see if user is logged in
       if (!this.isAuthenticated) {
         alert('you must be logged in to delete items.');
-        return
+        return;
       }
 
       // Check if the image belongs to the UserClothingItem table
@@ -191,7 +191,9 @@ export default {
 
         if (response.ok) {
           console.log('Image deleted:', imageId);
-          this.$emit('imageDeleted');
+          // fetch images after deletion
+          await this.fetchImages();
+          console.log('post emit');
         } else {
           console.error('Failed to delete image:', imageId);
         }
@@ -269,7 +271,6 @@ export default {
   this.editedCategory = "";
 },
 
-
     cancelImageEdit() {
       this.editingImageId = null;
       this.editedCategory = "";
@@ -290,7 +291,6 @@ export default {
 
   watch: {
     isAuthenticated: {
-      immediate: true,
       handler: function () {
           console.log("who watches the watcher");
           this.fetchImages();

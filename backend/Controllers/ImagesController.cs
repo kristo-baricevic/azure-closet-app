@@ -87,6 +87,8 @@ namespace ClothingInventory.Controllers
                 return NotFound();
             }
 
+            Console.WriteLine("DeleteIamge endpoint hit");
+
             _dbContext.UserClothingItems.Remove(clothingItem);
             _dbContext.SaveChanges();
 

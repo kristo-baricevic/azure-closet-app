@@ -30,14 +30,13 @@
       <ImageUploader msg="Welcome to The Image Uploader!" @imageUploaded="refreshPhotostream" />
     </div>
 
-    <!-- Render the outfit for Desktop -->
+    <!-- Render for Desktop -->
     <div v-if="isDesktop" class="desktop-layout">
       <div class="photostream-container">
         <PhotoStream 
+        v-bind:ref="photostreamRef"
         :selectedItems="selectedItems" 
         :images="images" 
-        ref="photostream" 
-        @imageDeleted="refreshPhotostream" 
         @selectImage="handleSelectImage"
         />
       </div>
@@ -56,8 +55,7 @@
         :selectedItems="selectedItems"
         :localSelectedItems="localSelectedItems" 
         :images="images" 
-        ref="photostream" 
-        @imageDeleted="refreshPhotostream" 
+        v-bindref="photostreamRef" 
         @selectImage="handleSelectImage"
         />
       </div>
@@ -103,6 +101,7 @@ export default {
 
   setup() {
     const store = useStore();
+    const photostreamRef = ref(null);
 
     // Reactive data properties
     const isDesktop = ref(false);
@@ -125,9 +124,8 @@ export default {
     };
 
     const refreshPhotostream = () => {
-      const photostreamComponent = document.getElementById('photostream');
-      if (photostreamComponent) {
-        photostreamComponent.fetchImages();
+      if (this.photostreamRef) {
+        this.photostreamRef.fetchImages();
       }
       console.log("refreshPhotostream has run");
     };
@@ -218,6 +216,7 @@ export default {
       isRegistrationModalVisible,
       isLoginModalVisible,
       selectedItems,
+      photostreamRef,
       isAuthenticated,
       refreshPhotostream,
       showRegistrationModal,
