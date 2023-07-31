@@ -189,7 +189,7 @@ export default {
 
       if (!image.userId) {
         console.log("userId check for delete");
-        alert('you cannot delete shared items');
+        alert('you cannot delete shared dotitems');
       }
 
       try {
@@ -221,24 +221,18 @@ export default {
       return;
     }
 
-    console.log(image.isUserImage);
+    console.log(image);
+
     // Check if the image belongs to the UserClothingItem table
-    this.isUserClothingItem(image.id)
-      .then((isUserItem) => {
-        if (isUserItem) {
-          // Allow the user to edit the image
-          this.editingImageId = image.id;
-          this.editedCategory = image.category;
-          console.log(this.editedCategory);
-        } else {
-          // Display an alert as the image is not owned by the user
-          alert('You can only edit your uploaded images.');
+        if (!image.userId) {
+          console.log("userId check for edit");
+          alert('You cannot edit shared images.');
         }
-      })
-      .catch((error) => {
-        console.error('Error checking if the image belongs to UserClothingItem:', error);
-        // Display an alert or handle the error gracefully
-      });
+
+    // Allow the user to edit the image
+    this.editingImageId = image.id;
+    this.editedCategory = image.category;
+    console.log(this.editedCategory);
   },
     
 
