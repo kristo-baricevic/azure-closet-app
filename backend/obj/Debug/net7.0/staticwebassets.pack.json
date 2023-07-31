@@ -13,20 +13,20 @@
       "PackagePath": "staticwebassets/index.html"
     },
     {
-      "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/js/app.8faed9bf.js",
-      "PackagePath": "staticwebassets/js/app.8faed9bf.js"
+      "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/js/app.09777bf1.js",
+      "PackagePath": "staticwebassets/js/app.09777bf1.js"
     },
     {
-      "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/js/app.8faed9bf.js.map",
-      "PackagePath": "staticwebassets/js/app.8faed9bf.js.map"
+      "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/js/app.09777bf1.js.map",
+      "PackagePath": "staticwebassets/js/app.09777bf1.js.map"
     },
     {
-      "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/js/chunk-vendors.d6763d27.js",
-      "PackagePath": "staticwebassets/js/chunk-vendors.d6763d27.js"
+      "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/js/chunk-vendors.ff618c66.js",
+      "PackagePath": "staticwebassets/js/chunk-vendors.ff618c66.js"
     },
     {
-      "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/js/chunk-vendors.d6763d27.js.map",
-      "PackagePath": "staticwebassets/js/chunk-vendors.d6763d27.js.map"
+      "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/js/chunk-vendors.ff618c66.js.map",
+      "PackagePath": "staticwebassets/js/chunk-vendors.ff618c66.js.map"
     },
     {
       "Id": "obj/Debug/net7.0/staticwebassets/msbuild.build.closet.props",

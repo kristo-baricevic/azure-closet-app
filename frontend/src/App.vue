@@ -34,7 +34,7 @@
     <div v-if="isDesktop" class="desktop-layout">
       <div class="photostream-container">
         <PhotoStream 
-        v-bind:ref="photostreamRef"
+        ref="photostreamRef"
         :selectedItems="selectedItems" 
         :images="images" 
         @selectImage="handleSelectImage"
@@ -55,7 +55,7 @@
         :selectedItems="selectedItems"
         :localSelectedItems="localSelectedItems" 
         :images="images" 
-        v-bindref="photostreamRef" 
+        ref="photostreamRef" 
         @selectImage="handleSelectImage"
         />
       </div>
@@ -124,9 +124,7 @@ export default {
     };
 
     const refreshPhotostream = () => {
-      if (this.photostreamRef) {
-        this.photostreamRef.fetchImages();
-      }
+      photostreamRef.value.fetchImages();
       console.log("refreshPhotostream has run");
     };
 
