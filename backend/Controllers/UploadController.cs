@@ -53,7 +53,6 @@ namespace ClothingInventory.Controllers
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-
             if (imageFile != null && imageFile.Length > 0)
             {
                 try
@@ -132,12 +131,17 @@ namespace ClothingInventory.Controllers
 
         private void SaveImageAndCategory(byte[] image, string category, string userId)
         {
+            var isUserImage = true; // Just for additional verification, you can log the value here
+            Console.WriteLine("isUserImage: " + isUserImage);
+
             // Save the image and category to the database
             var userClothingItem = new UserClothingItem
             {
                 Image = image,
                 Category = category,
-                UserId = userId
+                UserId = userId,
+                isUserImage = true,
+                
             };
 
             _dbContext.UserClothingItems.Add(userClothingItem);

@@ -17,7 +17,7 @@
           <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
           <div class="card-info">
             <div class="card-buttons-container">
-              <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
+              <button class="delete-button" @click="deleteImage(image)">Delete</button>
               <button class="select-button" @click="handleSelectImage(image)">Select</button>
               <button class="edit-button" @click="handleEditImage(image)">Edit</button>
             </div>
@@ -55,7 +55,7 @@
           <img class="card-image" :src="getImageUrl(image.data)" alt="Photo" />
           <div class="card-info">
             <div class="card-buttons-container">
-              <button class="delete-button" @click="deleteImage(image.id)">Delete</button>
+              <button class="delete-button" @click="deleteImage(image)">Delete</button>
               <button class="select-button" @click="handleSelectImage(image)">Select</button>
               <button class="edit-button" @click="handleEditImage(image)">Edit</button>
             </div>
@@ -162,54 +162,90 @@ export default {
 
         const response = await fetch('/backend/Images', { headers });
         const data = await response.json();
-        console.log('Retrieved images:', data);
-        this.images = data;
+
+        console.log("fetched images", data);
+
+        // Check if each image has a 'userId' property to determine if it's a user image
+        this.images = data.map((image) => ({
+        ...image,
+        isUserImage: image.userId !== null,
+        }));
       } catch (error) {
         console.error('Failed to fetch images:', error);
       }
     },
 
-    async deleteImage(imageId) {
+    async deleteImage(image) {
       console.log("delete function ran");
+      console.log(image);
 
       // Check to see if user is logged in
+
       if (!this.isAuthenticated) {
+        console.log("authentication check for delete");
         alert('you must be logged in to delete items.');
         return;
       }
 
-      // Check if the image belongs to the UserClothingItem table
-      const isUserClothingItem = await this.isUserClothingItem(imageId);
-
-      if (!isUserClothingItem) {
-        console.log("isUserClothingItem check");
-        alert('You cannot delete shared items.');
-        return;
-      }  
+      if (!image.userId) {
+        console.log("userId check for delete");
+        alert('you cannot delete shared items');
+      }
 
       try {
-        const response = await fetch(`/backend/Images/${imageId}`, {
+        console.log("sending image.userId to backend", image.id);
+        const response = await fetch(`/backend/Images/${image.id}`, {
           method: 'DELETE',
         });
 
         if (response.ok) {
-          console.log('Image deleted:', imageId);
+          console.log('Image deleted:', image.id);
           // fetch images after deletion
           await this.fetchImages();
           console.log('post emit');
         } else {
-          console.error('Failed to delete image:', imageId);
+          console.error('Failed to delete image:', image.id);
         }
       } catch (error) {
         console.error('Error deleting image:', error);
       }
     },
 
-    async isUserClothingItem(imageId) {
+
+  handleEditImage(image) {
+    console.log("edit hit");
+
+    // Check if the user is authenticated
+    if (!this.isAuthenticated) {
+      alert('You must be logged in to edit items.');
+      return;
+    }
+
+    console.log(image.isUserImage);
+    // Check if the image belongs to the UserClothingItem table
+    this.isUserClothingItem(image.id)
+      .then((isUserItem) => {
+        if (isUserItem) {
+          // Allow the user to edit the image
+          this.editingImageId = image.id;
+          this.editedCategory = image.category;
+          console.log(this.editedCategory);
+        } else {
+          // Display an alert as the image is not owned by the user
+          alert('You can only edit your uploaded images.');
+        }
+      })
+      .catch((error) => {
+        console.error('Error checking if the image belongs to UserClothingItem:', error);
+        // Display an alert or handle the error gracefully
+      });
+  },
+    
+
+  async isUserClothingItem(imageId) {
     try {
-      console.log("running isUserClothingItem")
-      const response = await fetch(`/backend/Images/${imageId}`);
-      return Object.prototype.hasOwnProperty.call(response, 'userId');
+      const image = this.images.find((img) => img.id === imageId);
+      return image && image.isUserImage;
     } catch (error) {
       console.error('Error checking if the image belongs to UserClothingItem:', error);
       return false;
@@ -217,78 +253,63 @@ export default {
   },
 
 
-    handleEditImage(image) {
-      // check to see if user is logged in
-      if (!this.isAuthenticated) {
-        alert('you must be logged in to edit items.');
-        return
+  isEditing(image) {
+    return this.editingImageId === image.id && image.isUserImage;
+  },
+
+  async saveImageEdit(image) {
+      const updatedCategory = this.editedCategory.trim();
+      if (updatedCategory !== "") {
+        // update the category 
+        const foundImage = this.images.find((img) => img.id === image.id);
+        if (foundImage) {
+        foundImage.category = updatedCategory;
       }
 
-      console.log("edit hit");
-      //Change to new category
-      this.editingImageId = image.id;
-      this.editedCategory = image.category;
-      console.log(this.editedCategory);
-    },
+      // Call the backend to update the category
+      try {
+        const response = await fetch(`/backend/Images/${image.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            category: updatedCategory,
+          }),
+        });
 
-    isEditing(image) {
-      return this.editingImageId === image.id;
-    },
-
-   async saveImageEdit(image) {
-
-    const updatedCategory = this.editedCategory.trim();
-    if (updatedCategory !== "") {
-    // update the category 
-    const foundImage = this.images.find((img) => img.id === image.id);
-    if (foundImage) {
-      foundImage.category = updatedCategory;
-    }
-
-    // Call the backend to update the category
-    try {
-      const response = await fetch(`/backend/Images/${image.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          category: updatedCategory,
-        }),
-      });
-
-      if (response.ok) {
-        const updatedImage = await response.json();
-        // Update the image category in the frontend
-        foundImage.category = updatedImage.category;
-      } else {
-        console.error('Failed to update image category:', response);
+        if (response.ok) {
+          const updatedImage = await response.json();
+          // Update the image category in the frontend
+          foundImage.category = updatedImage.category;
+          } else {
+            console.error('Failed to update image category:', response);
+          }
+        } catch (error) {
+        console.error('Error updating image category:', error);
+        }
       }
-    } catch (error) {
-      console.error('Error updating image category:', error);
-    }
-  }
 
-  // Reset editing state 
-  this.editingImageId = null;
-  this.editedCategory = "";
-},
+    // Reset editing state 
+    this.editingImageId = null;
+    this.editedCategory = "";
+  },
 
-    cancelImageEdit() {
-      this.editingImageId = null;
-      this.editedCategory = "";
-    },
+  cancelImageEdit() {
+    this.editingImageId = null;
+    this.editedCategory = "";
+  },
 
-    handleSelectImage(image) {
-      // Emit the selected image to the parent component
-      this.$emit('selectImage', image);
-      console.log('handleSelectImage connected:', image);
-    },
+  handleSelectImage(image) {
+    // Emit the selected image to the parent component
+    this.$emit('selectImage', image);
+    console.log('handleSelectImage connected:', image);
+  },
 
-    filterByCategory(category) {
-      console.log(category);
-      this.selectedCategory = category;
-      console.log(this.selectedCategory);
+  filterByCategory(category) {
+    console.log(category);
+    this.selectedCategory = category;
+    console.log(this.selectedCategory);
     },
   },
 

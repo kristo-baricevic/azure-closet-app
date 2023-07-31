@@ -51,6 +51,7 @@ namespace ClothingInventory.Controllers
                     id = userClothingItem.Id,
                     data = userClothingItem.Image,
                     category = userClothingItem.Category,
+                    userId = userClothingItem.UserId,
                 });
             }
 

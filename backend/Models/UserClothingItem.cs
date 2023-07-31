@@ -12,6 +12,8 @@ namespace ClothingInventory.Models
         public int Id { get; set; }
         public required byte[] Image { get; set; }
         public required string Category { get; set; }
+
+        public bool isUserImage { get; set; }
         
         [ForeignKey("User")]
         public string UserId { get; set; }
