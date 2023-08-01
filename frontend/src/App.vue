@@ -390,4 +390,23 @@ export default {
   z-index: 9999; 
 }
 
+.demo-button {
+  margin: 5px;
+  font-size: 14px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #50C878;
+  color: black;
+  border: 1px solid black;
+  border-radius: 4px;
+  width: 83px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.demo-button:hover{
+  background-color: #228B22;
+  color: black;
+}
+
 </style>

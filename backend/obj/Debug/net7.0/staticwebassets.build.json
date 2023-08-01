@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "a3v1Qku1Sm0Xxo9yTVS19YXYjZ09zcxPR6ny6PynDKs=",
+  "Hash": "szxxGFeCAjNq/PUBUAg8Mt5bAWGNF3z5KKoqQe13tQ0=",
   "Source": "closet",
   "BasePath": "_content/closet",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "/Users/kristo/azure-closet-app/backend/wwwroot/css/app.54519ea3.css",
+      "Identity": "/Users/kristo/azure-closet-app/backend/wwwroot/css/app.708ebc40.css",
       "SourceId": "closet",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/kristo/azure-closet-app/backend/wwwroot/",
       "BasePath": "_content/closet",
-      "RelativePath": "css/app.54519ea3.css",
+      "RelativePath": "css/app.708ebc40.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -31,7 +31,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/css/app.54519ea3.css"
+      "OriginalItemSpec": "wwwroot/css/app.708ebc40.css"
     },
     {
       "Identity": "/Users/kristo/azure-closet-app/backend/wwwroot/favicon.ico",
@@ -68,12 +68,12 @@
       "OriginalItemSpec": "wwwroot/index.html"
     },
     {
-      "Identity": "/Users/kristo/azure-closet-app/backend/wwwroot/js/app.3446aa84.js",
+      "Identity": "/Users/kristo/azure-closet-app/backend/wwwroot/js/app.6e9695af.js",
       "SourceId": "closet",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/kristo/azure-closet-app/backend/wwwroot/",
       "BasePath": "_content/closet",
-      "RelativePath": "js/app.3446aa84.js",
+      "RelativePath": "js/app.6e9695af.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -82,15 +82,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/js/app.3446aa84.js"
+      "OriginalItemSpec": "wwwroot/js/app.6e9695af.js"
     },
     {
-      "Identity": "/Users/kristo/azure-closet-app/backend/wwwroot/js/app.3446aa84.js.map",
+      "Identity": "/Users/kristo/azure-closet-app/backend/wwwroot/js/app.6e9695af.js.map",
       "SourceId": "closet",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/kristo/azure-closet-app/backend/wwwroot/",
       "BasePath": "_content/closet",
-      "RelativePath": "js/app.3446aa84.js.map",
+      "RelativePath": "js/app.6e9695af.js.map",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -99,7 +99,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/js/app.3446aa84.js.map"
+      "OriginalItemSpec": "wwwroot/js/app.6e9695af.js.map"
     },
     {
       "Identity": "/Users/kristo/azure-closet-app/backend/wwwroot/js/chunk-vendors.ff618c66.js",

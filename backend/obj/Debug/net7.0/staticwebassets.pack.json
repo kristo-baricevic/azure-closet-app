@@ -1,8 +1,8 @@
 {
   "Files": [
     {
-      "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/css/app.54519ea3.css",
-      "PackagePath": "staticwebassets/css/app.54519ea3.css"
+      "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/css/app.708ebc40.css",
+      "PackagePath": "staticwebassets/css/app.708ebc40.css"
     },
     {
       "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/favicon.ico",
@@ -13,12 +13,12 @@
       "PackagePath": "staticwebassets/index.html"
     },
     {
-      "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/js/app.3446aa84.js",
-      "PackagePath": "staticwebassets/js/app.3446aa84.js"
+      "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/js/app.6e9695af.js",
+      "PackagePath": "staticwebassets/js/app.6e9695af.js"
     },
     {
-      "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/js/app.3446aa84.js.map",
-      "PackagePath": "staticwebassets/js/app.3446aa84.js.map"
+      "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/js/app.6e9695af.js.map",
+      "PackagePath": "staticwebassets/js/app.6e9695af.js.map"
     },
     {
       "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/js/chunk-vendors.ff618c66.js",
