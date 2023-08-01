@@ -136,6 +136,41 @@ const store = createStore({
         console.error('Logout failed:', error);
       }
     },
+
+    async loginAnonymous({ commit }) {
+      try {
+        const response = await axios.post('/backend/User/loginAnonymous');
+        console.log('Response data:', response.data);
+
+        // eslint-disable-next-line no-unused-vars
+        const isAuthenticated = response.data.isAuthenticated;
+        const user = response.data.user;
+        const token = response.data.token;
+
+        //save token in lcoal storage
+        localStorage.setItem('token', token );
+
+        // include JWT token
+        const headers = {
+          Authorization: `Bearer ${token}`,
+        };
+
+        // Make another request to the backend with the JWT token included
+        const userResponse = await axios.get('/backend/User/current', {
+          headers: headers,
+        });
+
+        const authenticatedUser = userResponse.data;
+        console.log('Authenticated user: ', authenticatedUser);
+
+        // Commit the mutations to update the state
+        commit('SET_AUTHENTICATION', true);
+        commit('SET_USER', user);
+      } catch (error) {
+        //handle login error
+        console.error('Login failed:', error);
+      }
+    },
   },
   // Other Vuex properties (getters, modules, etc.)
 });

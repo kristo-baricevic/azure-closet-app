@@ -227,6 +227,7 @@ export default {
         if (!image.userId) {
           console.log("userId check for edit");
           alert('You cannot edit shared images.');
+          return;
         }
 
     // Allow the user to edit the image

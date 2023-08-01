@@ -90,6 +90,29 @@ namespace ClothingInventory.Controllers
 
         }
 
+        [HttpPost("loginAnonymous")]
+        public async Task<IActionResult> LoginAnonymous()
+        {
+            var anonymousUser = new User
+            {
+                // Generate a unique username for each anonymous user
+                UserName = "AnonymousUser_" + Guid.NewGuid().ToString(), 
+            };
+
+            var result = await _userManager.CreateAsync(anonymousUser);
+
+            if (result.Succeeded)
+            {
+                // Generate the token
+                var token = GenerateToken(anonymousUser);
+                return Ok(new { isAuthenticated = true, token, user = new { username = anonymousUser.UserName } });
+            }
+
+            // Login failed, return error message
+            return BadRequest(new { isAuthenticated = false, error = "Anonymous login failed" });
+        }
+
+
         [HttpGet("current")]
         [Authorize]
         public IActionResult GetCurrentUserData()

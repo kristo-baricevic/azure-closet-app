@@ -11,6 +11,9 @@
           <button class="login-button" v-if="!isAuthenticated" @click="showLoginModal">Login</button>
           <button class="logout-button" v-else @click="logoutUser">Logout</button>
         </li>
+        <li>
+          <button class="demo-button" @click="loginAnonymous">Demo</button>
+        </li>
       </ul>
 
     </nav>
@@ -144,6 +147,10 @@ export default {
       store.dispatch('logoutUser');
     };
 
+    const loginAnonymous = () => {
+      store.dispatch('loginAnonymous');
+    };
+
     const handleSelectImage = (image) => {
       const { category } = image;
       console.log("handleSelectImage hit:", image);
@@ -220,6 +227,7 @@ export default {
       showRegistrationModal,
       showLoginModal,
       logoutUser,
+      loginAnonymous,
       handleSelectImage,
       handleRemoveItem,
     };
