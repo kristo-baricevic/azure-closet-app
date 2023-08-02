@@ -89,6 +89,7 @@ export default {
       editedCategory: null,
       editingImageId: null,
       isFetched: false,
+      currentUserId: null,
     };
   },
 
@@ -103,7 +104,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['isAuthenticated']),
+    ...mapState(['isAuthenticated', user]),
 
     uniqueCategories() {
       const categories = new Set();
@@ -170,6 +171,12 @@ export default {
         ...image,
         isUserImage: image.userId !== null,
         }));
+        
+        // Check if the user is authenticated and get their userId
+        if (this.isAuthenticated && this.user) {
+          // Get the userId from the user object in the store
+          this.currentUserId = this.user.userId;
+        }
       } catch (error) {
         console.error('Failed to fetch images:', error);
       }
@@ -189,7 +196,7 @@ export default {
 
       if (!image.userId) {
         console.log("userId check for delete");
-        alert('you cannot delete shared dotitems');
+        alert('you cannot delete shared items');
       }
 
       try {
