@@ -132,7 +132,7 @@ namespace ClothingInventory.Controllers
         private void SaveImageAndCategory(byte[] image, string category, string userId)
         {   
             // Admin user ID
-            var isAdminUser = userId == "b0ab122e-6815-430b-9707-c2bd37b3d248"; 
+            var isAdminUser = userId == "a6a0400a-37fe-4f79-a93f-6b9b1427b0cb"; 
             Console.WriteLine("isAdminUser: " + isAdminUser);
 
             if (isAdminUser)

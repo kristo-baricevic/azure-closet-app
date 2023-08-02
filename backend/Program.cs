@@ -1,11 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
+using MySql.EntityFrameworkCore;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.Configuration;
 using ClothingInventory.Models;
@@ -42,19 +40,19 @@ var tokenSecretKey = builder.Configuration["TokenSecretKey"];
 var key = Encoding.ASCII.GetBytes(tokenSecretKey);
 
 // Add services to the container
-var connectionString = builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
+var connectionString = builder.Configuration.GetConnectionString("RAILWAY_MYSQL_CONNECTIONSTRING");
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
         builder => builder
-            .WithOrigins("http://localhost:5062", "https://closet-webapp.azurewebsites.net")
+            .WithOrigins("http://localhost:5062", "https://closet-webapp.azurewebsites.net", "https://closet-app-production.up.railway.app")
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
 
 builder.Services.AddDbContext<ClothingInventoryContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseMySQL(connectionString));
 
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
