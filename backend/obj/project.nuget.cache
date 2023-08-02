@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2S1Og2j/TrZ+VbiVdV+VuNvgdNt2OuhHwog114VugX81I3ygTpFrhK7HcxmqgYxu/GWPUDYJ88jy//PB8fdf4Q==",
+  "dgSpecHash": "noKpfF98p8P7ZsRLQy2MVy7iEpuFg+1LH9I2U5pbSysojCVIcIx4vinF08thbJLpmPXWBclODOboJOg7P/NKOw==",
   "success": true,
   "projectFilePath": "/Users/kristo/azure-closet-app/backend/closet.csproj",
   "expectedPackageFiles": [
@@ -44,6 +44,7 @@
     "/Users/kristo/.nuget/packages/mono.texttemplating/2.2.1/mono.texttemplating.2.2.1.nupkg.sha512",
     "/Users/kristo/.nuget/packages/mysql.data/8.1.0/mysql.data.8.1.0.nupkg.sha512",
     "/Users/kristo/.nuget/packages/mysql.entityframeworkcore/7.0.5/mysql.entityframeworkcore.7.0.5.nupkg.sha512",
+    "/Users/kristo/.nuget/packages/mysqlconnector/2.2.7/mysqlconnector.2.2.7.nupkg.sha512",
     "/Users/kristo/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
     "/Users/kristo/.nuget/packages/newtonsoft.json.bson/1.0.2/newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "/Users/kristo/.nuget/packages/portable.bouncycastle/1.9.0/portable.bouncycastle.1.9.0.nupkg.sha512",
