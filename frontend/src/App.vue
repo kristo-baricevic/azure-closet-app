@@ -333,7 +333,7 @@ export default {
   transition: background-color 0.3s ease;
 }
 
-.registation-button:hover {
+.registration-button:hover {
   background-color: #228B22;
   color: black;
 }
