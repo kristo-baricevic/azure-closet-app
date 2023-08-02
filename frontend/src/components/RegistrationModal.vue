@@ -48,6 +48,7 @@ export default {
         // Call register action in the Vuex store
         await store.dispatch('registerUser', userData);
         console.log('User registered successfully!');
+        handleCloseModal();
       } catch (error) {
         console.error('Registration failed:', error);
       }

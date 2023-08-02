@@ -34,27 +34,33 @@ namespace ClothingInventory.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
-            // Perform validation checks on the model if needed
-            // For example, check if the username or email already exists
 
             var user = new User
             {
                 UserName = model.Username,
                 Email = model.Email
-                // Add any additional properties you want to set for the user
-                // For example: FullName = model.FullName
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
 
+            //if successful then login with new username
             if (result.Succeeded)
             {
-                // You can choose to sign the user in automatically after registration if needed
-                // For example: await _signInManager.SignInAsync(user, isPersistent: false);
-                return Ok(new { Message = "User registered successfully" });
-            }
+                var loginResult = await _signInManager.PasswordSignInAsync(model.Username, model.Password, isPersistent: false, lockoutOnFailure: false);
 
-            // If user creation fails, return the errors
+                if (loginResult.Succeeded)
+                {
+                    user = await _userManager.FindByNameAsync(model.Username);
+
+                    var token = GenerateToken(user);
+                    return Ok(new { Message = "User registered and logged in successfully", isAuthenticated = true, token, user = new { username = model.Username } });
+                }
+                else
+                {
+                    // If user creation fails, return the errors
+                    return BadRequest(new { Message = "User registered, but login failed.", isAuthenticated = false });
+                }
+            }
             return BadRequest(result.Errors);
         }
 
@@ -66,8 +72,6 @@ namespace ClothingInventory.Controllers
 
             if (result.Succeeded)
             {
-                // User login successful
-
                 // Retrieve the authenticated user
                 var user = await _userManager.FindByNameAsync(model.Username);
 

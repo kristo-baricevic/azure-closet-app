@@ -65,13 +65,13 @@ const store = createStore({
         Authorization: `Bearer ${token}`,
       };
 
-      const authenticatedUser = userResponse.data;
-      console.log('Authenticated user:', authenticatedUser);
-
       // Make another request to the backend to get the authenticated user data
       const userResponse = await axios.get('/backend/User/current', {
         headers: headers,
       });
+
+      const authenticatedUser = userResponse.data;
+      console.log('Authenticated user:', authenticatedUser);
 
       commit('SET_USER', registeredUser);
       commit('SET_AUTHENTICATION', true);
