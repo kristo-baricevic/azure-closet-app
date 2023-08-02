@@ -130,22 +130,39 @@ namespace ClothingInventory.Controllers
         }
 
         private void SaveImageAndCategory(byte[] image, string category, string userId)
-        {
-            var isUserImage = true; // Just for additional verification, you can log the value here
-            Console.WriteLine("isUserImage: " + isUserImage);
+        {   
+            // Admin user ID
+            var isAdminUser = userId == "b0ab122e-6815-430b-9707-c2bd37b3d248"; 
+            Console.WriteLine("isAdminUser: " + isAdminUser);
 
-            // Save the image and category to the database
-            var userClothingItem = new UserClothingItem
+            if (isAdminUser)
             {
-                Image = image,
-                Category = category,
-                UserId = userId,
-                isUserImage = true,
-                
-            };
+                var clothingItem = new ClothingItem
+                {
+                    Image = image,
+                    Category = category,
+                    // Add other properties if needed
+                };
 
+                Console.WriteLine("admin upload");
+                _dbContext.ClothingItems.Add(clothingItem);
+                _dbContext.SaveChanges();
+            } 
+            else
+            {
+            // Save the image and category to the database
+                var userClothingItem = new UserClothingItem
+                {
+                    Image = image,
+                    Category = category,
+                    UserId = userId,
+                    isUserImage = true,
+                };
+
+            Console.WriteLine("user upload");
             _dbContext.UserClothingItems.Add(userClothingItem);
             _dbContext.SaveChanges();
+            }
         }
     }
 }
