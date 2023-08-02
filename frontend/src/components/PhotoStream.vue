@@ -89,7 +89,6 @@ export default {
       editedCategory: null,
       editingImageId: null,
       isFetched: false,
-      currentUserId: null,
     };
   },
 
@@ -104,7 +103,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['isAuthenticated', user]),
+    ...mapState(['isAuthenticated']),
 
     uniqueCategories() {
       const categories = new Set();
@@ -171,12 +170,6 @@ export default {
         ...image,
         isUserImage: image.userId !== null,
         }));
-        
-        // Check if the user is authenticated and get their userId
-        if (this.isAuthenticated && this.user) {
-          // Get the userId from the user object in the store
-          this.currentUserId = this.user.userId;
-        }
       } catch (error) {
         console.error('Failed to fetch images:', error);
       }

@@ -3,7 +3,6 @@
 
     <nav class="navbar">
       <ul class="navbar-menu">
-        <li><a href="/">Kristo's Closet</a></li>
         <li>    
           <button class="registration-button" @click="showRegistrationModal">Register</button>
         </li>
