@@ -51,7 +51,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddDbContext<ClothingInventoryContext>(options =>
-    options.UseMySQL($"Server={Environment.GetEnvironmentVariable("MYSQLHOST")};Port={Environment.GetEnvironmentVariable("MYSQLPORT")};Database={Environment.GetEnvironmentVariable("MYSQLDATABASE")};Uid={Environment.GetEnvironmentVariable("MYSQLUSER")};Pwd={Environment.GetEnvironmentVariable("MYSQLPASSWORD")};");
+    options.UseMySQL($"Server={Environment.GetEnvironmentVariable("MYSQLHOST")};Port={Environment.GetEnvironmentVariable("MYSQLPORT")};Database={Environment.GetEnvironmentVariable("MYSQLDATABASE")};Uid={Environment.GetEnvironmentVariable("MYSQLUSER")};Pwd={Environment.GetEnvironmentVariable("MYSQLPASSWORD")};"));
 
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
