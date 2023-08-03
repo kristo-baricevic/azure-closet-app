@@ -110,7 +110,7 @@ app.UseEndpoints(endpoints =>
 });
 
 var port = Environment.GetEnvironmentVariable("PORT") ?? "80";
-app.Listen($"http://0.0.0.0:{port}");
+app.Run($"http://0.0.0.0:{port}");
 
 app.Run();
 
