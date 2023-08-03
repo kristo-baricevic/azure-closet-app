@@ -160,7 +160,7 @@ export default {
           Authorization: `Bearer ${token}`,
         };
 
-        const response = await fetch('/backend/Images', { headers });
+        const response = await fetch('https://azure-closet-app-production.up.railway.app/backend/Images', { headers });
         const data = await response.json();
 
         console.log("fetched images", data);
