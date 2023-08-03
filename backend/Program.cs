@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using static Microsoft.AspNetCore.Hosting.IWebHostBuilder;
 using System.IO;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
@@ -109,8 +110,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapFallbackToFile("/index.html");
 });
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "80";
-app.Run($"http://0.0.0.0:{port}");
+app.Urls($"http://*:{Environment.GetEnvironmentVariable("PORT") ?? "80"}");
 
 app.Run();
 
