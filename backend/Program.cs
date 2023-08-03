@@ -107,7 +107,7 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
-    endpoints.MapFallbackToFile("/index.html"); // Serve index.html for all non-API routes
+    endpoints.MapFallbackToFile("/index.html");
 });
 
 app.Run();
