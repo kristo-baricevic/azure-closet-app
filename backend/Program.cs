@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using Microsoft.AspNetCore.Hosting.IWebHostBuilder;
 using System.IO;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
