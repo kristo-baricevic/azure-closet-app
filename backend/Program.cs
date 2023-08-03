@@ -46,7 +46,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
         builder => builder
-            .WithOrigins("http://localhost:5062", "https://closet-webapp.azurewebsites.net", "https://closet-app-production.up.railway.app")
+            .WithOrigins("http://localhost:5062", "https://closet-webapp.azurewebsites.net", "https://azure-closet-app-production.up.railway.app/")
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
