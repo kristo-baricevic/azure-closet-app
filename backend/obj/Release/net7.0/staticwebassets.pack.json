@@ -1,0 +1,49 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/css/app.d6a287d0.css",
+      "PackagePath": "staticwebassets/css/app.d6a287d0.css"
+    },
+    {
+      "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/favicon.ico",
+      "PackagePath": "staticwebassets/favicon.ico"
+    },
+    {
+      "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/index.html",
+      "PackagePath": "staticwebassets/index.html"
+    },
+    {
+      "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/js/app.046b5b7d.js",
+      "PackagePath": "staticwebassets/js/app.046b5b7d.js"
+    },
+    {
+      "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/js/app.046b5b7d.js.map",
+      "PackagePath": "staticwebassets/js/app.046b5b7d.js.map"
+    },
+    {
+      "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/js/chunk-vendors.ff618c66.js",
+      "PackagePath": "staticwebassets/js/chunk-vendors.ff618c66.js"
+    },
+    {
+      "Id": "/Users/kristo/azure-closet-app/backend/wwwroot/js/chunk-vendors.ff618c66.js.map",
+      "PackagePath": "staticwebassets/js/chunk-vendors.ff618c66.js.map"
+    },
+    {
+      "Id": "obj/Release/net7.0/staticwebassets/msbuild.build.closet.props",
+      "PackagePath": "build\\closet.props"
+    },
+    {
+      "Id": "obj/Release/net7.0/staticwebassets/msbuild.buildMultiTargeting.closet.props",
+      "PackagePath": "buildMultiTargeting\\closet.props"
+    },
+    {
+      "Id": "obj/Release/net7.0/staticwebassets/msbuild.buildTransitive.closet.props",
+      "PackagePath": "buildTransitive\\closet.props"
+    },
+    {
+      "Id": "obj/Release/net7.0/staticwebassets/msbuild.closet.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

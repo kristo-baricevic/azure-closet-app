@@ -33,7 +33,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add configuration
-builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+builder.Configuration.AddJsonFile("/azure-closet-app/backend/appsettings.json", optional: false, reloadOnChange: true);
 
 // Get the token secret key from appsettings.json
 var tokenSecretKey = builder.Configuration["TokenSecretKey"];
