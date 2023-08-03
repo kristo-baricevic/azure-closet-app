@@ -40,19 +40,18 @@ var tokenSecretKey = builder.Configuration["TokenSecretKey"];
 var key = Encoding.ASCII.GetBytes(tokenSecretKey);
 
 // Add services to the container
-var connectionString = builder.Configuration.GetConnectionString("RAILWAY_MYSQL_CONNECTIONSTRING");
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
         builder => builder
-            .WithOrigins("http://localhost:5062", "https://closet-webapp.azurewebsites.net", "https://azure-closet-app-production.up.railway.app/")
+            .WithOrigins("http://localhost:5062", "https://azure-closet-app-production.up.railway.app/")
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
 
 builder.Services.AddDbContext<ClothingInventoryContext>(options =>
-    options.UseMySQL(connectionString));
+    options.UseMySQL($"Server={Environment.GetEnvironmentVariable("MYSQLHOST")};Port={Environment.GetEnvironmentVariable("MYSQLPORT")};Database={Environment.GetEnvironmentVariable("MYSQLDATABASE")};Uid={Environment.GetEnvironmentVariable("MYSQLUSER")};Pwd={Environment.GetEnvironmentVariable("MYSQLPASSWORD")};");
 
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
@@ -109,6 +108,8 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllers();
     endpoints.MapFallbackToFile("/index.html");
 });
+
+app.UseUrls($"http://*:{Environment.GetEnvironmentVariable("PORT") ?? "80"}");
 
 app.Run();
 
