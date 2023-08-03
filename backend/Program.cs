@@ -110,7 +110,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapFallbackToFile("/index.html");
 });
 
-app.UseUrls($"http://*:{Environment.GetEnvironmentVariable("PORT") ?? "80"}");
+webBuilder.UseUrls($"http://*:{Environment.GetEnvironmentVariable("PORT") ?? "80"}");
 
 app.Run();
 
