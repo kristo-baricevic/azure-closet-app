@@ -67,6 +67,12 @@ jobs:
       - name: Install Railway CLI
         run: npm install -g @railway/cli
 
+      - name: Link Railway Project
+        run: npx railway link
+        env:
+          RAILWAY_API_TOKEN: ${{ secrets.RAILWAY_API_TOKEN }}
+
+
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
