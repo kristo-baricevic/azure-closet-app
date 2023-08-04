@@ -67,10 +67,13 @@ jobs:
       - name: Install Railway CLI
         run: npm install -g @railway/cli
 
+      - name: Set up Railway authentication
+        run: npx railway login -t ${{ env.RAILWAY_API_TOKEN }}
+
       - name: Link Railway Project
-        run: npx railway link
+        run: npx railway link --project lawful-hook
         env:
-          RAILWAY_API_TOKEN: ${{ secrets.RAILWAY_API_TOKEN }}
+          RAILWAY_API_TOKEN: ${{ env.RAILWAY_API_TOKEN }}
 
 
       - name: Download artifact from build job
@@ -79,6 +82,6 @@ jobs:
           name: myapp
 
       - name: Deploy to Railway
-        run: npx railway up
+        run: npx railway up --env production
         env:
           RAILWAY_API_TOKEN: ${{ env.RAILWAY_API_TOKEN }}
