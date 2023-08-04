@@ -98,6 +98,8 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
+app.UseRouting();
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
@@ -105,8 +107,6 @@ app.UseEndpoints(endpoints =>
 });
 
 app.UseStaticFiles();
-
-app.UseRouting();
 
 app.UseCors();
 
