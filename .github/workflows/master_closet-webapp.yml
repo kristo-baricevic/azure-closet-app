@@ -12,7 +12,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -25,6 +25,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          npm install
           npm ci
           npm install axios
         working-directory: ./frontend
@@ -68,13 +69,7 @@ jobs:
         with:
           name: myapp
 
-      - name: Set up SSH keys for Railway
-        uses: webfactory/ssh-agent@v0.4.0
-        with:
-          ssh-private-key: ${{ secrets.RAILWAY_SSH_PRIVATE_KEY }}
-
       - name: Deploy to Railway
-        run: |
-          ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY railway@your_server_ip "rm -rf ~/myapp"
-          scp -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY -r ./myapp railway@your_server_ip:~/
-          ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY railway@your_server_ip "sudo systemctl restart myapp.service"
+        run: npx railway up
+        env:
+          RAILWAY_API_TOKEN: ${{ env.RAILWAY_API_TOKEN }}
