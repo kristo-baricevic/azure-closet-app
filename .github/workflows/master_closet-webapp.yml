@@ -1,4 +1,4 @@
-name: Build and deploy Vue.js & ASP.Net Core app to Azure Web App
+name: Build and deploy Vue.js & ASP.Net Core app to Railway
 
 on:
   push:
@@ -55,27 +55,26 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: .net-app
+          name: myapp
           path: ./myapp
 
-
   deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: build
-    environment:
-      name: 'Production'
 
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: .net-app
+          name: myapp
 
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
+      - name: Set up SSH keys for Railway
+        uses: webfactory/ssh-agent@v0.4.0
         with:
-          app-name: 'closet-webapp'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.YOUR_AZURE_WEBAPP_PUBLISHPROFILE }}
-          package: .
+          ssh-private-key: ${{ secrets.RAILWAY_SSH_PRIVATE_KEY }}
+
+      - name: Deploy to Railway
+        run: |
+          ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY railway@your_server_ip "rm -rf ~/myapp"
+          scp -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY -r ./myapp railway@your_server_ip:~/
+          ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY railway@your_server_ip "sudo systemctl restart myapp.service"
