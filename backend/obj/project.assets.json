@@ -3366,6 +3366,7 @@
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 7.0.8",
       "Microsoft.EntityFrameworkCore >= 7.0.9",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.9",
+      "MySql.Data >= 8.1.0",
       "MySql.EntityFrameworkCore >= 7.0.5",
       "MySqlConnector >= 2.2.7",
       "SixLabors.ImageSharp >= 3.0.1"
@@ -3430,6 +3431,10 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "[7.0.9, )"
+          },
+          "MySql.Data": {
+            "target": "Package",
+            "version": "[8.1.0, )"
           },
           "MySql.EntityFrameworkCore": {
             "target": "Package",
