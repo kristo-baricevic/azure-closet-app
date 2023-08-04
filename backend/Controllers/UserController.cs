@@ -153,7 +153,7 @@ namespace ClothingInventory.Controllers
             // Get the token secret key from the configuration
             var tokenSecretKey = _configuration["TokenSecretKey"];
 
-            // Create the security key 
+            // Create the security key
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenSecretKey));
 
             // Creating the signing Credentials
