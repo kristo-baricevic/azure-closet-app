@@ -98,6 +98,12 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.MapFallbackToFile("/index.html");
+});
+
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -107,12 +113,6 @@ app.UseCors();
 app.UseAuthentication();
 
 app.UseAuthorization();
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-    endpoints.MapFallbackToFile("/index.html");
-});
 
 app.Run();
 
