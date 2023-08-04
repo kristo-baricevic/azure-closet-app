@@ -65,17 +65,8 @@ jobs:
 
     steps:
       - name: Install Railway CLI
-        run: npm install -g @railway/cli
-
-      - name: Set up Railway authentication
-        run: npx railway logout && npx railway login 
-        env:
-          RAILWAY_API_TOKEN: ${{ env.RAILWAY_API_TOKEN }}
-
-      - name: Link Railway Project
-        run: npx railway link --project lawful-hook
-        env:
-          RAILWAY_API_TOKEN: ${{ env.RAILWAY_API_TOKEN }}
+        run: nbash <(curl -fsSL cli.new)
+    
 
 
       - name: Download artifact from build job
@@ -83,7 +74,8 @@ jobs:
         with:
           name: myapp
 
-      - name: Deploy to Railway
-        run: npx railway up --env production
+      - name: Install Railway
+        run: railway up --service ${{secrets.RAILWAY_SERVICE_ID}}
         env:
-          RAILWAY_API_TOKEN: ${{ env.RAILWAY_API_TOKEN }}
+          RAILWAY_TOKEN: ${{secrets.RAILWAY_TOKEN}}
+      
