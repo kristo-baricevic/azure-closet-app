@@ -26,6 +26,7 @@ namespace ClothingInventory.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             Console.WriteLine("userId retrieved", userId);
+            Console.WriteLine("getImages hit");
 
             var userClothingItems = _dbContext.UserClothingItems
             .Where(item => item.UserId == userId)
