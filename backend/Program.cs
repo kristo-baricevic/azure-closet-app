@@ -99,11 +99,9 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-    endpoints.MapFallbackToFile("/index.html");
-});
+
+app.MapControllers();
+
 
 app.Urls.Add($"http://*:{Environment.GetEnvironmentVariable("PORT") ?? "80"}");
 
