@@ -89,6 +89,8 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
+app.MapControllers();
+
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -98,10 +100,6 @@ app.UseCors();
 app.UseAuthentication();
 
 app.UseAuthorization();
-
-
-app.MapControllers();
-
 
 app.Urls.Add($"http://*:{Environment.GetEnvironmentVariable("PORT") ?? "80"}");
 
