@@ -28,6 +28,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using MySql.Data.MySqlClient;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,6 +41,9 @@ var tokenSecretKey = builder.Configuration["TokenSecretKey"];
 var key = Encoding.ASCII.GetBytes(tokenSecretKey);
 
 // Add services to the container
+var connectionString = builder.Configuration.GetConnectionString("RAILWAY_MYSQL_CONNECTIONSTRING");
+using MySqlConnection connection = new MySqlConnection(connectionString);
+
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
@@ -50,8 +54,9 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader());
 });
 
+
 builder.Services.AddDbContext<ClothingInventoryContext>(options =>
-    options.UseMySQL($"Server={Environment.GetEnvironmentVariable("MYSQLHOST")};Port={Environment.GetEnvironmentVariable("MYSQLPORT")};Database={Environment.GetEnvironmentVariable("MYSQLDATABASE")};Uid={Environment.GetEnvironmentVariable("MYSQLUSER")};Pwd={Environment.GetEnvironmentVariable("MYSQLPASSWORD")};"));
+    options.UseMySql(connection));
 
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
@@ -108,8 +113,6 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllers();
     endpoints.MapFallbackToFile("/index.html");
 });
-
-app.Urls.Add($"http://*:{Environment.GetEnvironmentVariable("PORT") ?? "80"}");
 
 app.Run();
 
