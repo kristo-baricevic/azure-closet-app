@@ -64,7 +64,7 @@ jobs:
     needs: build
 
     steps:
-      name: Install Railway CLI
+      - name: Install Railway CLI
         run: npm install -g @railway/cli
 
       - name: Download artifact from build job
