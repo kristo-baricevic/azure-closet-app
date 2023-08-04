@@ -1,9 +1,9 @@
-using MySql.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ClothingInventory.Models;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer;
 
 
 namespace ClothingInventory.Models

@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.EntityFrameworkCore;
-using MySql.EntityFrameworkCore;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.Configuration;
 using ClothingInventory.Models;
@@ -23,7 +22,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using MySql.Data.MySqlClient;
+using Microsoft.EntityFrameworkCore.SqlServer;
 
 
 var builder = WebApplication.CreateBuilder(args);

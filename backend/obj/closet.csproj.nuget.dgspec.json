@@ -61,17 +61,9 @@
               "target": "Package",
               "version": "[7.0.9, )"
             },
-            "MySql.Data": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[8.1.0, )"
-            },
-            "MySql.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[7.0.5, )"
-            },
-            "MySqlConnector": {
-              "target": "Package",
-              "version": "[2.2.7, )"
+              "version": "[7.0.9, )"
             },
             "SixLabors.ImageSharp": {
               "target": "Package",
