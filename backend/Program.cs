@@ -36,18 +36,19 @@ var tokenSecretKey = builder.Configuration["TokenSecretKey"];
 var key = Encoding.ASCII.GetBytes(tokenSecretKey);
 
 // Add services to the container
+var connectionString = builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
         builder => builder
-            .WithOrigins("http://localhost:5062", "https://azure-closet-app-production.up.railway.app/")
+            .WithOrigins("http://localhost:5062", "https://closet-webapp.azurewebsites.net")
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
 
 builder.Services.AddDbContext<ClothingInventoryContext>(options =>
-    options.UseMySQL($"Server={Environment.GetEnvironmentVariable("MYSQLHOST")};Port={Environment.GetEnvironmentVariable("MYSQLPORT")};Database={Environment.GetEnvironmentVariable("MYSQLDATABASE")};Uid={Environment.GetEnvironmentVariable("MYSQLUSER")};Pwd={Environment.GetEnvironmentVariable("MYSQLPASSWORD")};"));
+    options.UseSqlServer(connectionString));
 
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
@@ -89,8 +90,6 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
-app.MapControllers();
-
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -101,6 +100,10 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.Urls.Add($"http://*:{Environment.GetEnvironmentVariable("PORT") ?? "80"}");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.MapFallbackToFile("/index.html"); // Serve index.html for all non-API routes
+});
 
 app.Run();
